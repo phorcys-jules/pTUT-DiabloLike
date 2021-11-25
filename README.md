@@ -13,10 +13,15 @@ Le but de ce projet est de réalisé un jeu de type Hack'n'slash type Diablo. No
 ## Tuteur : 
 - LEROUX Alexandre
 
+## Lancer le projet :
+le serveur se lance avec :
+    - npm run build
+    - puis npm run start
 ## Contribuer au projet :
 Pour contribuer qu projet, il est nécéssaire d'installer quelques outils : 
 - TypeScript : 
     - npm install typescript --save-dev
     - Convertir un fichier ts : 
             - npx tsc .\front\ts\User.ts --outDir .\front\js\
-            - ou juste npx tsc {--watch} pour tout compiler (rèf tsconfig.json)
+            - ou npx tsc {--watch} pour compiler back ou front (rèf tsconfig.json)
+            - ou npm run build / npm run dev pour tout compiler

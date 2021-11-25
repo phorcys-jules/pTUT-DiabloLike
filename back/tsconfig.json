@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./js/",
+        "target": "ES2015",
+        "noEmitOnError": true,
+        "strict": true,
+        "declaration": true,
+        "declarationDir": "./types",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+    },
+    "include": [
+        "./ts/*.ts",
+        "./ts/models/*.ts"],
+}

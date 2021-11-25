@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "./js",
+        "target": "ES2015",
+        "noEmitOnError": true,
+        "strict": true,
+        "declaration": true,
+        "declarationDir": "./types",
+    },
+    "include": [
+        "./ts/*.ts",
+        "./ts/character/*.ts"],
+}
