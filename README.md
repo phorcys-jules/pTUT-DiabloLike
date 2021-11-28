@@ -16,7 +16,7 @@ Le but de ce projet est de réalisé un jeu de type Hack'n'slash type Diablo. No
 ## Lancer le projet :
 le serveur se lance avec :
     - npm run build
-    - puis npm run start
+    - puis npm run serve
 ## Contribuer au projet :
 Pour contribuer qu projet, il est nécéssaire d'installer quelques outils : 
 - TypeScript : 
