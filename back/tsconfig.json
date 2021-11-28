@@ -1,21 +1,15 @@
 {
     "compilerOptions": {
         "outDir": "./js/",
-        "lib": ["es5", "es6"],
-        "target": "es6",
-        //"module": "commonjs",
+        "target": "ES2015",
         "noEmitOnError": true,
         "strict": true,
         "declaration": true,
         "declarationDir": "./types",
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true
     },
     "include": [
         "./ts/*.ts",
-        "./ts/database/*/*.ts",
-        "./ts/database/*.ts"],
+        "./ts/models/*.ts"],
 }
