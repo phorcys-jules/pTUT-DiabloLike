@@ -20,6 +20,8 @@ le serveur se lance avec :
     - puis npm run start
 ## Contribuer au projet :
 Pour contribuer qu projet, il est nécéssaire d'installer quelques outils : 
+- Node JS : 
+    - installer avec npm i
 - TypeScript : 
     - npm install typescript --save-dev
     - Convertir un fichier ts : 
