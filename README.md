@@ -22,6 +22,4 @@ Pour contribuer qu projet, il est nécéssaire d'installer quelques outils :
 - TypeScript : 
     - npm install typescript --save-dev
     - Convertir un fichier ts : 
-            - npx tsc .\front\ts\User.ts --outDir .\front\js\
-            - ou npx tsc {--watch} pour compiler back ou front (rèf tsconfig.json)
-            - ou npm run build / npm run dev pour tout compiler
+            - npm run build / npm run dev pour tout compiler

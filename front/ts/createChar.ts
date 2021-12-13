@@ -13,6 +13,7 @@ form.onsubmit = () => {
     const characterName = formData.get('name') as string;
     const characterClass = formData.get('class') as string;
     let c1:Character;
+    
 
     switch (characterClass) {
         case 'Sorcier':

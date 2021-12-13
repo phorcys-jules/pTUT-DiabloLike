@@ -7,25 +7,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import express from 'express';
-import { connect } from './database.js';
-// rest of the code remains same
-const app = express();
-const PORT = 8752;
-/**
- * Routes available
- */
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
-app.get('/ginette', function (req, res) {
+import { createPool } from 'mysql2/promise';
+//TODO Later utiliser fichier config .env
+export function connect() {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield connect();
-        yield conn.query("INSERT INTO `user` (`id`, `pseudo`, `firstname`, `lastname`, `password`, `email`) VALUES (NULL, 'GinGinGaming', 'Gin', 'ette', '1234', 'ginette@gaming.com')");
-        res.json({
-            message: 'Ginette Created'
+        const connection = yield createPool({
+            host: 'localhost',
+            port: 3308,
+            user: 'root',
+            password: 'root',
+            database: 'diablolike',
+            connectionLimit: 10
         });
+        return connection;
     });
-});
-//Launch the app
-app.listen(PORT, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
-});
+}
