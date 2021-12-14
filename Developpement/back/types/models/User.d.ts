@@ -1,5 +1,9 @@
 export declare class User {
-    name: string;
+    pseudo: string;
+    firstname: string;
+    lastname: string;
     password: string;
-    constructor(name: string, password: string);
+    email: string;
+    constructor(pseudo: string, firstname: string, lastname: string, password: string, email: string);
+    sql_insert(): string;
 }
