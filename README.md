@@ -18,6 +18,7 @@ Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
 le serveur se lance avec :
     - npm run build
     - puis npm run start
+    
 ## Contribuer au projet :
 Pour contribuer qu projet, il est nécéssaire d'installer quelques outils : 
 - Node JS : 
