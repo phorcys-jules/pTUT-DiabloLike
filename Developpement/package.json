@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "start echo 'Dev back : ' npx tsc -p ./back/tsconfig.json --watch && echo 'Dev front : ' npx tsc -p ./front/tsconfig.json --watch",
+    "dev": "start npx tsc -p ./back/tsconfig.json --watch && start npx tsc -p ./front/tsconfig.json --watch",
     "build": "npx tsc -p ./back/tsconfig.json && npx tsc -p ./front/tsconfig.json",
     "start": "node ./back/js/index.js"
   },

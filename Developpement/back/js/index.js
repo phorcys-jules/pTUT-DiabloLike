@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import express from 'express';
 import { connect } from './database.js';
-// rest of the code remains same
+import { User } from './models/User.js';
+//Config the app
 const app = express();
 const PORT = 8752;
 /**
@@ -22,6 +23,29 @@ app.get('/ginette', function (req, res) {
         yield conn.query("INSERT INTO `user` (`id`, `pseudo`, `firstname`, `lastname`, `password`, `email`) VALUES (NULL, 'GinGinGaming', 'Gin', 'ette', '1234', 'ginette@gaming.com')");
         res.json({
             message: 'Ginette Created'
+        });
+    });
+});
+/**
+ * Routes de création d'un utilisateur
+ * type : POST
+ */
+app.post('/createUser/:pseudo/:firstname/:lastname/:pass/:mail', function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let p = req.params;
+        let u = new User(p.pseudo, p.firstname, p.lastname, p.pass, p.mail);
+        /**
+       * TODO gestion erreur try catch
+       * si connection pas possible
+       * si donné non validé par le constructeur de user
+       * si problème lors de l'exècution de la requete
+       * mail existe déja,...
+       */
+        const conn = yield connect();
+        yield conn.query(u.sql_insert());
+        res.status(201).json({
+            data: [],
+            message: "user created"
         });
     });
 });
