@@ -8,7 +8,8 @@ async function bootstrap() {
   }
 
   const context = canvasEl.getContext("2d") as  CanvasRenderingContext2D;
-
+  console.log(context);
+  
   const game = new Game(context, canvasEl.width, canvasEl.height);
   game.run();
 }

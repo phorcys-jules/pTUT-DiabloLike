@@ -16,6 +16,7 @@ function bootstrap() {
             return;
         }
         const context = canvasEl.getContext("2d");
+        console.log(context);
         const game = new Game(context, canvasEl.width, canvasEl.height);
         game.run();
     });

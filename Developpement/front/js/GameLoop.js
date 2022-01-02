@@ -1,4 +1,4 @@
-import DeltaTracker from "./DeltaTracker";
+import DeltaTracker from "./DeltaTracker.js";
 class GameLoop {
     constructor(loopFunction) {
         this.loopFunction = loopFunction;
