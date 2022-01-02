@@ -21,7 +21,7 @@ le serveur se lance avec :
     
 ## Contribuer au projet :
 Pour contribuer qu projet, il est nécéssaire d'installer quelques outils : 
-- Node JS : 
+- Node JS et dépendances : 
     - installer avec npm i
 - TypeScript : 
     - npm install typescript --save-dev

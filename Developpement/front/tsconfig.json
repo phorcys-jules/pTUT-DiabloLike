@@ -6,8 +6,9 @@
         "strict": true,
         "declaration": true,
         "declarationDir": "./types",
+        "strictPropertyInitialization": false,
     },
     "include": [
         "./ts/*.ts",
-        "./ts/character/*.ts"],
+        "./ts/*/*.ts"],
 }
