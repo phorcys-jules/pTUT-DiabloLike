@@ -21,12 +21,26 @@ if (form ===null ) {
     
 }
 
-async function validate ( u: User ): Promise<object> {
-    const url = new URL(`http://localhost:8752/createUser/${u.pseudo}/${u.firstname}/${u.lastname}/${u.password}/${u.email}`);
-   
-    const headers = {};
-    const response = await fetch( url.toString(), {headers} );
-    return await response.json();
+async function validate ( u: User ){
+    const data = { username: 'example' };
+
+    //POST request with body equal on data in JSON format
+    fetch(`http://localhost:8752/createUser/${u.pseudo}/${u.firstname}/${u.lastname}/${u.password}/${u.email}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    //Then with the data from the response in JSON...
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    //Then with the error genereted...
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 };
 
 /**
