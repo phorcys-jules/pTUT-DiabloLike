@@ -1,9 +1,21 @@
-import  { Character } from "./character/Character.js";
-class User {
-    name:string;
+export class User {
+    pseudo:string;
+    lastname:string;
+    firstname:string;
+    email:string;
     password:string;
-    constructor(name:string, password:string, chars:Character) {
-        this.name =name;
+    constructor(pseudo:string,firstname:string, lastname:string, password:string, email:string) {
+        this.pseudo = pseudo;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.password = password;
+        this.email = email;
+    }
+
+    toString() {
+        return `Nom : ${this.lastname} / Prenom : ${this.firstname} / Pseudo : ${this.pseudo} a ete créé`;
     }
 }
+
+
+
