@@ -5,11 +5,13 @@ class GameMap {
    * Texture de la case
    */
   private tileImage: HTMLImageElement;
+  private wallImage: HTMLImageElement;
   private width: number;
   private height: number;
 
-  constructor(tileImage: HTMLImageElement, width: number, height: number) {
+  constructor(tileImage: HTMLImageElement, wallImage : HTMLImageElement, width: number, height: number) {
     this.tileImage = tileImage;
+    this.wallImage = wallImage;
     this.width = width;
     this.height = height;
   }

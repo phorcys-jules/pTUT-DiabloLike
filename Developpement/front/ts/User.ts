@@ -1,5 +1,5 @@
 import  { Character } from "./character/Character.js";
-class User {
+export class User {
     name:string;
     password:string;
     constructor(name:string, password:string, chars:Character) {
