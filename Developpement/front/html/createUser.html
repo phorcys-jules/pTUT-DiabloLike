@@ -5,24 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diablo Like</title>
-        
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/user.css">
     <link rel="shortcut icon" href="../assets/logo.png">
 </head>
 
 <body>
-    <div>
+    <div id='content'>
         <h1>Créer nouveau compte</h1>
         <form id='formUser'>
+            <ul>
             <label for="lastname">Nom : <input type="text" name="lastname" id="lastname"></label>
             <label for="fisrtname">Prénom : <input type="text" name="firstname" id="firstname"></label>
             <label for="pseudo">Pseudo : <input type="text" name="pseudo" id="pseudo"></label>
             <label for="mdp">Mot de passe : <input type="password" name="mdp" id="mdp"></label>
             <label for="mdpconfirm">Confirmer mot de passe : <input type="password" name="mdpconfirm" id="mdpconfirm"></label>
             <label for="mail">Email : <input type="text" name="mail" id="mail"></label>
-            <button type="reset" id='reset'>Annuler</button>
-            <button type="submit" id='confirm'>Confirmer</button>
+            <div id='boutons'>
+                <button type="reset" class="btn btn-primary" id='reset'>Annuler</button>
+                <button type="submit" class="btn btn-success" id='confirm'>Confirmer</button>
+            </div>    
+
+            </ul>
         </form>
 
     </div>
