@@ -54,7 +54,8 @@ class Game {
     
     //bg image
     const img = await ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
-    this.map = new GameMap(img, this.width, this.height)
+    const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.jpg");
+    this.map = new GameMap(img, wall, this.width, this.height)
 
     this.charImage = await ImageUtils.loadImageFromUrl("./assets/img/perso/perso_bas.png");
 
