@@ -43,5 +43,9 @@ form.onsubmit = () => {
             throw new Error("Erreur creation");
             break;
     }
+    let u = new User(userPseudo, userFirstName, userLastName, userPassword, userEmail);
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.classList.add('d-none');
+    errorMessage.classList.remove('show');
     return false; // prevent reload
 };
