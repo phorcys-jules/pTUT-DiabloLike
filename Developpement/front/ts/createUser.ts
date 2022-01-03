@@ -21,6 +21,20 @@ if (form ===null ) {
     
 }
 
+async function validate ( u: User ): Promise<object> {
+    const url = new URL(`http://localhost:8752/createUser/${u.pseudo}/${u.firstname}/${u.lastname}/${u.password}/${u.email}`);
+   
+    const headers = {};
+    const response = await fetch( url.toString(), {headers} );
+    return await response.json();
+};
+
+/**
+ * Main
+ * @param e event (confirm button of form)
+ * @returns false
+ */
+
 form.onsubmit = (e) => {
     e.preventDefault();
 
@@ -49,14 +63,7 @@ form.onsubmit = (e) => {
 
     let u:User = new User(userPseudo,userFirstName, userLastName, userPassword, userEmail);
 
-    async function getCrypto ( query: string ): object {
-        const url = new URL(...
-        url.search = new URLSearchParams(...
-        const headers = {...
-        const response = await fetch( url.toString(), {headers} );
-        return await response.json();
-     };
-
+    validate(u);
     const errorMessage = document.getElementById('errorMessage') as HTMLElement;
     
     errorMessage.classList.add('d-none');
