@@ -15,9 +15,7 @@ function bootstrap() {
             console.log("Couldn't find the canvas element");
             return;
         }
-        const context = canvasEl.getContext("2d");
-        console.log(context);
-        const game = new Game(context, canvasEl.width, canvasEl.height);
+        const game = new Game(canvasEl);
         game.run();
     });
 }

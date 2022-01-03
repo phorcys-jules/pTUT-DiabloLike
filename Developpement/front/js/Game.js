@@ -11,15 +11,39 @@ import ImageUtils from "./ImageUtils.js";
 import GameMap from "./GameMap.js";
 import GameLoop from "./GameLoop.js";
 class Game {
-    constructor(context, width, height) {
+    constructor(canvasEl) {
         this.charX = 0;
         this.charY = 0;
-        this.context = context;
-        this.width = width;
-        this.height = height;
+        /**
+         * key : name key down,
+         * value : isDown ?
+         */
+        this.keyStates = {};
+        this.canvasEl = canvasEl;
+        this.context = canvasEl.getContext("2d");
+        this.width = canvasEl.width;
+        this.height = canvasEl.height;
+        this.setup();
+    }
+    init() {
+        return this.setup(this.canvasEl);
+    }
+    /**
+     * setup some action as key Mapping
+     */
+    setup() {
+        document.addEventListener("keydown", e => {
+            e.preventDefault();
+            this.keyStates[e.key] = true;
+        });
+        document.addEventListener("keyup", e => {
+            e.preventDefault();
+            this.keyStates[e.key] = false;
+        });
     }
     run() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('GG u run the Game');
             //bg image
             const img = yield ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
             this.map = new GameMap(img, this.width, this.height);
@@ -28,11 +52,27 @@ class Game {
             gameLoop.run();
         });
     }
+    /**
+     * Appeler a chaque update du jeu
+     * @param delta tmps depuis dernier appel
+     */
     loop(delta) {
-        console.log(this.map);
+        //redessine la carte
         this.map.render(this.context);
-        this.charX += 30 * delta;
-        this.charY += 30 * delta;
+        //déplace le perso en f° du temps écouler
+        if (this.keyStates["d"] || this.keyStates["ArrowRight"]) {
+            this.charX += 30 * delta;
+        }
+        else if (this.keyStates["q"] || this.keyStates["ArrowLeft"]) {
+            this.charX -= 30 * delta;
+        }
+        if (this.keyStates["s"] || this.keyStates["ArrowDown"]) {
+            this.charY += 30 * delta;
+        }
+        else if (this.keyStates["z"] || this.keyStates["ArrowUp"]) {
+            this.charY -= 30 * delta;
+        }
+        //redessine le perso
         this.context.drawImage(this.charImage, this.charX, this.charY);
     }
 }

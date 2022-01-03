@@ -1,4 +1,5 @@
 declare class Game {
+    private canvasEl;
     private context;
     private width;
     private height;
@@ -6,8 +7,22 @@ declare class Game {
     private charImage;
     private charX;
     private charY;
-    constructor(context: CanvasRenderingContext2D, width: number, height: number);
+    /**
+     * key : name key down,
+     * value : isDown ?
+     */
+    private keyStates;
+    constructor(canvasEl: HTMLCanvasElement);
+    init(this: any): EventListenerOrEventListenerObject;
+    /**
+     * setup some action as key Mapping
+     */
+    private setup;
     run(): Promise<void>;
+    /**
+     * Appeler a chaque update du jeu
+     * @param delta tmps depuis dernier appel
+     */
     private loop;
 }
 export default Game;

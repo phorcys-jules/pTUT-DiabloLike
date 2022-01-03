@@ -4,6 +4,10 @@ class GameMap {
         this.width = width;
         this.height = height;
     }
+    /**
+     * Redessinne la carte
+     * @param context objet html ou dessiner : Canva 2D
+     */
     render(context) {
         const tileSize = 64;
         const tileCountX = Math.ceil(this.width / tileSize);
