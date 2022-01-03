@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 export class User {
     constructor(pseudo, firstname, lastname, password, email) {
         this.pseudo = pseudo;
@@ -11,12 +10,3 @@ export class User {
         return `Nom : ${this.lastname} / Prenom : ${this.firstname} / Pseudo : ${this.pseudo} a ete créé`;
     }
 }
-=======
-class User {
-    constructor(name, password, chars) {
-        this.name = name;
-        this.password = password;
-    }
-}
-export {};
->>>>>>> Stashed changes
