@@ -12,8 +12,8 @@ class Game {
 
   private map: GameMap;
   private charImage: HTMLImageElement;
-  private charX = 0;
-  private charY = 0;
+  private charX = 64;
+  private charY = 64;
   /**
    * key : name key down,
    * value : isDown ? 
@@ -54,8 +54,9 @@ class Game {
     
     //bg image
     const img = await ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
-    const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.jpg");
-    this.map = new GameMap(img, wall, this.width, this.height)
+    const border = await ImageUtils.loadImageFromUrl("./assets/img/map/border.jpg");
+    const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
+    this.map = new GameMap(img, border, wall, this.width, this.height)
 
     this.charImage = await ImageUtils.loadImageFromUrl("./assets/img/perso/perso_bas.png");
 

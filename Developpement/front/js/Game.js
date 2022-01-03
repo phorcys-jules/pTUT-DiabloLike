@@ -12,8 +12,8 @@ import GameMap from "./GameMap.js";
 import GameLoop from "./GameLoop.js";
 class Game {
     constructor(canvasEl) {
-        this.charX = 0;
-        this.charY = 0;
+        this.charX = 64;
+        this.charY = 64;
         /**
          * key : name key down,
          * value : isDown ?
@@ -46,7 +46,9 @@ class Game {
             console.log('GG u run the Game');
             //bg image
             const img = yield ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
-            this.map = new GameMap(img, this.width, this.height);
+            const border = yield ImageUtils.loadImageFromUrl("./assets/img/map/border.jpg");
+            const wall = yield ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
+            this.map = new GameMap(img, border, wall, this.width, this.height);
             this.charImage = yield ImageUtils.loadImageFromUrl("./assets/img/perso/perso_bas.png");
             const gameLoop = new GameLoop(this.loop.bind(this));
             gameLoop.run();
