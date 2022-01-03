@@ -1,30 +1,31 @@
 import { User } from './User.js';
 
-
-function validateEmail(mail:string){
-    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    let res = regex.test(mail).toString();
-
-    switch(res){
-        case 'true':
-            return true;
-            break;
-
-        case 'false':
-            return false;
-            break;
-
-        default:
-            alert("erreur");
-            break;
-    }
+function validateEmail(mail:string):boolean{
+    let regex:RegExp = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    return regex.test(mail);
 }
 
-const form: HTMLFormElement = document.getElementById('formUser') as HTMLFormElement;
+function displayError(message:string) {
+    const errorMessage = document.getElementById('errorMessage') as HTMLElement;
+    errorMessage.innerHTML = `<strong>Error!</strong> ${message}`;
+    
+    errorMessage.classList.add('show');
+    errorMessage.classList.remove('d-none');
+    throw new Error(message);
+}
 
+const form:HTMLFormElement  = document.getElementById('formUser') as HTMLFormElement ;
 
-form.onsubmit = () => {
+if (form ===null ) {
+    throw new Error("Cannot get formUser");
+    
+}
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+
     const formData = new FormData(form);
+
     const userLastName = formData.get('lastname') as string;
     const userFirstName = formData.get('firstname') as string;
 
@@ -32,27 +33,34 @@ form.onsubmit = () => {
     const userPasswordConfirm = formData.get('mdpconfirm') as string;
     const userPseudo = formData.get('pseudo') as string;
     const userEmail = formData.get('mail') as string;
-    let bool=(userPassword==userPasswordConfirm).toString();
-    let verifmail=validateEmail(userEmail)!.toString();
 
-    let u;
-    
-    switch (bool) {
-        case 'true':
-            if(verifmail=='true'){
-                u = new User(userPseudo,userFirstName, userLastName, userPassword, userEmail);
-                alert(u.toString());
-            }else{
-                alert("Email invalide");
-            }
-            break;
-        case 'false':
-            alert('Erreur, veuillez vérifier que les mots de passes soient indentiques');
-            break;
-    
-        default:
-            throw new Error("Erreur creation");
-            break;
+    console.log(userLastName);
+    if ( userLastName==='' || userFirstName==='' || userPassword==='' || userPasswordConfirm==='' || 
+        userPseudo==='' || userEmail==='') {
+            displayError("Au moin un champ n'est pas remplit");      
     }
+
+    if( ! validateEmail(userEmail)){
+         displayError("Email invalide");
+    }
+    if(! (userPassword===userPasswordConfirm)){
+         displayError('Erreur, veuillez vérifier que les mots de passes soient indentiques');
+    }
+
+    let u:User = new User(userPseudo,userFirstName, userLastName, userPassword, userEmail);
+
+    async function getCrypto ( query: string ): object {
+        const url = new URL(...
+        url.search = new URLSearchParams(...
+        const headers = {...
+        const response = await fetch( url.toString(), {headers} );
+        return await response.json();
+     };
+
+    const errorMessage = document.getElementById('errorMessage') as HTMLElement;
+    
+    errorMessage.classList.add('d-none');
+    errorMessage.classList.remove('show');
+
     return false; // prevent reload
 };
