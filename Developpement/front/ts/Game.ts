@@ -69,7 +69,9 @@ class Game {
    * @param delta tmps depuis dernier appel
    */
   private loop(delta: number) {
-    
+    //tmp for presentation TODO remove
+    delta*=4;
+
     //redessine la carte
     this.map.render(this.context);
 

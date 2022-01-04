@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import express from 'express';
+import bcrypt from 'bcryptjs';
 import { connect } from './database.js';
 import { User } from './models/User.js';
 //Config the app
@@ -38,6 +39,7 @@ app.get('/ginette', function (req, res) {
 app.post('/createUser/:pseudo/:firstname/:lastname/:pass/:mail', function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let p = req.params;
+        p.pass = yield bcrypt.hash(p.pass, 10);
         let u = new User(p.pseudo, p.firstname, p.lastname, p.pass, p.mail);
         /**
        * TODO gestion erreur try catch

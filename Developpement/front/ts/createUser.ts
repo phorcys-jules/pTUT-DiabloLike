@@ -36,6 +36,7 @@ async function validate ( u: User ){
     //Then with the data from the response in JSON...
     .then((data) => {
       console.log('Success:', data);
+      window.location.href = './createChar.html';
     })
     //Then with the error genereted...
     .catch((error) => {

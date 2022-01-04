@@ -22,5 +22,6 @@ form.onsubmit = () => {
             break;
     }
     console.log(c1.toString());
+    window.location.href = '../index.html';
     return false; // prevent reload
 };

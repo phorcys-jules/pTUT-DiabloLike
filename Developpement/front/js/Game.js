@@ -59,6 +59,8 @@ class Game {
      * @param delta tmps depuis dernier appel
      */
     loop(delta) {
+        //tmp for presentation TODO remove
+        delta *= 4;
         //redessine la carte
         this.map.render(this.context);
         //déplace le perso en f° du temps écouler

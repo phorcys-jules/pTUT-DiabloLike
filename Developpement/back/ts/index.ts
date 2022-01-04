@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import bcrypt from 'bcryptjs';
 import { connect } from './database.js';
 import { User } from './models/User.js';
 
@@ -34,6 +35,7 @@ app.get('/ginette', async function (req, res) {
  */
 app.post('/createUser/:pseudo/:firstname/:lastname/:pass/:mail', async function (req, res) {
   let p = req.params;
+  p.pass = await bcrypt.hash(p.pass, 10);
   let u = new User(p.pseudo, p.firstname, p.lastname, p.pass, p.mail);
 
     /**
