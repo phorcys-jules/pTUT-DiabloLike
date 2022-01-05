@@ -1,6 +1,7 @@
 import { Sorcier } from "./character/Sorcier.js";
 import { Guerrier } from "./character/Guerrier.js";
 import { Archer } from "./character/Archer.js";
+import { bootstrap } from "./engine/bootstrap.js";
 const form = document.getElementById('formChar');
 form.onsubmit = () => {
     const formData = new FormData(form);
@@ -22,6 +23,7 @@ form.onsubmit = () => {
             break;
     }
     console.log(c1.toString());
+    bootstrap(c1);
     window.location.href = '../index.html';
     return false; // prevent reload
 };

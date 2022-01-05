@@ -1,30 +1,37 @@
 import ImageUtils  from "./ImageUtils.js";
 import GameMap  from "./GameMap.js";
 import GameLoop  from "./GameLoop.js";
+import { Character } from "../character/Character.js";
 
 class Game {
 
-  private canvasEl: HTMLCanvasElement
+  private canvasEl: HTMLCanvasElement;
 
   private context: CanvasRenderingContext2D;
   private width: number;
   private height: number;
 
   private map: GameMap;
-  private charImage: HTMLImageElement;
-  private charX = 64;
-  private charY = 64;
+  private mobImage: HTMLImageElement;
+
+  private char:Character;
+
+
   /**
    * key : name key down,
    * value : isDown ? 
    */
-  private keyStates: {[key: string]: boolean} = {};
+  //private keyStates: {[key: string]: boolean} = {};
+  private keyStates:string[]=[];
+  
 
-  constructor(canvasEl: HTMLCanvasElement) {
+  constructor(canvasEl: HTMLCanvasElement, char:Character ){
     this.canvasEl = canvasEl;
     this.context = canvasEl.getContext("2d") as  CanvasRenderingContext2D;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
+
+    this.char=char;
 
     this.setup()
     
@@ -39,14 +46,23 @@ class Game {
   private setup() {
     
     document.addEventListener("keydown", e => {
-      e.preventDefault();
-      this.keyStates[e.key] = true;
+        if(! this.keyStates.includes(e.key)){
+          this.keyStates.push(e.key);
+        }
     })
     document.addEventListener("keyup", e => {
       e.preventDefault();
-      this.keyStates[e.key] = false;
+      //this.keyStates[e.key] = false;
+      this.keyStates.splice(this.keyStates.indexOf(e.key));
     })
 
+  }
+  public isKeyDown(key: string) {
+    return this.keyStates.includes(key);
+  }
+
+  public isAnyKeyDown() {
+    return this.keyStates.length !=0;
   }
 
   public async run() {
@@ -58,7 +74,9 @@ class Game {
     const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
     this.map = new GameMap(img, border, wall, this.width, this.height)
 
-    this.charImage = await ImageUtils.loadImageFromUrl("./assets/img/perso/perso_bas.png");
+    this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
+    this.context.drawImage(this.mobImage, 3*64, 3*64);
+
 
     const gameLoop = new GameLoop(this.loop.bind(this));
     gameLoop.run();
@@ -71,26 +89,28 @@ class Game {
   private loop(delta: number) {
     //tmp for presentation TODO remove
     delta*=4;
-
     //redessine la carte
     this.map.render(this.context);
 
-    //déplace le perso en f° du temps écouler
-
-    if (this.keyStates["d"] || this.keyStates["ArrowRight"]) {
-      this.charX += 30 * delta;
-    } else if (this.keyStates["q"] || this.keyStates["ArrowLeft"]) {
-      this.charX -= 30 * delta;
-    }
-    
-    if (this.keyStates["s"] || this.keyStates["ArrowDown"]) {
-      this.charY += 30 * delta;
-    } else if (this.keyStates["z"] || this.keyStates["ArrowUp"]) {
-      this.charY -= 30 * delta;
+    //Détéction des touches et lancement des fonctions associé
+    if (this.isAnyKeyDown()) {
+      if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
+        this.char.walk(3);
+      } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
+        this.char.walk(4);
+      }
+      if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
+        this.char.walk(2);
+      } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
+        this.char.walk(1);
+      }
+      
     }
 
     //redessine le perso
-    this.context.drawImage(this.charImage, this.charX, this.charY);
+    this.char.paint(this.context);
+    //console.log(this.keyStates);
+    
   }
 
 }

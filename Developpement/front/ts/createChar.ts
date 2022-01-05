@@ -3,6 +3,8 @@ import { Sorcier } from "./character/Sorcier.js";
 import { Guerrier } from "./character/Guerrier.js";
 import { Archer } from "./character/Archer.js";
 
+import { bootstrap } from "./engine/bootstrap.js";
+
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
 
@@ -31,6 +33,8 @@ form.onsubmit = () => {
             break;
     }
     console.log(c1.toString());
+
+    bootstrap(c1);
 
     window.location.href = '../index.html';
     return false; // prevent reload

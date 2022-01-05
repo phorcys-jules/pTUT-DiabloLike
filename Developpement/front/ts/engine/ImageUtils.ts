@@ -2,15 +2,16 @@
 class ImageUtils {
 
   public static loadImageFromUrl(url: string): Promise<HTMLImageElement> {
+    //TODO : if image not found, return null.png
     return new Promise(resolve => {
       const img = new Image()
       img.onload = () => {
-        resolve(img)
+        resolve(img);
       }
-      img.src = url
+      img.src = url;
     })
   }
   
 }
 
-export default ImageUtils
+export default ImageUtils;

@@ -8,15 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Game from "./Game.js";
-function bootstrap() {
+export function bootstrap(char) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log("booting the game");
         const canvasEl = document.getElementById("game-canvas");
         if (canvasEl == null) {
             console.log("Couldn't find the canvas element");
             return;
         }
-        const game = new Game(canvasEl);
+        const game = new Game(canvasEl, char);
         game.run();
     });
 }
-bootstrap();

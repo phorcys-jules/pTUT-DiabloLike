@@ -1,5 +1,6 @@
 class ImageUtils {
     static loadImageFromUrl(url) {
+        //TODO : if image not found, return null.png
         return new Promise(resolve => {
             const img = new Image();
             img.onload = () => {
