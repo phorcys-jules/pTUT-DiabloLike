@@ -16,6 +16,12 @@ class Game {
 
   private char:Character;
 
+  /**
+   * Deltas en ms depuis le dernier refresh
+   */
+  private timeSinceLastFPS:number = 0;
+  private frame: number=0;
+
 
   /**
    * key : name key down,
@@ -23,6 +29,7 @@ class Game {
    */
   //private keyStates: {[key: string]: boolean} = {};
   private keyStates:string[]=[];
+  
   
 
   constructor(canvasEl: HTMLCanvasElement, char:Character ){
@@ -44,12 +51,18 @@ class Game {
    * setup some action as key Mapping
    */
   private setup() {
+    let frame = 0;
     
     document.addEventListener("keydown", e => {
         if(! this.keyStates.includes(e.key)){
           this.keyStates.push(e.key);
         }
-    })
+    }),
+    document.addEventListener("keypress", e => {
+      if(! this.keyStates.includes(e.key)){
+        console.log("pressed ", e.key)
+      }
+  })
     document.addEventListener("keyup", e => {
       e.preventDefault();
       //this.keyStates[e.key] = false;
@@ -87,28 +100,44 @@ class Game {
    * @param delta tmps depuis dernier appel
    */
   private loop(delta: number) {
-    //tmp for presentation TODO remove
-    delta*=4;
-    //redessine la carte
-    this.map.render(this.context);
+    this.timeSinceLastFPS+=delta;
+    
+
 
     //Détéction des touches et lancement des fonctions associé
     if (this.isAnyKeyDown()) {
       if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
-        this.char.walk(3);
+        this.char.walk(3, delta);
       } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
-        this.char.walk(4);
+        this.char.walk(4, delta);
       }
       if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
-        this.char.walk(2);
+        this.char.walk(2, delta);
       } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
-        this.char.walk(1);
+        this.char.walk(1, delta);
+      }
+    }
+
+    //1/60 pour 1 image toutes les 60 secondes
+    if(this.timeSinceLastFPS>=1/60) {
+      this.timeSinceLastFPS=0;
+      this.frame+=1;
+      //redessine la carte
+      this.map.render(this.context);
+      //redessine le perso
+      this.char.paint(this.context);
+      //1 sprite toute les 5 frames
+      if (this.frame===5) {
+        this.frame=0;
+        this.char.nextSprites();
       }
       
     }
+    else{
+      console.log("false");
+      
+    }
 
-    //redessine le perso
-    this.char.paint(this.context);
     //console.log(this.keyStates);
     
   }

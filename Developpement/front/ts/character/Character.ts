@@ -16,7 +16,7 @@ export abstract class Character extends Object {
 
 
 
-    constructor(name: string, lvl: number = 1, speed: number = 1, x: number = 64, y: number = 64) {
+    constructor(name: string, lvl: number = 1, speed: number = 100, x: number = 64, y: number = 64) {
         //Level has  default value of 1
         super();
         this.name = name;
@@ -35,7 +35,6 @@ export abstract class Character extends Object {
 
     paint(context: CanvasRenderingContext2D) {        
         context.drawImage(this.sprites, this.currentSprite[0], this.currentSprite[1],64,64,this.x,this.y,64,64);
-        this.nextSprites();
     }
     nextSprites() {
         if (this.currentSprite[0]==64) {
@@ -56,26 +55,27 @@ export abstract class Character extends Object {
      * 2 : S,
      * 3 : E,
      * 4 : O
+     * @param delta : temps depuis la dernière boucle : anti-lag
      */
-    walk(direction: number) {
+    walk(direction: number, delta:number) {
         //TODO if en collision, return -1
         
 
         switch (direction) {
             case 1:
-                this.y -= this.speed;
+                this.y -= this.speed*delta;
                 this.currentSprite[1]=192;
                 break; 
             case 2:
-                this.y += this.speed;
+                this.y += this.speed*delta;
                 this.currentSprite[1]=0;
                 break; 
             case 3:
-                this.x += this.speed;
+                this.x += this.speed*delta;
                 this.currentSprite[1]=64;
                 break; 
             case 4:
-                this.x -= this.speed;
+                this.x -= this.speed*delta;
                 this.currentSprite[1]=128;
                 break;
         }

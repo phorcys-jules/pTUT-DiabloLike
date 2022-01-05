@@ -8,6 +8,11 @@ declare class Game {
     private mobImage;
     private char;
     /**
+     * Deltas en ms depuis le dernier refresh
+     */
+    private timeSinceLastFPS;
+    private frame;
+    /**
      * key : name key down,
      * value : isDown ?
      */

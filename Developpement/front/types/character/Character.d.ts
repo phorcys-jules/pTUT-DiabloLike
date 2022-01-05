@@ -21,6 +21,7 @@ export declare abstract class Character extends Object {
      * 2 : S,
      * 3 : E,
      * 4 : O
+     * @param delta : temps depuis la dernière boucle : anti-lag
      */
-    walk(direction: number): void;
+    walk(direction: number, delta: number): void;
 }
