@@ -2,6 +2,7 @@ import ImageUtils  from "./ImageUtils.js";
 import GameMap  from "./GameMap.js";
 import GameLoop  from "./GameLoop.js";
 import { Character } from "../character/Character.js";
+import * as e from "cors";
 
 class Game {
 
@@ -14,7 +15,8 @@ class Game {
   private map: GameMap;
   private mobImage: HTMLImageElement;
 
-  private char:Character;
+  private hero:Character;
+  private char:Character[];
 
   /**
    * Deltas en ms depuis le dernier refresh
@@ -32,13 +34,14 @@ class Game {
   
   
 
-  constructor(canvasEl: HTMLCanvasElement, char:Character ){
+  constructor(canvasEl: HTMLCanvasElement, hero:Character, char:Character[]=[]){
     this.canvasEl = canvasEl;
     this.context = canvasEl.getContext("2d") as  CanvasRenderingContext2D;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
 
-    this.char=char;
+    this.hero=hero;
+    this.char = char;
 
     this.setup()
     
@@ -107,16 +110,18 @@ class Game {
     //Détéction des touches et lancement des fonctions associé
     if (this.isAnyKeyDown()) {
       if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
-        this.char.walk(3, delta);
+        this.hero.walk(3, delta);
       } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
-        this.char.walk(4, delta);
+        this.hero.walk(4, delta);
       }
       if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
-        this.char.walk(2, delta);
+        this.hero.walk(2, delta);
       } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
-        this.char.walk(1, delta);
+        this.hero.walk(1, delta);
       }
     }
+
+
 
     //1/60 pour 1 image toutes les 60 secondes
     if(this.timeSinceLastFPS>=1/60) {
@@ -125,21 +130,25 @@ class Game {
       //redessine la carte
       this.map.render(this.context);
       //redessine le perso
-      this.char.paint(this.context);
-      //1 sprite toute les 5 frames
-      if (this.frame===5) {
-        this.frame=0;
-        this.char.nextSprites();
-      }
-      
-    }
-    else{
+      this.hero.paint(this.context);
+
+      this.char.forEach((entity) =>{
+        entity.evolve(delta);
+        entity.paint(this.context)
+      });
+    };
+
+    //1 sprite toute les 5 frames
+    if (this.frame===5) {
+      this.frame=0;
+      this.hero.nextSprites();
+      this.char.forEach((entity) =>{
+        entity.nextSprites();
+      });
+    }else{
       console.log("false");
-      
     }
 
-    //console.log(this.keyStates);
-    
   }
 
 }

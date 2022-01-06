@@ -1,7 +1,13 @@
 export declare abstract class Character extends Object {
     name: string;
     lvl: number;
+    xp: number;
     speed: number;
+    strenth: number;
+    hp: number;
+    maxHp: number;
+    mp: number;
+    maxMp: number;
     x: number;
     y: number;
     sprites: HTMLImageElement;
@@ -9,11 +15,13 @@ export declare abstract class Character extends Object {
      * x, y of the current sprite
      */
     currentSprite: number[];
-    constructor(name: string, lvl?: number, speed?: number, x?: number, y?: number);
-    private loadSprites;
+    dir: number;
+    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
+    protected loadSprites(): Promise<void>;
     paint(context: CanvasRenderingContext2D): void;
     nextSprites(): void;
     toString(): string;
+    evolve(delat: number): void;
     /**
      * Déplace le perso dans la dir associé
      * @param direction
@@ -24,4 +32,5 @@ export declare abstract class Character extends Object {
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number): void;
+    addXP(amount: number): void;
 }
