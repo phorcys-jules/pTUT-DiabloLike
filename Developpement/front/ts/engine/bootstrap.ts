@@ -1,7 +1,7 @@
 import { Character } from "../character/Character.js";
 import  Game  from "./Game.js";
 
-export async function bootstrap(char:Character) {
+export async function bootstrap(hero:Character, char:Character[]) {
   console.log("booting the game");
   
   const canvasEl = document.getElementById("game-canvas") as HTMLCanvasElement | undefined;
@@ -10,6 +10,6 @@ export async function bootstrap(char:Character) {
     return
   }
 
-  const game = new Game(canvasEl, char);
+  const game = new Game(canvasEl,hero, char);
   game.run();
 }

@@ -1,10 +1,17 @@
 import ImageUtils from "../engine/ImageUtils.js";
+//import Stuff from "./stuff/Stuff.js";
 
 export abstract class Character extends Object {
 
     name: string;
     lvl: number;
+    xp: number;
     speed: number;
+    strenth:number;
+    hp:number;
+    maxHp:number;
+    mp:number;
+    maxMp:number;
 
     x: number;
     y: number;
@@ -13,24 +20,33 @@ export abstract class Character extends Object {
      * x, y of the current sprite
      */
     currentSprite: number[];
+    dir:number=2;
+
+    //stuff:Stuff[];
 
 
-
-    constructor(name: string, lvl: number = 1, speed: number = 100, x: number = 64, y: number = 64) {
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth:number=1, maxHp:number=1, maxMp:number=1, x: number = 64, y: number = 64) {
         //Level has  default value of 1
         super();
         this.name = name;
         this.lvl = lvl;
+        this.xp = 0;
         this.speed=speed;
+        this.strenth=strenth;
+        this.hp = maxHp;
+        this.maxHp=maxHp;
+        this.mp=maxMp;
+        this.maxMp=maxMp;
         this.x = x;
         this.y = y;
 
         this.loadSprites();
     }
 
-    private async loadSprites() {
+    protected async loadSprites() {
         this.sprites = await ImageUtils.loadImageFromUrl("./assets/img/perso/sprites.png");
         this.currentSprite=[0,0];
+        console.log("you're supposed to rededfine this function with the correct sprite")
     }
 
     paint(context: CanvasRenderingContext2D) {        
@@ -48,6 +64,8 @@ export abstract class Character extends Object {
         return `${this.name} est un ${this.constructor.name} de niveau ${this.lvl}`
     }
 
+    evolve(delat:number){};
+
     /**
      * Déplace le perso dans la dir associé
      * @param direction
@@ -60,7 +78,6 @@ export abstract class Character extends Object {
     walk(direction: number, delta:number) {
         //TODO if en collision, return -1
         
-
         switch (direction) {
             case 1:
                 this.y -= this.speed*delta;
@@ -78,6 +95,49 @@ export abstract class Character extends Object {
                 this.x -= this.speed*delta;
                 this.currentSprite[1]=128;
                 break;
+        }
+    }
+
+    addXP(amount:number){
+        this.xp +=amount;
+        if (this.xp >= 1,2*(this.lvl+100)) {
+            this.lvl+=1;
+            this.xp=0;
+
+            //Up stats
+            this.hp+=2;
+            this.maxHp+=2;
+            this.mp+=2;
+            this.maxMp+=2;
+            this.strenth+=2;
+        }
+    }
+
+    addMana(amount:number){
+        //Si atteint lim basse ou haute
+        if (this.mp+amount>=this.maxMp) {
+            this.mp+=amount=64;
+        } else { 
+            if (this.mp+amount<=0) {
+                this.mp=0;
+            } else {
+                //cas OK
+                this.mp+=amount;
+            }
+        }
+    }
+
+    addHp(amount:number){
+        //Si atteint lim basse ou haute
+        if (this.hp+amount>=this.maxHp) {
+            this.hp+=amount=64;
+        } else { 
+            if (this.hp+amount<=0) {
+                this.hp=0;
+            } else {
+                //cas OK
+                this.hp+=amount;
+            }
         }
     }
 }

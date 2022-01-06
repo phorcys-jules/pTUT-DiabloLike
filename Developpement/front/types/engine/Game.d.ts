@@ -6,6 +6,7 @@ declare class Game {
     private height;
     private map;
     private mobImage;
+    private hero;
     private char;
     /**
      * Deltas en ms depuis le dernier refresh
@@ -17,7 +18,7 @@ declare class Game {
      * value : isDown ?
      */
     private keyStates;
-    constructor(canvasEl: HTMLCanvasElement, char: Character);
+    constructor(canvasEl: HTMLCanvasElement, hero: Character, char?: Character[]);
     init(this: any): EventListenerOrEventListenerObject;
     /**
      * setup some action as key Mapping

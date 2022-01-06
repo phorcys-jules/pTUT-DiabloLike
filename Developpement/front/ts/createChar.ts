@@ -1,9 +1,10 @@
 import { Character } from "./character/Character.js";
-import { Sorcier } from "./character/Sorcier.js";
-import { Guerrier } from "./character/Guerrier.js";
+import { Wizard } from "./character/Wizard.js";
+import { Warrior } from "./character/Warrior.js";
 import { Archer } from "./character/Archer.js";
 
 import { bootstrap } from "./engine/bootstrap.js";
+import { Zombie } from "./character/Zombie.js";
 
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
@@ -18,11 +19,11 @@ form.onsubmit = () => {
     
 
     switch (characterClass) {
-        case 'Sorcier':
-            c1 = new Sorcier(characterName);
+        case 'Wizard':
+            c1 = new Wizard(characterName);
             break;
-        case 'Guerrier':
-            c1 = new Guerrier(characterName);
+        case 'Warrior':
+            c1 = new Warrior(characterName);
             break;
         case 'Archer':
             c1 = new Archer(characterName);
@@ -34,7 +35,7 @@ form.onsubmit = () => {
     }
     console.log(c1.toString());
 
-    bootstrap(c1);
+    bootstrap(c1, [new Zombie(), new Zombie()]);
 
     window.location.href = '../index.html';
     return false; // prevent reload
