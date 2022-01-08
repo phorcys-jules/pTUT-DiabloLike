@@ -88,7 +88,27 @@ class Game {
     const img = await ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
     const border = await ImageUtils.loadImageFromUrl("./assets/img/map/border.jpg");
     const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
-    this.map = new GameMap(img, border, wall, this.width, this.height)
+    this.map = new GameMap();
+
+    let bFlor = new Block(0, 0, 64, 64, false, img);
+    let bBord = new Block(0, 0, 64, 64, true, border);
+
+    let newBlocks = [[bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
+                     [bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord]];
+
+    this.map.setBlocks(newBlocks);
 
     this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
     this.context.drawImage(this.mobImage, 3*64, 3*64);

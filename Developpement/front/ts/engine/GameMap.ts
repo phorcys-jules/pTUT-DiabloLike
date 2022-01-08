@@ -1,22 +1,52 @@
+import ImageUtils  from "./ImageUtils.js";
 
 class GameMap {
 
   /**
    * Texture de la case
    */
-  private tileImage: HTMLImageElement;
-  private borderImage: HTMLImageElement;
-  private wallImage: HTMLImageElement;
-  private width: number;
-  private height: number;
 
-  constructor(tileImage: HTMLImageElement, borderImage: HTMLImageElement, wallImage : HTMLImageElement, width: number, height: number) {
-    this.tileImage = tileImage;
-    this.borderImage = borderImage;
-    this.wallImage = wallImage;
-    this.width = width;
-    this.height = height;
+  private blocks: Block[][];
+
+  constructor() {
   }
+
+  public getBlocks():Block[][]{
+    return this.blocks;
+  }
+
+  public setBlocks(p_blocks:Block[][]){
+    this.blocks = p_blocks;
+  }
+
+  public getBlock(p_x:number, p_y:number):Block{
+    return this.blocks[p_x][p_y];
+  }
+
+  public setBlock(p_x:number, p_y:number, p_block:Block){
+    this.blocks[p_x][p_y] = p_block;
+  }
+
+  public async deleteBlock(p_x:number, p_y:number){
+    let nullBlock = this.getBlock(p_x, p_y); 
+    let nullImg = await ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg")
+    this.blocks[p_x][p_y] = new Block(nullBlock.getBlockX(),
+                                      nullBlock.getBlockY(),
+                                      nullBlock.getWidth(),
+                                      nullBlock.getHeight(),
+                                      false, 
+                                      nullImg);
+  }
+
+  public ajoutBlock(p_block:Block){
+    if (this.blocks[this.blocks.length].length === this.blocks[this.blocks.length-1].length){
+      this.blocks[this.blocks.length+1][0] = p_block;
+    }
+    else{
+      this.blocks[this.blocks.length].push(p_block);
+    }
+  }
+
 
   /**
    * Redessinne la carte
@@ -25,21 +55,13 @@ class GameMap {
   public render(context: CanvasRenderingContext2D) {
     const tileSize = 64;
     
-    const tileCountX = Math.ceil(this.width / tileSize);
-    const tileCountY = Math.ceil(this.height / tileSize);
+    const tileCountX = Math.ceil(this.blocks.length);
+    const tileCountY = Math.ceil(this.blocks[0].length);
 
-    for (let y = 1; y < tileCountY-1; y++) {
-      for (let x = 1; x < tileCountX-1; x++) {
-        context.drawImage(this.tileImage, x * tileSize, y * tileSize, tileSize, tileSize);
+    for (let y = 0; y < tileCountY; y++) {
+      for (let x = 0; x < tileCountX; x++) {
+        context.drawImage(this.blocks[x][y].getImg(), x * tileSize, y * tileSize, tileSize, tileSize);
       }
-    }
-    for (let y = 0; y < tileCountY; y++){
-      context.drawImage(this.borderImage, 0 * tileSize, y * tileSize, tileSize, tileSize);
-      context.drawImage(this.borderImage, (tileCountX-1) * tileSize, y * tileSize, tileSize, tileSize);
-    }
-    for (let x = 0; x < tileCountX; x++){
-      context.drawImage(this.borderImage, x * tileSize, 0 * tileSize, tileSize, tileSize);
-      context.drawImage(this.borderImage, x * tileSize, (tileCountY-1) * tileSize, tileSize, tileSize);
     }
   }
   
