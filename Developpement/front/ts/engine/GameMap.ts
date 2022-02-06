@@ -1,4 +1,4 @@
-import ImageUtils  from "./ImageUtils";
+import ImageUtils  from "./ImageUtils.js";
 import fs from 'fs';
 //import ErrnoException from 'fs';
 //import readFile from "fs/promises";

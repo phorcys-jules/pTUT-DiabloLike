@@ -1,5 +1,5 @@
-import { Character } from "../character/Character";
-import  Game  from "./Game";
+import { Character } from "../character/Character.js";
+import  Game  from "./Game.js";
 
 export async function bootstrap(hero:Character, char:Character[]) {
   console.log("booting the game");

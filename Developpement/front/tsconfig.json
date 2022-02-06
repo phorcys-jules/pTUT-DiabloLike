@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "resolveJsonModule": true,
-      "module": "commonjs",
+      "module": "ES2022",
       "target": "ES2021",
       "strict": true,
       "outDir": "./js",

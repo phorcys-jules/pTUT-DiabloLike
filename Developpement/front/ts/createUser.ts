@@ -1,4 +1,4 @@
-import { User } from './User';
+import { User } from './User.js';
 
 function validateEmail(mail:string):boolean{
     let regex:RegExp = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');

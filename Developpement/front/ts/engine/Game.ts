@@ -1,7 +1,7 @@
-import ImageUtils  from "./ImageUtils";
-import GameMap  from "./GameMap";
-import GameLoop  from "./GameLoop";
-import { Character } from "../character/Character";
+import ImageUtils  from "./ImageUtils.js";
+import GameMap  from "./GameMap.js";
+import GameLoop  from "./GameLoop.js";
+import { Character } from "../character/Character.js";
 import * as e from "cors";
 
 class Game {

@@ -1,5 +1,5 @@
-import ImageUtils from "../engine/ImageUtils";
-import { Character } from "./Character";
+import ImageUtils from "../engine/ImageUtils.js";
+import { Character } from "./Character.js";
 
 export class Zombie extends Character {
     /**
