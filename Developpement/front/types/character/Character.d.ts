@@ -33,4 +33,6 @@ export declare abstract class Character extends Object {
      */
     walk(direction: number, delta: number): void;
     addXP(amount: number): void;
+    addMana(amount: number): void;
+    addHp(amount: number): void;
 }

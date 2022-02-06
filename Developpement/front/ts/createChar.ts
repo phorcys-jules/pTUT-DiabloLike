@@ -1,10 +1,10 @@
-import { Character } from "./character/Character.js";
-import { Wizard } from "./character/Wizard.js";
-import { Warrior } from "./character/Warrior.js";
-import { Archer } from "./character/Archer.js";
+import { Character } from "./character/Character";
+import { Wizard } from "./character/Wizard";
+import { Warrior } from "./character/Warrior";
+import { Archer } from "./character/Archer";
 
-import { bootstrap } from "./engine/bootstrap.js";
-import { Zombie } from "./character/Zombie.js";
+import { bootstrap } from "./engine/bootstrap";
+import { Zombie } from "./character/Zombie";
 
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;

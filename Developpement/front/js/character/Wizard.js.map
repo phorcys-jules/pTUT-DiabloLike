@@ -1,0 +1,1 @@
+{"version":3,"file":"Wizard.js","sourceRoot":"","sources":["../../ts/character/Wizard.ts"],"names":[],"mappings":";;;;AAAA,yFAAiD;AACjD,iDAA2C;AAE3C,MAAa,MAAO,SAAQ,wBAAS;IAGvB,KAAK,CAAC,WAAW;QACvB,IAAI,CAAC,OAAO,GAAG,MAAM,uBAAU,CAAC,gBAAgB,CAAC,uCAAuC,CAAC,CAAC;QAC1F,IAAI,CAAC,aAAa,GAAC,CAAC,CAAC,EAAC,CAAC,CAAC,CAAC;IAC7B,CAAC;CACJ;AAPD,wBAOC"}

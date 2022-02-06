@@ -1,4 +1,4 @@
-import { Character } from "../character/Character.js";
+import { Character } from "../character/Character";
 declare class Game {
     private canvasEl;
     private context;

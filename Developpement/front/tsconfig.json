@@ -1,5 +1,33 @@
 {
     "compilerOptions": {
+      "resolveJsonModule": true,
+      "module": "commonjs",
+      "target": "ES2021",
+      "strict": true,
+      "outDir": "./js",
+      "declaration": true,
+      "declarationDir": "./types",
+      "importHelpers": true,
+      "esModuleInterop": true,
+      "noEmitOnError": true,
+      "strictPropertyInitialization": false,
+      "lib": [
+        "ES2021",
+        "esnext.asynciterable",
+        "dom"
+      ],
+      "moduleResolution": "node"
+    },
+    "include": [
+        "./ts/*.ts",
+        "./ts/*/*.ts",
+        "./ts/*/*/*.ts"],
+}
+
+
+/*
+
+    "compilerOptions": {
         "outDir": "./js",
         "target": "ES6",
         "noEmitOnError": true,
@@ -7,9 +35,39 @@
         "declaration": true,
         "declarationDir": "./types",
         "strictPropertyInitialization": false,
-    },
-    "include": [
-        "./ts/*.ts",
-        "./ts/*/*.ts",
-        "./ts/*/*/*.ts"],
+        "moduleResolution": "node",
+        "resolveJsonModule" : true,
+        "esModuleInterop": true,
+        "noEmitOnError": true,
+
+
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "module": "commonjs",
+    "target": "ES2021",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "strictPropertyInitialization": false,
+    "outDir": "build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "importHelpers": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "ES2021",
+      "esnext.asynciterable"
+    ],
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }
+
+*/

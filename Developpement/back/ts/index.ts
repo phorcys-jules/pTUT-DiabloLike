@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
-import { connect } from './database.js';
-import { User } from './models/User.js';
+import { connect } from './database';
+import { User } from './models/User';
 
 //Config the app
 const app = express();

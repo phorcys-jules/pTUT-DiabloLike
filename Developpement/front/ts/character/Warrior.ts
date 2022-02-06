@@ -1,4 +1,4 @@
-import { Character } from "./Character.js";
+import { Character } from "./Character";
 
 export class Warrior extends Character {
 
@@ -7,3 +7,4 @@ export class Warrior extends Character {
         super(name, lvl);
     }
 }
+

@@ -1,4 +1,4 @@
-import DeltaTracker from "./DeltaTracker.js";
+import DeltaTracker from "./DeltaTracker";
 
 type GameLoopFunction = (delta: number) => void;
 

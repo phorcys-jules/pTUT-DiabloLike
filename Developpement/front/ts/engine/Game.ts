@@ -1,7 +1,7 @@
-import ImageUtils  from "./ImageUtils.js";
-import GameMap  from "./GameMap.js";
-import GameLoop  from "./GameLoop.js";
-import { Character } from "../character/Character.js";
+import ImageUtils  from "./ImageUtils";
+import GameMap  from "./GameMap";
+import GameLoop  from "./GameLoop";
+import { Character } from "../character/Character";
 import * as e from "cors";
 
 class Game {
@@ -89,7 +89,7 @@ class Game {
     const border = await ImageUtils.loadImageFromUrl("./assets/img/map/border.jpg");
     const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
     this.map = new GameMap();
-
+    /*
     let bFlor = new Block(0, 0, 64, 64, false, img);
     let bBord = new Block(0, 0, 64, 64, true, border);
 
@@ -108,7 +108,9 @@ class Game {
                      [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
                      [bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord]];
 
-    this.map.setBlocks(newBlocks);
+    this.map.setMaps(newBlocks);
+    */
+   this.map.initMap(0);
 
     this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
     this.context.drawImage(this.mobImage, 3*64, 3*64);

@@ -1,4 +1,4 @@
-import { Character } from "./Character";
+import { Character } from "./Character.js";
 export declare class Zombie extends Character {
     /**
      * Temps en ms depuis la dernière action : attaque, changement de direction,...

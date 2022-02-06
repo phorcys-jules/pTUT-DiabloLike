@@ -1,4 +1,4 @@
-import ImageUtils from "../engine/ImageUtils.js";
+import ImageUtils from "../engine/ImageUtils";
 //import Stuff from "./stuff/Stuff.js";
 
 export abstract class Character extends Object {
