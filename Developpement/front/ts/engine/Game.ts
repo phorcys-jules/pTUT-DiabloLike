@@ -3,6 +3,7 @@ import GameMap  from "./GameMap.js";
 import GameLoop  from "./GameLoop.js";
 import { Character } from "../character/Character.js";
 import * as e from "cors";
+import { Block } from "../map/block.js";
 
 class Game {
 
@@ -85,9 +86,9 @@ class Game {
     console.log('GG u run the Game');
     
     //bg image
-    const img = await ImageUtils.loadImageFromUrl("./assets/img/map/dirt.jpg");
-    const border = await ImageUtils.loadImageFromUrl("./assets/img/map/border.jpg");
-    const wall = await ImageUtils.loadImageFromUrl("./assets/img/map/wall.png");
+    const img = "./assets/img/map/dirt.jpg";
+    const border = "./assets/img/map/border.jpg";
+    const wall = "./assets/img/map/wall.png";
     this.map = new GameMap();
     /*
     let bFlor = new Block(0, 0, 64, 64, false, img);
@@ -109,8 +110,9 @@ class Game {
                      [bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord]];
 
     this.map.setMaps(newBlocks);
-    */
-   this.map.initMap(0);
+    
+   */
+    this.map.initMap(0);
 
     this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
     this.context.drawImage(this.mobImage, 3*64, 3*64);
@@ -124,7 +126,7 @@ class Game {
    * Appeler a chaque update du jeu
    * @param delta tmps depuis dernier appel
    */
-  private loop(delta: number) {
+  private async loop(delta: number) {
     this.timeSinceLastFPS+=delta;
     
 
@@ -150,7 +152,7 @@ class Game {
       this.timeSinceLastFPS=0;
       this.frame+=1;
       //redessine la carte
-      this.map.render(this.context);
+      await this.map.render(this.context);
       //redessine le perso
       this.hero.paint(this.context);
 
@@ -168,7 +170,7 @@ class Game {
         entity.nextSprites();
       });
     }else{
-      console.log("false");
+      //console.log("false");
     }
 
   }

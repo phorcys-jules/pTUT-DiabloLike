@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "DiabloLike est réalisé dans le cadre d'un projet tutoré de LP Ciasie de l'IUT Nancy-Charlemagne promotion 2021-2022.\r Le but de ce projet est de réalisé un jeu de type Hack'n'slash type Diablo. Nous avons choisi de garder l'aspect principal du jeu qui est de combattre des donjons ou des monstres afin d’acquérir de l’expérience pour évoluer notre personnage et avancer dans le jeu.",
   "main": "main.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "start npx tsc -p ./back/tsconfig.json --watch && start npx tsc -p ./front/tsconfig.json --watch",
@@ -33,6 +33,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "database": "0.0.2",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
