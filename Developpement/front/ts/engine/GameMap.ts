@@ -141,7 +141,7 @@ class GameMap {
           case 14:
             item = true;
             tile = Block.CHEST;
-            toPush = new Block(currentX, this.height-1, 64, 64, false, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3]);
+            toPush = new Block(currentX+0.25, this.height-1+0.25, 32, 32, false, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3]);
             break;
 
             

@@ -1,9 +1,10 @@
+import ImageUtils from "../engine/ImageUtils.js";
 import { Character } from "./Character.js";
 
 export class Archer extends Character {
 
-    constructor(name:string, lvl:number =1) {
-        //Level has  default value of 1
-        super(name, lvl);
+    protected async loadSprites() {
+        this.sprites = await ImageUtils.loadImageFromUrl("./assets/img/perso/elves_sprites_taller.png");
+        this.currentSprite=[0,0];
     }
 }
