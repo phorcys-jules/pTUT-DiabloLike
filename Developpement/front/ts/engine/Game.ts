@@ -4,6 +4,8 @@ import GameLoop  from "./GameLoop.js";
 import { Character } from "../character/Character.js";
 import * as e from "cors";
 import { Block } from "../map/block.js";
+import { Wizard } from "../character/Wizard.js";
+import { Archer } from "../character/Archer.js";
 
 class Game {
 
@@ -27,12 +29,11 @@ class Game {
 
 
   /**
+   * Touches sur lesquelles on peut rester appuyé
    * key : name key down,
    * value : isDown ? 
    */
-  //private keyStates: {[key: string]: boolean} = {};
   private keyStates:string[]=[];
-  
   
 
   constructor(canvasEl: HTMLCanvasElement, hero:Character, char:Character[]=[]){
@@ -45,6 +46,7 @@ class Game {
     this.char = char;
 
     this.setup()
+
     
   }
   
@@ -56,15 +58,19 @@ class Game {
    */
   private setup() {
     let frame = 0;
-    
     document.addEventListener("keydown", e => {
         if(! this.keyStates.includes(e.key)){
           this.keyStates.push(e.key);
         }
     }),
+    //Touches que l'on presse simplement pour effectuer UNE action
     document.addEventListener("keypress", e => {
-      if(! this.keyStates.includes(e.key)){
-        console.log("pressed ", e.key)
+      //console.log(e.key);
+      
+      switch (e.key) {
+        case 'p':
+          this.switchPerso();
+          break;
       }
   })
     document.addEventListener("keyup", e => {
@@ -85,33 +91,8 @@ class Game {
   public async run() {
     console.log('GG u run the Game');
     
-    //bg image
-    const img = "./assets/img/map/dirt.jpg";
-    const border = "./assets/img/map/border.jpg";
-    const wall = "./assets/img/map/wall.png";
     this.map = new GameMap();
-    /*
-    let bFlor = new Block(0, 0, 64, 64, false, img);
-    let bBord = new Block(0, 0, 64, 64, true, border);
 
-    let newBlocks = [[bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bFlor, bBord],
-                     [bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord, bBord]];
-
-    this.map.setMaps(newBlocks);
-    
-   */
     this.map.initMap(0);
 
     this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
@@ -173,6 +154,20 @@ class Game {
       //console.log("false");
     }
 
+  }
+  switchPerso() {
+    //TODO : stocker la liste des perso du joueur et prendre dedans
+    //console.log( this.hero instanceof Wizard);
+    let newHero : Character;
+    if ( this.hero instanceof Wizard) {
+      newHero = new Archer('Legolas');
+    } else {
+      newHero = new Wizard('Gandalfs');
+    }
+
+    newHero.x = this.hero.x;
+    newHero.y = this.hero.y;
+    this.hero = newHero
   }
 
 }

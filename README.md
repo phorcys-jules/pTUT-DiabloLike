@@ -4,6 +4,9 @@ DiabloLike est réalisé dans le cadre d'un projet tutoré de LP Ciasie de l'IUT
 Le but de ce projet est de réalisé un jeu de Hack'n'slash type Diablo. Nous avons choisi de garder l'aspect principal du jeu qui est d'explorer des donjons en combattant des monstres afin d’acquérir de l’expérience.
 Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
 
+## Comment jouer
+    - Se déplacer avec zqsd ou les flèches
+    - Changer de perso avec p
 
 ## Auteurs
 - FRANCOIS Jules
