@@ -138,6 +138,13 @@ class GameMap {
             tile = Block.WALL[bl - 7];
             toPush = new Block(currentX+0.5, this.height-1, 32, 64, false, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3]);
             break;
+          case 14:
+            item = true;
+            tile = Block.CHEST;
+            toPush = new Block(currentX, this.height-1, 64, 64, false, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3]);
+            break;
+
+            
 
           default:
             toPush = new Block(0, 0, 64, 64, false, "./assets/img/map/border.jpg");

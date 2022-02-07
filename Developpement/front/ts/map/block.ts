@@ -29,6 +29,8 @@ export class Block {
     //[24,48,17,31], [75,309,31,32], [7,48,17,31]];
     [24,48,17,31], [71,104,9,7], [7,48,17,31], [112,104,9,7]];
 
+    public static CHEST : number[] = [96,272,16,16];
+
 
 
     constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: string, dx:number=0, dy:number=0, dw:number=64, dh:number=64) {

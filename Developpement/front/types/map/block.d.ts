@@ -15,6 +15,7 @@ export declare class Block {
      * UP left --- UP --- Up Right --- Down Right --- Right Side --- Down left --- Left Side
      */
     static WALL: number[][];
+    static CHEST: number[];
     constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: string, dx?: number, dy?: number, dw?: number, dh?: number);
     getBlockX(): number;
     getBlockY(): number;
