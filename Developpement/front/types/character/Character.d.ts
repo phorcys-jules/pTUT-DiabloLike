@@ -35,4 +35,5 @@ export declare abstract class Character extends Object {
     addXP(amount: number): void;
     addMana(amount: number): void;
     addHp(amount: number): void;
+    getBlockPos(): number[];
 }
