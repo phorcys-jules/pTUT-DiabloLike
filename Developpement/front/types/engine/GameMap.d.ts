@@ -3,15 +3,11 @@ declare class GameMap {
     /**
      * Texture de la case
      */
-    private maps;
+    static maps: Block[][];
     private itemMaps;
     private width;
     private height;
     constructor();
-    getMaps(): Block[][];
-    setMaps(p_maps: Block[][]): void;
-    getBlock(p_x: number, p_y: number): Block;
-    setBlock(p_x: number, p_y: number, p_block: Block): void;
     deleteBlock(p_x: number, p_y: number): Promise<void>;
     ajoutBlock(p_block: Block): void;
     /**

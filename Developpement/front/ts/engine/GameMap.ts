@@ -14,7 +14,7 @@ class GameMap {
    * Texture de la case
    */
 
-  private maps: Block[][];
+  static maps: Block[][];
   private itemMaps: Block[];
   private width: number;
   private height: number;
@@ -22,31 +22,15 @@ class GameMap {
 
 
   constructor() {
-    this.maps = [[]];
+    GameMap.maps = [[]];
     this.itemMaps = [];
     this.width = 0;
     this.height = 0;
   }
 
-  public getMaps(): Block[][] {
-    return this.maps;
-  }
-
-  public setMaps(p_maps: Block[][]) {
-    this.maps = p_maps;
-  }
-
-  public getBlock(p_x: number, p_y: number): Block {
-    return this.maps[p_x][p_y];
-  }
-
-  public setBlock(p_x: number, p_y: number, p_block: Block) {
-    this.maps[p_x][p_y] = p_block;
-  }
-
   public async deleteBlock(p_x: number, p_y: number) {
-    let nullBlock = this.getBlock(p_x, p_y);
-    this.maps[p_x][p_y] = new Block(nullBlock.getBlockX(),
+    let nullBlock = GameMap.maps[p_x][p_y];
+    GameMap.maps[p_x][p_y] = new Block(nullBlock.getBlockX(),
       nullBlock.getBlockY(),
       nullBlock.getWidth(),
       nullBlock.getHeight(),
@@ -55,12 +39,16 @@ class GameMap {
   }
 
   public ajoutBlock(p_block: Block) {
-    if (this.maps[this.height - 1].length < this.width) {
-      this.maps[this.height - 1].push(p_block);
+    if (GameMap.maps[this.height - 1].length < this.width) {
+      p_block.blockY = this.height - 1;
+      p_block.blockX = GameMap.maps[this.height - 1].length; 
+      GameMap.maps[this.height - 1].push(p_block);
     } else { //si on a remplit la ligne, on en crée une nouvelle
       this.height++;
-      this.maps.push([]);
-      this.maps[this.height - 1].push(p_block);
+      GameMap.maps.push([]);
+      p_block.blockY = this.height - 1;
+      p_block.blockX = GameMap.maps[this.height - 1].length; 
+      GameMap.maps[this.height - 1].push(p_block);
     }
   }
 
@@ -76,7 +64,7 @@ class GameMap {
 
     for (let x = 0; x < this.width; x++) {
       for (let y = 0; y < this.height; y++) {
-        bl = this.maps[y][x];
+        bl = GameMap.maps[y][x];
         bl.img.forEach(async i => {
 
           context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, x * tileSize, y * tileSize, tileSize, tileSize);
@@ -183,7 +171,7 @@ class GameMap {
     });
     //console.log( 'floor : ', jSONmap.floors[0].map);
     console.log("we create a map of ", this.width, this.height, "sizing ", nb);
-    console.log(this.maps);
+    console.log(GameMap.maps);
 
 
 
