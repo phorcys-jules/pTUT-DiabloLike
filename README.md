@@ -5,8 +5,9 @@ Le but de ce projet est de réalisé un jeu de Hack'n'slash type Diablo. Nous av
 Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
 
 ## Comment jouer
-    - Se déplacer avec zqsd ou les flèches
-    - Changer de perso avec p
+    - zqsd, flèches : Se déplacer
+    - p : Changer de perso
+    - b, n : Changer d'étages
 
 ## Auteurs
 - FRANCOIS Jules

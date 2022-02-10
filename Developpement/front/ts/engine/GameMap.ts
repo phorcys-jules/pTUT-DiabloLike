@@ -18,6 +18,7 @@ class GameMap {
   private itemMaps: Block[];
   private width: number;
   private height: number;
+  public static currentFloor : number=1;
 
 
 
@@ -52,6 +53,18 @@ class GameMap {
     }
   }
 
+  public nextFloor(){
+    if (GameMap.currentFloor < 2) {
+      GameMap.currentFloor++;
+      this.initMap()
+    }
+  }
+  public previousFloor(){
+    if (GameMap.currentFloor > 0) {
+      GameMap.currentFloor--;
+      this.initMap()
+    }
+  }
 
   /**
    * Redessinne la carte
@@ -82,25 +95,32 @@ class GameMap {
 
   /**
    * Init a map from a JSON File
-   * @param floorNumber number of the floor
    */
-  initMap(floorNumber: number) {
+  initMap() {
+    //On reset la map
+    GameMap.maps = [[]];
     this.height = 1;
-    this.width = jSONmap.floors[floorNumber].map[this.height - 1].length;
-    let currentX: number = 0;
+    this.width = jSONmap.floors[GameMap.currentFloor].map[this.height - 1].length;
+    
+    
     let toPush: Block;
     let nb: number = 0;
     let tile: number[];
     let item: boolean;
 
+    
+    //On rècupère le thème de l'étage
+    let theme:string = jSONmap.floors[GameMap.currentFloor].theme;
+   
+
     //case par défaut à mettre sous les items (coffre escalier....) qui n'occupe pas une case entière
     tile = Block.FLOOR[1];
-    let defaultImage:GameImage = new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3]);
-    let voidImage:GameImage = new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", 0,0,0,0);
+    let defaultImage:GameImage = new GameImage(0, 0, 64, 64, theme, tile[0], tile[1], tile[2], tile[3]);
+    let voidImage:GameImage = new GameImage(0, 0, 64, 64, theme, 0,0,0,0);
     
     let dY =0;
     //On itère sur tableau correspondant à l'étge courant
-    jSONmap.floors[floorNumber].map.forEach(el => {
+    jSONmap.floors[GameMap.currentFloor].map.forEach(el => {
       el.forEach(async bl => {
         if (bl <-1) { dY=-1; bl=-bl; }  else{ dY=0;}
         //toPush = new Block(0, 0, 64, 64, false, "./assets/img/map/dirt.jpg");
@@ -113,13 +133,13 @@ class GameMap {
           case 4:
           case 5:
             tile = Block.FLOOR[bl];
-            toPush = new Block(0, 0, 64, 64, false, [new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, 0, 64, 64, false, [new GameImage(0, 0, 64, 64, theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 6:
             item = true;
             tile = Block.STAIR_UR;
-            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
-                                                      new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64, theme, Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+                                                      new GameImage(0, dY, 64, 64, theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 7:
           case 8:
@@ -127,28 +147,28 @@ class GameMap {
           case 10:
           case 12:
             tile = Block.WALL[bl - 7];
-            toPush = new Block(0, 0, 64, 64, false, [new GameImage(0, 0, 64, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, 0, 64, 64, false, [new GameImage(0, 0, 64, 64,  theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
 
           case 11:
             item = true;
             tile = Block.WALL[bl - 7];
-            toPush = new Block(0, 0, 32, 64, false, [defaultImage, new GameImage(0, 0, 32, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, 0, 32, 64, true, [defaultImage, new GameImage(0, 0, 32, 64,  theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 13:
             item = true;
             tile = Block.WALL[bl - 7];
-            toPush = new Block(0+0.5, 0-1, 32, 64, false, [defaultImage, new GameImage(0.5, 0, 32, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0+0.5, 0-1, 32, 64, true, [defaultImage, new GameImage(0.5, 0, 32, 64,  theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
             case 14:
               tile = Block.WALL[1];
-              toPush = new Block(0, 1, 64, 64, true, [new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
-                                                      new GameImage(0, 0, 64, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+              toPush = new Block(0, 1, 64, 64, true, [new GameImage(0, 0, 64, 64, theme, Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+                                                      new GameImage(0, 0, 64, 64,  theme, tile[0], tile[1], tile[2], tile[3])]);
               break;
           case 15:
             item = true;
             tile = Block.CHEST;
-            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64, theme, Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
                                                        new GameImage(0, dY, 64, 64, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3])]);
             break;
 
@@ -161,15 +181,12 @@ class GameMap {
 
             break;
         }
-        currentX++;
         nb++;
 
         this.ajoutBlock(toPush);
         
       });
       
-      currentX = 0;
-
     });
     //console.log( 'floor : ', jSONmap.floors[0].map);
     console.log("we create a map of ", this.width, this.height, "sizing ", nb);

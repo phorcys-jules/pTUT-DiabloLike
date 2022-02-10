@@ -88,34 +88,29 @@ export abstract class Character extends Object {
         switch (direction) {
             case 1:
                 // x, newY + décalage par rapport a 0 de l'image qui se situe au pied
+                this.currentSprite[1] = 192;
                 if (!this.isBlockSolid(this.x, this.y - this.speed * delta-48)) {
                     this.y -= this.speed * delta;
-                    this.currentSprite[1] = 192;
                 }
                 break;
             case 2:
-                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0]].solid)) {
-                //if (!GameMap.maps[coord[1] + 1][coord[0]].solid) {
-                if (!this.isBlockSolid(this.x, this.y + this.speed * delta+32)) {
+                this.currentSprite[1] = 0;
+                if (!this.isBlockSolid(this.x, this.y + this.speed * delta)) {
                     this.y += this.speed * delta;
-                    this.currentSprite[1] = 0;
                 }
 
                 break;
             case 3:
-                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1]][coord[0] + 1].solid)) {
-                //if (!GameMap.maps[coord[1]][coord[0] + 1].solid) {
-                if (!this.isBlockSolid(this.x +this.speed*delta+32, this.y)) {
+                this.currentSprite[1] = 64;
+                if (!this.isBlockSolid(this.x +this.speed*delta, this.y)) {
                     this.x += this.speed * delta;
-                    this.currentSprite[1] = 64;
                 }
 
                 break;
             case 4:
-                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0] - 1].solid)) {
-                if (!this.isBlockSolid(this.x - this.speed*delta-32, this.y)) {
+                this.currentSprite[1] = 128;
+                if (!this.isBlockSolid(this.x - this.speed*delta, this.y)) {
                     this.x -= this.speed * delta;
-                    this.currentSprite[1] = 128;
                 }
 
                 break;

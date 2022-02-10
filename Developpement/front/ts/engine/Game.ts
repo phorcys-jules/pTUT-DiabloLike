@@ -71,11 +71,18 @@ class Game {
           case 'p':
             this.switchPerso();
             break;
-            //debug
+          case 'b':
+            this.map.previousFloor();
+            break;
+          case 'n':
+            this.map.nextFloor();
+            break;
+          //debug
           case 'h':
-            console.log("pos hero : ", this.hero.x, ", ",this.hero.y,"\n",
-                        "map : ", this.map, "\n"
-                        );
+            console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
+              "map : ", this.map, "\n"
+            );
+            break;
         }
       })
     document.addEventListener("keyup", e => {
@@ -98,7 +105,7 @@ class Game {
 
     this.map = new GameMap();
 
-    this.map.initMap(0);
+    this.map.initMap();
 
     this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
     this.context.drawImage(this.mobImage, 3 * 64, 3 * 64);

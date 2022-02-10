@@ -7,9 +7,12 @@ declare class GameMap {
     private itemMaps;
     private width;
     private height;
+    static currentFloor: number;
     constructor();
     deleteBlock(p_x: number, p_y: number): Promise<void>;
     ajoutBlock(p_block: Block): void;
+    nextFloor(): void;
+    previousFloor(): void;
     /**
      * Redessinne la carte
      * @param context objet html ou dessiner : Canva 2D
@@ -17,9 +20,8 @@ declare class GameMap {
     render(context: CanvasRenderingContext2D): Promise<void>;
     /**
      * Init a map from a JSON File
-     * @param floorNumber number of the floor
      */
-    initMap(floorNumber: number): void;
+    initMap(): void;
     getCurrentTime(): void;
 }
 export default GameMap;
