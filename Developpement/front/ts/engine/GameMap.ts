@@ -67,7 +67,7 @@ class GameMap {
         bl = GameMap.maps[y][x];
         bl.img.forEach(async i => {
 
-          context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, x * tileSize, y * tileSize, tileSize, tileSize);
+          context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x+i.X) * tileSize, (y+i.Y) * tileSize, i.width, i.height);
       });
       }
     }
@@ -96,10 +96,13 @@ class GameMap {
     //case par défaut à mettre sous les items (coffre escalier....) qui n'occupe pas une case entière
     tile = Block.FLOOR[1];
     let defaultImage:GameImage = new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3]);
+    let voidImage:GameImage = new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", 0,0,0,0);
     
+    let dY =0;
     //On itère sur tableau correspondant à l'étge courant
     jSONmap.floors[floorNumber].map.forEach(el => {
       el.forEach(async bl => {
+        if (bl <-1) { dY=-1; bl=-bl; }  else{ dY=0;}
         //toPush = new Block(0, 0, 64, 64, false, "./assets/img/map/dirt.jpg");
         //toPush = new Block(0, 0, 64, 64, false, "./assets/img/map/border.jpg");
         switch (bl) {
@@ -115,7 +118,8 @@ class GameMap {
           case 6:
             item = true;
             tile = Block.STAIR_UR;
-            toPush = new Block(currentX, this.height - 1, 64, 64, false, [defaultImage, new GameImage(currentX, this.height - 1, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+                                                      new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 7:
           case 8:
@@ -129,23 +133,29 @@ class GameMap {
           case 11:
             item = true;
             tile = Block.WALL[bl - 7];
-            toPush = new Block(currentX, this.height, 32, 64, false, [defaultImage, new GameImage(0, 0, 64, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, 0, 32, 64, false, [defaultImage, new GameImage(0, 0, 32, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 13:
             item = true;
             tile = Block.WALL[bl - 7];
-            toPush = new Block(currentX+0.5, this.height-1, 32, 64, false, [defaultImage, new GameImage(0, 0, 64, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0+0.5, 0-1, 32, 64, false, [defaultImage, new GameImage(0.5, 0, 32, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
             break;
-          case 14:
+            case 14:
+              tile = Block.WALL[1];
+              toPush = new Block(0, 1, 64, 64, true, [new GameImage(0, 0, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+                                                      new GameImage(0, 0, 64, 64, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])]);
+              break;
+          case 15:
             item = true;
             tile = Block.CHEST;
-            toPush = new Block(currentX+0.25, this.height-1+0.25, 32, 32, false, [defaultImage, new GameImage(0, 0, 64, 64, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3])]);
+            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64,"./assets/img/map/AssetsDG.png", Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+                                                       new GameImage(0, dY, 64, 64, "./assets/img/map/Dungeon_deco.png", tile[0], tile[1], tile[2], tile[3])]);
             break;
 
             
 
           default:
-            toPush = new Block(0, 0, 64, 64, false, [defaultImage]);
+            toPush = new Block(0, 0, 64, 64, false, [voidImage]);
 
             console.log("Ce Block n'est pas reconnu : ", bl);
 
@@ -154,14 +164,6 @@ class GameMap {
         currentX++;
         nb++;
 
-        /*
-        //L'item se pose par dessus un block basique
-        if (item === true) {
-          item = false;
-          this.itemMaps.push(toPush);
-          tile = Block.FLOOR[1];
-          toPush = new Block(0, 0, 64, 64, false, "./assets/img/map/AssetsDG.png", tile[0], tile[1], tile[2], tile[3])
-        }*/
         this.ajoutBlock(toPush);
         
       });

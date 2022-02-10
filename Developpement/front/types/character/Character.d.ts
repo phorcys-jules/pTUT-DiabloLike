@@ -16,6 +16,7 @@ export declare abstract class Character extends Object {
      */
     currentSprite: number[];
     dir: number;
+    movable: boolean[];
     constructor(name?: string, lvl?: number, speed?: number, strenth?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
     protected loadSprites(): Promise<void>;
     paint(context: CanvasRenderingContext2D): void;
@@ -35,5 +36,6 @@ export declare abstract class Character extends Object {
     addXP(amount: number): void;
     addMana(amount: number): void;
     addHp(amount: number): void;
-    getBlockPos(): number[];
+    getBlockPos(y?: number, x?: number): number[];
+    isBlockSolid(x: number, y: number): boolean;
 }

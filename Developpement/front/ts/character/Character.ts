@@ -24,6 +24,9 @@ export abstract class Character extends Object {
     currentSprite: number[];
     dir: number = 2;
 
+    //character cans move to N,S,E,O ?
+    movable: boolean[] = [true, true, true, true]
+
     //stuff:Stuff[];
 
 
@@ -80,33 +83,39 @@ export abstract class Character extends Object {
     walk(direction: number, delta: number) {
         //TODO if en collision, return -1
         let coord = this.getBlockPos();
-        console.log(coord);
-        console.log(GameMap.maps[0][3].solid);
+        //console.log(coord);
+        //console.log(GameMap.maps[0][3].solid);
         switch (direction) {
             case 1:
-                if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] - 1][coord[0]].solid)) {
+                // x, newY + décalage par rapport a 0 de l'image qui se situe au pied
+                if (!this.isBlockSolid(this.x, this.y - this.speed * delta-48)) {
                     this.y -= this.speed * delta;
                     this.currentSprite[1] = 192;
                 }
                 break;
             case 2:
-                if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0]].solid)) {
+                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0]].solid)) {
+                //if (!GameMap.maps[coord[1] + 1][coord[0]].solid) {
+                if (!this.isBlockSolid(this.x, this.y + this.speed * delta+32)) {
                     this.y += this.speed * delta;
                     this.currentSprite[1] = 0;
                 }
 
                 break;
             case 3:
-                if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1]][coord[0] + 1].solid)) {
+                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1]][coord[0] + 1].solid)) {
+                //if (!GameMap.maps[coord[1]][coord[0] + 1].solid) {
+                if (!this.isBlockSolid(this.x +this.speed*delta+32, this.y)) {
                     this.x += this.speed * delta;
                     this.currentSprite[1] = 64;
                 }
 
                 break;
             case 4:
-                if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0] - 1].solid)) {
-                    this.x -= this.speed * delta;   
-                    this.currentSprite[1] = 128;    
+                //if (!GameMap.maps[coord[1]][coord[0]].solid || (GameMap.maps[coord[1]][coord[0]].solid && !GameMap.maps[coord[1] + 1][coord[0] - 1].solid)) {
+                if (!this.isBlockSolid(this.x - this.speed*delta-32, this.y)) {
+                    this.x -= this.speed * delta;
+                    this.currentSprite[1] = 128;
                 }
 
                 break;
@@ -156,7 +165,20 @@ export abstract class Character extends Object {
         }
     }
 
-    getBlockPos() {
-        return [Math.round(this.x / 64), Math.round(this.y / 64)];
+    getBlockPos(y: number = this.y, x: number = this.x): number[] {
+        return [Math.round(x / 64), Math.round(y / 64)];
+    }
+
+    isBlockSolid(x: number, y: number): boolean {
+        let blCord: number[] = this.getBlockPos(x, y);
+        try {
+            //console.log(GameMap.maps[blCord[0]][blCord[1]].solid);
+            return GameMap.maps[blCord[0]][blCord[1]].solid
+        } catch (error) {
+            console.log(error);
+            return true
+
+        }
+        return true;
     }
 }

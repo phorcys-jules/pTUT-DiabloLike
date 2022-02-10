@@ -17,6 +17,7 @@ export declare class Block {
      */
     static WALL: number[][];
     static CHEST: number[];
+    static VOID: number[];
     constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: GameImage[]);
     getBlockX(): number;
     getBlockY(): number;

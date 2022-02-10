@@ -6,6 +6,7 @@ import { bootstrap } from "./engine/bootstrap.js";
 
 document.getElementById('run')?.addEventListener("click", function(){
     //bootstrap(new Wizard('Gandalf'), [new Zombie()]);
-    bootstrap(new Archer('Legolas'), [new Zombie()]);
+    bootstrap(new Wizard('Gandalf'), []);
+    //bootstrap(new Archer('Legolas'), [new Zombie()]);
 });
 

@@ -31,6 +31,7 @@ export class Block {
     [24,48,17,31], [71,104,9,7], [7,48,17,31], [112,104,9,7]];
 
     public static CHEST : number[] = [96,272,16,16];
+    public static VOID : number[] = [0,0,0,0];
 
 
 
