@@ -1,4 +1,5 @@
 import ImageUtils from "../engine/ImageUtils.js";
+import { GameImage } from "./GameImage.js";
 
 export class Block {
 
@@ -7,7 +8,7 @@ export class Block {
     public width: number;
     public height: number;
     public solid: boolean;
-    public img: HTMLImageElement;
+    public img: GameImage[];
 
     public dx: number;
     public dy: number;
@@ -33,17 +34,14 @@ export class Block {
 
 
 
-    constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: string, dx:number=0, dy:number=0, dw:number=64, dh:number=64) {
+    constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: GameImage[]) {
         this.blockX = p_blockX;
         this.blockY = p_blockY;
         this.width = p_width;
         this.height = p_height;
         this.solid = p_solid;
-        this.dx = dx;
-        this.dy = dy;
-        this.dw = dw;
-        this.dh = dh;
-        this.setImg(p_img);        
+
+        this.img = p_img;
       }
 
     public getBlockX():number{
@@ -61,11 +59,9 @@ export class Block {
     public getSolid():boolean{
         return this.solid;
     }
-    public async getImg():Promise<HTMLImageElement>{
-        return this.img;
-    }
+
     /**
-     * @returns a floor tile of 64*64 so 4 16*16
+     * @returns a random floor tile of 64*64 so 4 16*16
      */
     public async getFloor():Promise<HTMLImageElement>{
         Math.floor(Math.random() * (6 + 1));
@@ -89,9 +85,7 @@ export class Block {
     public setsolid(p_solid:boolean){
         this.solid = p_solid;
     }
-    public async setImg(p_img:string){
-        this.img = await ImageUtils.loadImageFromUrl(p_img);
-    }
+
 
     public getURX():number{
         return this.blockX + this.width;

@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
-import { connect } from './database';
-import { User } from './models/User';
+import { connect } from './database.js';
+import { User } from './models/User.js';
 
 //Config the app
 const app = express();
@@ -28,6 +28,19 @@ app.get('/ginette', async function (req, res) {
   });
 });
 
+app.get('/characters', async function (req, res) {
+
+  const conn = await connect();
+  await conn.query("SELECT * FROM `character`")
+    .then((result) => {
+      res.send(result)
+    })
+    .catch((error) => {
+      res.send({
+        error: error.toString(),
+      })
+    })
+});
 
 /**
  * Routes de création d'un utilisateur
