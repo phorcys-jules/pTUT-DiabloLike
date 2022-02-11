@@ -5,7 +5,7 @@ import { createPool, Pool } from 'mysql2/promise';
 export async function connect(): Promise<Pool> {
     const connection = await createPool({
         host: 'localhost',
-        port: 3306,
+        port: 3308,
         user: 'root',
         password: 'root',
         database: 'diablolike',

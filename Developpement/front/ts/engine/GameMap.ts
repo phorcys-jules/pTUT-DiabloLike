@@ -204,10 +204,3 @@ class GameMap {
 
 export default GameMap;
 
-function async(async: any, arg1: { switch(): any; case: any; }) {
-  throw new Error("Function not implemented.");
-}
-function i(i: any, arg1: boolean) {
-  throw new Error("Function not implemented.");
-}
-

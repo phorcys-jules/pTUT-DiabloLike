@@ -2,3 +2,4 @@ node_modules/*
 Developpement/node_modules/*
 Developpement/back/ts/database.ts
 *.js
+Developpement/back/ts/database.ts
