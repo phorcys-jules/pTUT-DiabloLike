@@ -6,8 +6,50 @@ import { Archer } from "./character/Archer.js";
 import { bootstrap } from "./engine/bootstrap.js";
 import { Zombie } from "./character/Zombie.js";
 
-
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
+
+ function getClassId (n: string){
+    const data = {};
+
+    //POST request with body equal on data in JSON format
+    fetch(`http://localhost:8752/classbyname/${n}`, {
+      method: 'GET',
+    })
+    .then((response) => console.log(response.blob()))
+    //Then with the data from the response in JSON...
+    .then((data) => {
+      console.log('Success:', data);
+      //window.location.href = './createChar.html';
+    })
+    //Then with the error genereted...
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
+
+
+async function validate(name:string, classID:number){
+    const data={};
+    //POST request with body equal on data in JSON format
+    fetch(`http://localhost:8752/createChar/${name}/${classID}/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    //Then with the data from the response in JSON...
+    .then((data) => {
+      console.log('Success:', data);
+      //window.location.href = './createChar.html';
+    })
+    //Then with the error genereted...
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
+
 
 
 form.onsubmit = () => {
@@ -19,10 +61,10 @@ form.onsubmit = () => {
     
 
     switch (characterClass) {
-        case 'Wizard':
+        case 'Sorcier':
             c1 = new Wizard(characterName);
             break;
-        case 'Warrior':
+        case 'Guerrier':
             c1 = new Warrior(characterName);
             break;
         case 'Archer':
@@ -35,9 +77,12 @@ form.onsubmit = () => {
     }
     console.log(c1.toString());
 
+    const idClass=getClassId(characterClass);
+    //validate(characterName,idClass)
+    console.log(idClass)
     bootstrap(c1, [new Zombie(), new Zombie()]);
 
-    window.location.href = '../index.html';
+    //window.location.href = '../index.html';
     return false; // prevent reload
 };
 

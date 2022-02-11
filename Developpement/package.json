@@ -31,15 +31,18 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "database": "0.0.2",
+    "database": "^0.0.2",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "install": "^0.13.0",
     "mysql2": "^2.3.3",
     "nodes": "^0.1.0",
+    "path": "^0.12.7",
     "promises": "^0.2.5",
     "systemjs": "^6.12.1",
     "tslib": "^2.3.1"
