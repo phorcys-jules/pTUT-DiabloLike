@@ -11,6 +11,7 @@ export declare abstract class Character extends Object {
     x: number;
     y: number;
     sprites: HTMLImageElement;
+    multiSprite: number;
     /**
      * x, y of the current sprite
      */
