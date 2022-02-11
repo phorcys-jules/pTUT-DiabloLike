@@ -1,10 +1,11 @@
+import { GameImage } from "./GameImage.js";
 export declare class Block {
     blockX: number;
     blockY: number;
     width: number;
     height: number;
     solid: boolean;
-    img: HTMLImageElement;
+    img: GameImage[];
     dx: number;
     dy: number;
     dw: number;
@@ -16,15 +17,15 @@ export declare class Block {
      */
     static WALL: number[][];
     static CHEST: number[];
-    constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: string, dx?: number, dy?: number, dw?: number, dh?: number);
+    static VOID: number[];
+    constructor(p_blockX: number, p_blockY: number, p_width: number, p_height: number, p_solid: boolean, p_img: GameImage[]);
     getBlockX(): number;
     getBlockY(): number;
     getWidth(): number;
     getHeight(): number;
     getSolid(): boolean;
-    getImg(): Promise<HTMLImageElement>;
     /**
-     * @returns a floor tile of 64*64 so 4 16*16
+     * @returns a random floor tile of 64*64 so 4 16*16
      */
     getFloor(): Promise<HTMLImageElement>;
     setBlockX(p_blockX: number): void;
@@ -32,7 +33,6 @@ export declare class Block {
     setWidth(p_width: number): void;
     setHeight(p_height: number): void;
     setsolid(p_solid: boolean): void;
-    setImg(p_img: string): Promise<void>;
     getURX(): number;
     getURY(): number;
     getDRX(): number;

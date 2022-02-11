@@ -38,6 +38,19 @@ app.get('/ginette', async function (req, res) {
   });
 });
 
+app.get('/characters', async function (req, res) {
+
+  const conn = await connect();
+  await conn.query("SELECT * FROM `character`")
+    .then((result) => {
+      res.send(result)
+    })
+    .catch((error) => {
+      res.send({
+        error: error.toString(),
+      })
+    })
+});
 
 app.get(`/users`, async function (req, res) {
   

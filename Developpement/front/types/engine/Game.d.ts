@@ -14,6 +14,7 @@ declare class Game {
     private timeSinceLastFPS;
     private frame;
     /**
+     * Touches sur lesquelles on peut rester appuyé
      * key : name key down,
      * value : isDown ?
      */
@@ -32,5 +33,6 @@ declare class Game {
      * @param delta tmps depuis dernier appel
      */
     private loop;
+    switchPerso(): void;
 }
 export default Game;
