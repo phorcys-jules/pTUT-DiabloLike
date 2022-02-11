@@ -18,6 +18,7 @@ export abstract class Character extends Object {
     x: number;
     y: number;
     sprites: HTMLImageElement;
+    multiSprite: number;
     /**
      * x, y of the current sprite
      */
@@ -44,6 +45,7 @@ export abstract class Character extends Object {
         this.maxMp = maxMp;
         this.x = x;
         this.y = y;
+        this.multiSprite = 1;
         console.log(this.name);
         this.loadSprites();
     }
@@ -58,11 +60,12 @@ export abstract class Character extends Object {
         context.drawImage(this.sprites, this.currentSprite[0], this.currentSprite[1], 64, 64, this.x, this.y, 64, 64);
     }
     nextSprites() {
-        if (this.currentSprite[0] == 64) {
-            this.currentSprite[0] = 0;
-        } else {
-            this.currentSprite[0] += 64;
-        }
+        if (this.currentSprite[0] == 128)
+            this.multiSprite = -1;
+        if (this.currentSprite[0] == 0)
+            this.multiSprite = 1;
+        this.currentSprite[0] += 64 * this.multiSprite;
+
     }
 
     toString() {
@@ -89,7 +92,7 @@ export abstract class Character extends Object {
             case 1:
                 // x, newY + décalage par rapport a 0 de l'image qui se situe au pied
                 this.currentSprite[1] = 192;
-                if (!this.isBlockSolid(this.x, this.y - this.speed * delta-48)) {
+                if (!this.isBlockSolid(this.x, this.y - this.speed * delta - 48)) {
                     this.y -= this.speed * delta;
                 }
                 break;
@@ -102,14 +105,14 @@ export abstract class Character extends Object {
                 break;
             case 3:
                 this.currentSprite[1] = 64;
-                if (!this.isBlockSolid(this.x +this.speed*delta, this.y)) {
+                if (!this.isBlockSolid(this.x + this.speed * delta, this.y)) {
                     this.x += this.speed * delta;
                 }
 
                 break;
             case 4:
                 this.currentSprite[1] = 128;
-                if (!this.isBlockSolid(this.x - this.speed*delta, this.y)) {
+                if (!this.isBlockSolid(this.x - this.speed * delta, this.y)) {
                     this.x -= this.speed * delta;
                 }
 

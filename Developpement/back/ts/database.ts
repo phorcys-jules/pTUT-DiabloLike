@@ -7,7 +7,7 @@ export async function connect(): Promise<Pool> {
         host: 'localhost',
         port: 3306,
         user: 'root',
-        password: 'root',
+        password:'',
         database: 'diablolike',
         connectionLimit: 10
     });

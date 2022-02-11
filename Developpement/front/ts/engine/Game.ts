@@ -156,7 +156,7 @@ class Game {
     };
 
     //1 sprite toute les 5 frames
-    if (this.frame === 5) {
+    if (this.frame === 8) {
       this.frame = 0;
       this.hero.nextSprites();
       this.char.forEach((entity) => {
