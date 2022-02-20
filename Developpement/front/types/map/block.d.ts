@@ -41,4 +41,5 @@ export declare class Block {
     getDLY(): number;
     getULX(): number;
     getULY(): number;
+    collisionJoueur(): void;
 }

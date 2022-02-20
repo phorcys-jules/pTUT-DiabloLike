@@ -1,3 +1,4 @@
+import { Block } from "../map/block.js";
 export declare abstract class Character extends Object {
     name: string;
     lvl: number;
@@ -37,6 +38,16 @@ export declare abstract class Character extends Object {
     addXP(amount: number): void;
     addMana(amount: number): void;
     addHp(amount: number): void;
+    /**
+     * @returns la position dans le tableau du block en x y
+     */
     getBlockPos(y?: number, x?: number): number[];
+    /**
+     * @returns le block en x y
+     */
+    getBlockFromPos(y?: number, x?: number): Block;
+    /**
+     * @returns true si le block aux coordonnées x,y est solid
+     */
     isBlockSolid(x: number, y: number): boolean;
 }

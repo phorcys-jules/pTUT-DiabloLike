@@ -2,8 +2,6 @@ import ImageUtils from "./ImageUtils.js";
 import GameMap from "./GameMap.js";
 import GameLoop from "./GameLoop.js";
 import { Character } from "../character/Character.js";
-import * as e from "cors";
-import { Block } from "../map/block.js";
 import { Wizard } from "../character/Wizard.js";
 import { Archer } from "../character/Archer.js";
 
@@ -15,7 +13,6 @@ class Game {
   private width: number;
   private height: number;
 
-  private map: GameMap;
   private mobImage: HTMLImageElement;
 
   private hero: Character;
@@ -72,15 +69,15 @@ class Game {
             this.switchPerso();
             break;
           case 'b':
-            this.map.previousFloor();
+            GameMap.previousFloor();
             break;
           case 'n':
-            this.map.nextFloor();
+            GameMap.nextFloor();
             break;
           //debug
           case 'h':
             console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
-              "map : ", this.map, "\n"
+              "map : ", GameMap.maps, "\n"
             );
             break;
         }
@@ -103,12 +100,10 @@ class Game {
   public async run() {
     console.log('GG u run the Game');
 
-    this.map = new GameMap();
+    GameMap.initMap();
 
-    this.map.initMap();
-
-    this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_bas.png");
-    this.context.drawImage(this.mobImage, 3 * 64, 3 * 64);
+    //this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
+    //this.context.drawImage(this.mobImage, 3 * 64, 3 * 64);
 
 
     const gameLoop = new GameLoop(this.loop.bind(this));
@@ -145,7 +140,7 @@ class Game {
       this.timeSinceLastFPS = 0;
       this.frame += 1;
       //redessine la carte
-      await this.map.render(this.context);
+      await GameMap.render(this.context);
       //redessine le perso
       this.hero.paint(this.context);
 

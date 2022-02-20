@@ -4,7 +4,6 @@ declare class Game {
     private context;
     private width;
     private height;
-    private map;
     private mobImage;
     private hero;
     private char;

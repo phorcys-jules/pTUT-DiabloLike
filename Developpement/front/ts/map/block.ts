@@ -1,4 +1,3 @@
-import ImageUtils from "../engine/ImageUtils.js";
 import { GameImage } from "./GameImage.js";
 
 export class Block {
@@ -112,4 +111,6 @@ export class Block {
     public getULY():number{
         return this.blockY;
     }
+
+    public collisionJoueur(){};
 }

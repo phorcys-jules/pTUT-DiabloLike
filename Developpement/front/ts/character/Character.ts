@@ -84,7 +84,6 @@ export abstract class Character extends Object {
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number) {
-        //TODO if en collision, return -1
         let coord = this.getBlockPos();
         //console.log(coord);
         //console.log(GameMap.maps[0][3].solid);
@@ -115,9 +114,10 @@ export abstract class Character extends Object {
                 if (!this.isBlockSolid(this.x - this.speed * delta, this.y)) {
                     this.x -= this.speed * delta;
                 }
-
                 break;
         }
+        this.getBlockFromPos().collisionJoueur();
+
     }
 
     addXP(amount: number) {
@@ -163,10 +163,24 @@ export abstract class Character extends Object {
         }
     }
 
+    /**
+     * @returns la position dans le tableau du block en x y
+     */
     getBlockPos(y: number = this.y, x: number = this.x): number[] {
         return [Math.round(x / 64), Math.round(y / 64)];
     }
 
+    /**
+     * @returns le block en x y
+     */
+    getBlockFromPos(y: number = this.y, x: number = this.x): Block {
+        let blCord: number[] = this.getBlockPos(x, y);
+        return GameMap.maps[blCord[0]][blCord[1]];
+    }
+
+    /**
+     * @returns true si le block aux coordonnées x,y est solid
+     */
     isBlockSolid(x: number, y: number): boolean {
         let blCord: number[] = this.getBlockPos(x, y);
         try {

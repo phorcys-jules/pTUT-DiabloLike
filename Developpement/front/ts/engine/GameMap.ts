@@ -1,13 +1,8 @@
-import ImageUtils from "./ImageUtils.js";
-//import fs from "fs/promises";
-//import readFile from "fs";
-//import ErrnoException from 'fs';
-//import readFile from "fs/promises";
-//import writeFile from "fs/promises";import { Block } from "../map/block.js";
 import { Block } from "../map/block.js";
 
 import jSONmap from "../map/map.json" assert { type: "json" };
 import { GameImage } from "../map/GameImage.js";
+import { Stair } from "../map/Stair.js";
 
 class GameMap {
   /**
@@ -15,21 +10,19 @@ class GameMap {
    */
 
   static maps: Block[][];
-  private itemMaps: Block[];
-  private width: number;
-  private height: number;
-  public static currentFloor : number=1;
+  static width: number;
+  static height: number;
+  public static currentFloor : number=0;
 
 
 
   constructor() {
     GameMap.maps = [[]];
-    this.itemMaps = [];
-    this.width = 0;
-    this.height = 0;
+    GameMap.width = 0;
+    GameMap.height = 0;
   }
 
-  public async deleteBlock(p_x: number, p_y: number) {
+  public deleteBlock(p_x: number, p_y: number) {
     let nullBlock = GameMap.maps[p_x][p_y];
     GameMap.maps[p_x][p_y] = new Block(nullBlock.getBlockX(),
       nullBlock.getBlockY(),
@@ -39,30 +32,30 @@ class GameMap {
       []);
   }
 
-  public ajoutBlock(p_block: Block) {
-    if (GameMap.maps[this.height - 1].length < this.width) {
-      p_block.blockY = this.height - 1;
-      p_block.blockX = GameMap.maps[this.height - 1].length; 
-      GameMap.maps[this.height - 1].push(p_block);
+  public static ajoutBlock(p_block: Block) {
+    if (GameMap.maps[GameMap.height - 1].length < GameMap.width) {
+      p_block.blockY = GameMap.height - 1;
+      p_block.blockX = GameMap.maps[GameMap.height - 1].length; 
+      GameMap.maps[GameMap.height - 1].push(p_block);
     } else { //si on a remplit la ligne, on en crée une nouvelle
-      this.height++;
+      GameMap.height++;
       GameMap.maps.push([]);
-      p_block.blockY = this.height - 1;
-      p_block.blockX = GameMap.maps[this.height - 1].length; 
-      GameMap.maps[this.height - 1].push(p_block);
+      p_block.blockY = GameMap.height - 1;
+      p_block.blockX = GameMap.maps[GameMap.height - 1].length; 
+      GameMap.maps[GameMap.height - 1].push(p_block);
     }
   }
 
-  public nextFloor(){
+  public static nextFloor(){
     if (GameMap.currentFloor < 2) {
       GameMap.currentFloor++;
-      this.initMap()
+      GameMap.initMap()
     }
   }
-  public previousFloor(){
+  public static previousFloor(){
     if (GameMap.currentFloor > 0) {
       GameMap.currentFloor--;
-      this.initMap()
+      GameMap.initMap()
     }
   }
 
@@ -70,37 +63,31 @@ class GameMap {
    * Redessinne la carte
    * @param context objet html ou dessiner : Canva 2D
    */
-  public async render(context: CanvasRenderingContext2D) {
+  public static async render(context: CanvasRenderingContext2D) {
     const tileSize = 64;
 
     let bl:Block;
 
-    for (let x = 0; x < this.width; x++) {
-      for (let y = 0; y < this.height; y++) {
+    for (let x = 0; x < GameMap.width; x++) {
+      for (let y = 0; y < GameMap.height; y++) {
         bl = GameMap.maps[y][x];
         bl.img.forEach(async i => {
-
-          context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x+i.X) * tileSize, (y+i.Y) * tileSize, i.width, i.height);
+          try {
+            context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x+i.X) * tileSize, (y+i.Y) * tileSize, i.width, i.height);
+          }catch{}
       });
       }
     }
-    /*
-    this.itemMaps.forEach(async itm => {
-      context.drawImage(await itm.getImg(), itm.dx, itm.dy, itm.dw, itm.dh, itm.blockX * tileSize, itm.blockY * tileSize, itm.width, itm.height)
-    });
-    */
-
-    //render items
   }
 
   /**
    * Init a map from a JSON File
    */
-  initMap() {
+  public static initMap() {
     //On reset la map
     GameMap.maps = [[]];
-    this.height = 1;
-    this.width = jSONmap.floors[GameMap.currentFloor].map[this.height - 1].length;
+    GameMap.height = 1;
+    GameMap.width = jSONmap.floors[GameMap.currentFloor].map[GameMap.height - 1].length;
     
     
     let toPush: Block;
@@ -138,7 +125,7 @@ class GameMap {
           case 6:
             item = true;
             tile = Block.STAIR_UR;
-            toPush = new Block(0, dY-1, 64, 64, true, [new GameImage(0, dY, 64, 64, theme, Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
+            toPush = new Stair(0, dY-1, 64, 64, false, [new GameImage(0, dY, 64, 64, theme, Block.FLOOR[1][0], Block.FLOOR[1][1], Block.FLOOR[1][2], Block.FLOOR[1][3]),
                                                       new GameImage(0, dY, 64, 64, theme, tile[0], tile[1], tile[2], tile[3])]);
             break;
           case 7:
@@ -183,13 +170,13 @@ class GameMap {
         }
         nb++;
 
-        this.ajoutBlock(toPush);
+        GameMap.ajoutBlock(toPush);
         
       });
       
     });
     //console.log( 'floor : ', jSONmap.floors[0].map);
-    console.log("we create a map of ", this.width, this.height, "sizing ", nb);
+    console.log("we create a map of ", GameMap.width, GameMap.height, "sizing ", nb);
     console.log(GameMap.maps);
 
 
