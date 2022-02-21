@@ -1,11 +1,14 @@
 import ImageUtils from "../engine/ImageUtils.js";
 import { Character } from "./Character.js";
+import { Entity } from "./Entity.js";
 
-export class Zombie extends Character {
+export class Zombie extends Entity {
     /**
      * Temps en ms depuis la dernière action : attaque, changement de direction,...
      */
     timeSinceLastAction:number=0;
+
+    public static isActive: boolean = true;
 
     constructor (){
         super();
@@ -17,8 +20,10 @@ export class Zombie extends Character {
             this.timeSinceLastAction=0;
             this.dir = Math.round((Math.random()*4));
         }    
+        if (Zombie.isActive) {
+            this.walk(this.dir, delta);
+        }
         
-        this.walk(this.dir, delta);
     }
     protected async loadSprites() {
         super.loadSprites();

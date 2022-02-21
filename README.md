@@ -8,6 +8,7 @@ Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
     - zqsd, flèches : Se déplacer
     - p : Changer de perso
     - b, n : Changer d'étages
+    - K, l : bloquer, débloquer les zombies
 
 ## Auteurs
 - FRANCOIS Jules

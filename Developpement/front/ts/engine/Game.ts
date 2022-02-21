@@ -4,6 +4,8 @@ import GameLoop from "./GameLoop.js";
 import { Character } from "../character/Character.js";
 import { Wizard } from "../character/Wizard.js";
 import { Archer } from "../character/Archer.js";
+import { Entity } from "../character/Entity.js";
+import { Zombie } from "../character/Zombie.js";
 
 class Game {
 
@@ -16,7 +18,7 @@ class Game {
   private mobImage: HTMLImageElement;
 
   private hero: Character;
-  private char: Character[];
+  private mob: Entity[];
 
   /**
    * Deltas en ms depuis le dernier refresh
@@ -33,14 +35,14 @@ class Game {
   private keyStates: string[] = [];
 
 
-  constructor(canvasEl: HTMLCanvasElement, hero: Character, char: Character[] = []) {
+  constructor(canvasEl: HTMLCanvasElement, hero: Character, mob: Entity[] = []) {
     this.canvasEl = canvasEl;
     this.context = canvasEl.getContext("2d") as CanvasRenderingContext2D;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
 
     this.hero = hero;
-    this.char = char;
+    this.mob = mob;
 
     this.setup()
 
@@ -73,6 +75,12 @@ class Game {
             break;
           case 'n':
             GameMap.nextFloor();
+            break;
+          case 'k':
+            Zombie.isActive = false;
+            break;
+          case 'l':
+            Zombie.isActive = true;
             break;
           //debug
           case 'h':
@@ -122,14 +130,14 @@ class Game {
     //Détéction des touches et lancement des fonctions associé
     if (this.isAnyKeyDown()) {
       if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
-        this.hero.walk(3, delta);
+        this.hero.walk(3, delta, this.mob);
       } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
-        this.hero.walk(4, delta);
+        this.hero.walk(4, delta, this.mob);
       }
       if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
-        this.hero.walk(2, delta);
+        this.hero.walk(2, delta, this.mob);
       } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
-        this.hero.walk(1, delta);
+        this.hero.walk(1, delta, this.mob);
       }
     }
 
@@ -144,7 +152,7 @@ class Game {
       //redessine le perso
       this.hero.paint(this.context);
 
-      this.char.forEach((entity) => {
+      this.mob.forEach((entity) => {
         entity.evolve(delta);
         entity.paint(this.context)
       });
@@ -154,7 +162,7 @@ class Game {
     if (this.frame === 8) {
       this.frame = 0;
       this.hero.nextSprites();
-      this.char.forEach((entity) => {
+      this.mob.forEach((entity) => {
         entity.nextSprites();
       });
     } else {
