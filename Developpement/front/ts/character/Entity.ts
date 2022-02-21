@@ -234,6 +234,8 @@ export abstract class Entity extends Object {
         try {
             const hpLabel = document.getElementById('heroHp') as HTMLElement;
             hpLabel.innerHTML = this.hp.toString();
+            const mpLabel = document.getElementById('heroMp') as HTMLElement;
+            mpLabel.innerHTML = this.mp.toString();
           } catch (error) {}
     }
 }

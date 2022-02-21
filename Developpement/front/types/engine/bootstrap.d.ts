@@ -1,3 +1,3 @@
-import { Character } from "../character/Character.js";
 import { Entity } from "../character/Entity.js";
-export declare function bootstrap(hero: Character, mob: Entity[]): Promise<void>;
+import { User } from "../User.js";
+export declare function bootstrap(player: User, mob: Entity[]): Promise<void>;

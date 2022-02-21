@@ -1,11 +1,12 @@
-import { Character } from "../character/Character.js";
 import { Entity } from "../character/Entity.js";
+import { User } from "../User.js";
 declare class Game {
     private canvasEl;
     private context;
     private width;
     private height;
     private mobImage;
+    static player: User;
     private hero;
     private mob;
     /**
@@ -19,7 +20,7 @@ declare class Game {
      * value : isDown ?
      */
     private keyStates;
-    constructor(canvasEl: HTMLCanvasElement, hero: Character, mob?: Entity[]);
+    constructor(canvasEl: HTMLCanvasElement, player: User, mob?: Entity[]);
     init(this: any): EventListenerOrEventListenerObject;
     /**
      * setup some action as key Mapping

@@ -6,6 +6,7 @@ import { Wizard } from "../character/Wizard.js";
 import { Archer } from "../character/Archer.js";
 import { Entity } from "../character/Entity.js";
 import { Zombie } from "../character/Zombie.js";
+import { User } from "../User.js";
 
 class Game {
 
@@ -17,6 +18,7 @@ class Game {
 
   private mobImage: HTMLImageElement;
 
+  public static player : User;
   private hero: Character;
   private mob: Entity[];
 
@@ -25,7 +27,7 @@ class Game {
    */
   private timeSinceLastFPS: number = 0;
   private frame: number = 0;
-
+  
 
   /**
    * Touches sur lesquelles on peut rester appuyé
@@ -35,13 +37,14 @@ class Game {
   private keyStates: string[] = [];
 
 
-  constructor(canvasEl: HTMLCanvasElement, hero: Character, mob: Entity[] = []) {
+  constructor(canvasEl: HTMLCanvasElement, player: User, mob: Entity[] = []) {
     this.canvasEl = canvasEl;
     this.context = canvasEl.getContext("2d") as CanvasRenderingContext2D;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
 
-    this.hero = hero;
+    Game.player = player;
+    this.hero = player.chars[0];
     this.mob = mob;
 
     this.setup()
