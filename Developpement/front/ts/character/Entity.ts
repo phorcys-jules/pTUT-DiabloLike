@@ -30,8 +30,12 @@ export abstract class Entity extends Object {
 
     //stuff:Stuff[];
 
+    //sound 
+    
+    public attackSound: HTMLAudioElement;
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 1, maxMp: number = 1, x: number = 64, y: number = 64) {
+
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
         //Level has  default value of 1
         super();
         this.name = name;
@@ -147,6 +151,7 @@ export abstract class Entity extends Object {
                 this.mp += amount;
             }
         }
+        this.updateAffichageStats();
     }
 
     addHp(amount: number) {
@@ -161,6 +166,7 @@ export abstract class Entity extends Object {
                 this.hp += amount;
             }
         }
+        this.updateAffichageStats();
     }
 
     /**
@@ -192,5 +198,17 @@ export abstract class Entity extends Object {
 
         }
         return true;
+    }
+
+    attack(): number {
+        this.attackSound.play();
+        return this.strenth;
+    }
+
+    updateAffichageStats() {
+        try {
+            const hpLabel = document.getElementById('heroHp') as HTMLElement;
+            hpLabel.innerHTML = this.hp.toString();
+          } catch (error) {}
     }
 }

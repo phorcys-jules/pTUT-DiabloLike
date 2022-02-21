@@ -19,6 +19,7 @@ export declare abstract class Entity extends Object {
     currentSprite: number[];
     dir: number;
     movable: boolean[];
+    attackSound: HTMLAudioElement;
     constructor(name?: string, lvl?: number, speed?: number, strenth?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
     protected loadSprites(): Promise<void>;
     paint(context: CanvasRenderingContext2D): void;
@@ -50,4 +51,6 @@ export declare abstract class Entity extends Object {
      * @returns true si le block aux coordonnées x,y est solid
      */
     isBlockSolid(x: number, y: number): boolean;
+    attack(): number;
+    updateAffichageStats(): void;
 }

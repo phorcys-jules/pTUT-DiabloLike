@@ -56,6 +56,7 @@ class Game {
    * setup some action as key Mapping
    */
   private setup() {
+    this.hero.updateAffichageStats();
     let frame = 0;
     document.addEventListener("keydown", e => {
       if (!this.keyStates.includes(e.key)) {

@@ -9,9 +9,11 @@ export class Zombie extends Entity {
     timeSinceLastAction:number=0;
 
     public static isActive: boolean = true;
+    public attackSound: HTMLAudioElement;
 
     constructor (){
         super();
+        this.attackSound = new Audio('./assets/sound/entity/zombie_attack.mp3');
     }
 
     evolve(delta:number): void {
@@ -30,4 +32,5 @@ export class Zombie extends Entity {
         this.sprites = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
         
     }
+
 }

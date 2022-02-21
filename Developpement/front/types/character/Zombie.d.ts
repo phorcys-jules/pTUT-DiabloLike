@@ -5,6 +5,7 @@ export declare class Zombie extends Entity {
      */
     timeSinceLastAction: number;
     static isActive: boolean;
+    attackSound: HTMLAudioElement;
     constructor();
     evolve(delta: number): void;
     protected loadSprites(): Promise<void>;
