@@ -13,7 +13,7 @@ export class Zombie extends Entity {
 
     constructor (){
         super();
-        this.attackSound = new Audio('./assets/sound/entity/zombie_attack.mp3');
+        this.attackSound = new Audio('./assets/sound/entity/zombie_attack2.mp3');
     }
 
     evolve(delta:number): void {
