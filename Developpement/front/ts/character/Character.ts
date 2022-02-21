@@ -5,7 +5,7 @@ import { Entity } from "./Entity.js";
 //import Stuff from "./stuff/Stuff.js";
 
 export abstract class Character extends Entity {
-
+    
     
 
     /**
@@ -19,15 +19,19 @@ export abstract class Character extends Entity {
      */
     walk(direction: number, delta: number, mob: Entity[]) {
         super.walk(direction, delta, mob);
-        console.log();
+        console.log("delta : ", delta);
         
         mob.forEach(monstre => {
             //console.log("mob : ", monstre.x, monstre.y, "\n hero : ", this.x, this.y);
             if (this.x -32 < monstre.x && this.x + 32 > monstre.x &&
-                 this.y -32 < monstre.y && this.y + 32 > monstre.y) {
+                this.y -32 < monstre.y && this.y + 32 > monstre.y) {
                 console.log("collision hero, monstre");
+                this.addHp(-monstre.attack());
                 
             }
         });
     }
+
+
+
 }
