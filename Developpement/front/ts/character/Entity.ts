@@ -82,9 +82,9 @@ export abstract class Entity extends Object {
      * Déplace le perso dans la dir associé
      * @param direction
      * 1 : N,
-     * 2 : S,
-     * 3 : E,
-     * 4 : O
+     * -1 || 3 : S,
+     * 2 : E,
+     * -2 || 4: O
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number, mob: Entity[] = []) {
@@ -99,21 +99,23 @@ export abstract class Entity extends Object {
                     this.y -= this.speed * delta;
                 }
                 break;
-            case 2:
+            case 3 :
+            case -1:
                 this.currentSprite[1] = 0;
                 if (!this.isBlockSolid(this.x, this.y + this.speed * delta)) {
                     this.y += this.speed * delta;
                 }
 
                 break;
-            case 3:
+            case 2:
                 this.currentSprite[1] = 64;
                 if (!this.isBlockSolid(this.x + this.speed * delta, this.y)) {
                     this.x += this.speed * delta;
                 }
 
                 break;
-            case 4:
+            case 4 :
+            case -2:
                 this.currentSprite[1] = 128;
                 if (!this.isBlockSolid(this.x - this.speed * delta, this.y)) {
                     this.x -= this.speed * delta;
@@ -122,6 +124,29 @@ export abstract class Entity extends Object {
         }
         this.getBlockFromPos().collisionJoueur();
 
+    }
+
+    /**
+     * Fait reculer l'entite en arrière suita à un coup
+     * @param direction 
+     */
+    knockback(direction: number, delta : number){
+        switch (direction) {
+            case 1:
+                this.y -= this.speed * delta*10;
+                break;
+            case 3 :
+            case -1:
+                this.y += this.speed * delta*10;
+                break;
+            case 2:
+                this.x += this.speed * delta*10;
+                break;
+            case 4 :
+            case -2:
+                this.x -= this.speed * delta*10;
+                break;
+        }
     }
 
     addXP(amount: number) {

@@ -28,6 +28,9 @@ export abstract class Character extends Entity {
                 console.log("collision hero, monstre");
                 this.addHp(-monstre.attack());
                 
+                //Si on reçoit des dégats aloçrs on recule
+                super.knockback(-direction, delta);
+                monstre.knockback(direction, delta)
             }
         });
     }

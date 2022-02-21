@@ -30,12 +30,17 @@ export declare abstract class Entity extends Object {
      * Déplace le perso dans la dir associé
      * @param direction
      * 1 : N,
-     * 2 : S,
-     * 3 : E,
-     * 4 : O
+     * -1 || 3 : S,
+     * 2 : E,
+     * -2 || 4: O
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number, mob?: Entity[]): void;
+    /**
+     * Fait reculer l'entite en arrière suita à un coup
+     * @param direction
+     */
+    knockback(direction: number, delta: number): void;
     addXP(amount: number): void;
     addMana(amount: number): void;
     addHp(amount: number): void;

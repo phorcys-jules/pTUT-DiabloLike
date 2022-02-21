@@ -131,12 +131,12 @@ class Game {
     //Détéction des touches et lancement des fonctions associé
     if (this.isAnyKeyDown()) {
       if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
-        this.hero.walk(3, delta, this.mob);
+        this.hero.walk(2, delta, this.mob);
       } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
-        this.hero.walk(4, delta, this.mob);
+        this.hero.walk(-2, delta, this.mob);
       }
       if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
-        this.hero.walk(2, delta, this.mob);
+        this.hero.walk(-1, delta, this.mob);
       } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
         this.hero.walk(1, delta, this.mob);
       }
