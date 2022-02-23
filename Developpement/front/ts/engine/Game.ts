@@ -12,13 +12,13 @@ class Game {
 
   private canvasEl: HTMLCanvasElement;
 
-  private context: CanvasRenderingContext2D;
+  public static context: CanvasRenderingContext2D;
   private width: number;
   private height: number;
 
   private mobImage: HTMLImageElement;
 
-  public static player : User;
+  public static player: User;
   private hero: Character;
   private mob: Entity[];
 
@@ -27,7 +27,7 @@ class Game {
    */
   private timeSinceLastFPS: number = 0;
   private frame: number = 0;
-  
+
 
   /**
    * Touches sur lesquelles on peut rester appuyé
@@ -39,7 +39,7 @@ class Game {
 
   constructor(canvasEl: HTMLCanvasElement, player: User, mob: Entity[] = []) {
     this.canvasEl = canvasEl;
-    this.context = canvasEl.getContext("2d") as CanvasRenderingContext2D;
+    Game.context = canvasEl.getContext("2d") as CanvasRenderingContext2D;
     this.width = canvasEl.width;
     this.height = canvasEl.height;
 
@@ -85,6 +85,9 @@ class Game {
             break;
           case 'l':
             Zombie.isActive = true;
+            break;
+          case 'a':
+            this.hero.attack();
             break;
           //debug
           case 'h':
@@ -152,13 +155,13 @@ class Game {
       this.timeSinceLastFPS = 0;
       this.frame += 1;
       //redessine la carte
-      await GameMap.render(this.context);
+      await GameMap.render(Game.context);
       //redessine le perso
-      this.hero.paint(this.context);
+      this.hero.paint(Game.context);
 
       this.mob.forEach((entity) => {
         entity.evolve(delta);
-        entity.paint(this.context)
+        entity.paint(Game.context)
       });
     };
 

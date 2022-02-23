@@ -14,6 +14,8 @@ class GameMap {
   static height: number;
   public static currentFloor : number=0;
 
+  public static renderable:{ (): void; }[] = [];
+
 
 
   constructor() {
@@ -74,6 +76,10 @@ class GameMap {
         bl.img.forEach(async i => {
           try {
             context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x+i.X) * tileSize, (y+i.Y) * tileSize, i.width, i.height);
+            GameMap.renderable.forEach(element => {
+              element();
+            });
+            //console.log(GameMap.renderable);
           }catch{}
       });
       }

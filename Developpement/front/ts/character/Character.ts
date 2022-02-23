@@ -19,7 +19,7 @@ export abstract class Character extends Entity {
      */
     walk(direction: number, delta: number, mob: Entity[]) {
         super.walk(direction, delta, mob);
-        console.log("delta : ", delta);
+        //console.log("delta : ", delta);
         
         mob.forEach(monstre => {
             //console.log("mob : ", monstre.x, monstre.y, "\n hero : ", this.x, this.y);

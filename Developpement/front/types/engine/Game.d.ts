@@ -2,7 +2,7 @@ import { Entity } from "../character/Entity.js";
 import { User } from "../User.js";
 declare class Game {
     private canvasEl;
-    private context;
+    static context: CanvasRenderingContext2D;
     private width;
     private height;
     private mobImage;

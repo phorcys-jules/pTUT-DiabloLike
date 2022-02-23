@@ -7,6 +7,9 @@ declare class GameMap {
     static width: number;
     static height: number;
     static currentFloor: number;
+    static renderable: {
+        (): void;
+    }[];
     constructor();
     deleteBlock(p_x: number, p_y: number): void;
     static ajoutBlock(p_block: Block): void;
