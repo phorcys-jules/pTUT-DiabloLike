@@ -6,7 +6,11 @@ import { Archer } from "./character/Archer.js";
 import { bootstrap } from "./engine/bootstrap.js";
 import { Zombie } from "./character/Zombie.js";
 
+
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
+
+
+
 
  function getClassId (n: string){
     const data = {};
@@ -28,7 +32,7 @@ const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormEle
 };
 
 
-async function validate(name:string, classID:number){
+async function validate(name:String, classID:number){
     const data={};
     //POST request with body equal on data in JSON format
     fetch(`http://localhost:8752/createChar/${name}/${classID}/`, {
@@ -63,12 +67,15 @@ form.onsubmit = () => {
     switch (characterClass) {
         case 'Sorcier':
             c1 = new Wizard(characterName);
+            validate(characterName,2);
             break;
         case 'Guerrier':
             c1 = new Warrior(characterName);
+            validate(characterName,3);
             break;
         case 'Archer':
             c1 = new Archer(characterName);
+            validate(characterName,1);
             break;
 
         default:
@@ -76,10 +83,10 @@ form.onsubmit = () => {
             break;
     }
     console.log(c1.toString());
-
-    const idClass=getClassId(characterClass);
+    console.log('Character created !')
+    //const idClass=getClassId(characterClass);
     //validate(characterName,idClass)
-    console.log(idClass)
+    //console.log(idClass)
     bootstrap(c1, [new Zombie(), new Zombie()]);
 
     //window.location.href = '../index.html';

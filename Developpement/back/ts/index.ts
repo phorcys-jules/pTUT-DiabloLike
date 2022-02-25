@@ -126,7 +126,7 @@ app.post('/createChar/:name/:classID/', async function (req, res) {
    * mail existe déja,...
    */
   const conn = await connect();
-  await conn.query("INSERT INTO `character` (name, lvl, hp, maxHP, mp, MaxMP, classID VALUES ("+name+", 1, 10, 100, 6, 15,"+id);
+  await conn.query("INSERT INTO `character` (name, lvl, hp, maxHP, mp, MaxMP, classID) VALUES ('"+name+"', 1, 10, 100,1,1,"+id+")");
 
   res.status(201).json({
     data: [],
