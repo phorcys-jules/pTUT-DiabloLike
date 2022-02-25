@@ -10,7 +10,7 @@ document.getElementById('run')?.addEventListener("click", function(){
     //bootstrap(new Wizard('Gandalf'), [new Zombie()]);
     //bootstrap(new Archer('Legolas'), [new Zombie()]);
     
-    bootstrap(new User('Phorcys', 'a','a','a','a', 100, [new Wizard('Gandalf')]), [new Zombie()]);
+    bootstrap(new User('Phorcys', 'a','a','a','a', 100, [new Wizard('Gandalf')]), []);
 
 });
 

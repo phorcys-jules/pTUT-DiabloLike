@@ -24,6 +24,7 @@ declare class GameMap {
      * Init a map from a JSON File
      */
     static initMap(): void;
+    static jsonProceduralMap(): void;
     getCurrentTime(): void;
 }
 export default GameMap;

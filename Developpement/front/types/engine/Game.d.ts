@@ -8,7 +8,7 @@ declare class Game {
     private mobImage;
     static player: User;
     private hero;
-    private mob;
+    static mob: Entity[];
     /**
      * Deltas en ms depuis le dernier refresh
      */

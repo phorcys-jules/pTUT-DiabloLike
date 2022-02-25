@@ -21,7 +21,7 @@ class Game {
 
   public static player: User;
   private hero: Character;
-  private mob: Entity[];
+  public static mob: Entity[];
 
   /**
    * Deltas en ms depuis le dernier refresh
@@ -46,7 +46,7 @@ class Game {
 
     Game.player = player;
     this.hero = player.chars[0];
-    this.mob = mob;
+    Game.mob = mob;
 
     this.setup()
 
@@ -89,13 +89,13 @@ class Game {
             break;
           case 'm':
             //try
-            if (this.mob[0].addHp(-1) <= 0) {
-              this.mob.splice(0);
+            if (Game.mob[0].addHp(-1) <= 0) {
+              Game.mob.splice(0);
               Game.player.updateGold(+5);
             }
             break;
           case 'o':
-            this.mob.push(new Zombie());
+            Game.mob.push(new Zombie());
             break;
           case 'a':
             this.hero.attack();
@@ -129,8 +129,8 @@ class Game {
 
     GameMap.initMap();
 
-    //this.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
-    //this.context.drawImage(this.mobImage, 3 * 64, 3 * 64);
+    //Game.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
+    //this.context.drawImage(Game.mobImage, 3 * 64, 3 * 64);
 
 
     const gameLoop = new GameLoop(this.loop.bind(this));
@@ -149,14 +149,14 @@ class Game {
     //Détéction des touches et lancement des fonctions associé
     if (this.isAnyKeyDown()) {
       if (this.isKeyDown("d") || this.isKeyDown("ArrowRight")) {
-        this.hero.walk(2, delta, this.mob);
+        this.hero.walk(2, delta, Game.mob);
       } else if (this.isKeyDown("q") || this.isKeyDown("ArrowLeft")) {
-        this.hero.walk(-2, delta, this.mob);
+        this.hero.walk(-2, delta, Game.mob);
       }
       if (this.isKeyDown("s") || this.isKeyDown("ArrowDown")) {
-        this.hero.walk(-1, delta, this.mob);
+        this.hero.walk(-1, delta, Game.mob);
       } else if (this.isKeyDown("z") || this.isKeyDown("ArrowUp")) {
-        this.hero.walk(1, delta, this.mob);
+        this.hero.walk(1, delta, Game.mob);
       }
     }
 
@@ -171,17 +171,17 @@ class Game {
       //redessine le perso
       this.hero.paint(Game.context);
 
-      this.mob.forEach((entity) => {
+      Game.mob.forEach((entity) => {
         entity.evolve(delta);
         entity.paint(Game.context)
       });
     };
 
-    //1 sprite toute les 5 frames
+    //1 sprite toute les 8 frames
     if (this.frame === 8) {
       this.frame = 0;
       this.hero.nextSprites();
-      this.mob.forEach((entity) => {
+      Game.mob.forEach((entity) => {
         entity.nextSprites();
       });
     } else {
