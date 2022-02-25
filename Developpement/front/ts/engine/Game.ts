@@ -107,6 +107,30 @@ class Game {
               "renderable : ", GameMap.renderable, "\n"
             );
             break;
+          case 'j':
+            console.log("saving json....");
+            async function save() {
+              /*
+              let url = `http://localhost:8752/json`;
+            
+                e.preventDefault();
+                let response = await fetch(url, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  }
+                });
+                */
+                let urlSend = `http://localhost:8752/json`
+                  let xhr = new XMLHttpRequest();
+                  xhr.open('GET',urlSend);
+                  xhr.responseType = 'json';
+                  console.log('url :  ',urlSend);
+                  xhr.send();
+             
+            }
+            save()
+            break;
         }
       })
     document.addEventListener("keyup", e => {

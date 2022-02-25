@@ -4,6 +4,8 @@ import jSONmap from "../map/map.json" assert { type: "json" };
 import { GameImage } from "../map/GameImage.js";
 import { Stair } from "../map/Stair.js";
 
+
+
 class GameMap {
   /**
    * Texture de la case
