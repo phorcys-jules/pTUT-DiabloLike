@@ -186,7 +186,7 @@ export abstract class Entity extends Object {
         this.updateAffichageStats();
     }
 
-    addHp(amount: number) {
+    addHp(amount: number) : number{
         //Si atteint lim basse ou haute
         if (this.hp + amount >= this.maxHp) {
             this.hp += amount = 64;
@@ -198,7 +198,7 @@ export abstract class Entity extends Object {
                 this.hp += amount;
             }
         }
-        this.updateAffichageStats();
+        return this.hp;
     }
 
     /**

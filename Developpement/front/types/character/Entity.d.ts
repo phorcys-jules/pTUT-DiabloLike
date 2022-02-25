@@ -50,7 +50,7 @@ export declare abstract class Entity extends Object {
     knockback(direction: number, delta: number): void;
     addXP(amount: number): void;
     addMana(amount: number): void;
-    addHp(amount: number): void;
+    addHp(amount: number): number;
     /**
      * @returns la position dans le tableau du block en x y
      */

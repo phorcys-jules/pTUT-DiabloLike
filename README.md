@@ -9,6 +9,7 @@ Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
     - p : Changer de perso
     - b, n : Changer d'étages
     - K, l : bloquer, débloquer les zombies
+    - m  : enlever 1 pv à un monstre (débug)
 
 ## Auteurs
 - FRANCOIS Jules

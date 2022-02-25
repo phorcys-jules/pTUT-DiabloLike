@@ -10,4 +10,5 @@ export declare abstract class Character extends Entity {
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number, mob: Entity[]): void;
+    addHp(amount: number): number;
 }

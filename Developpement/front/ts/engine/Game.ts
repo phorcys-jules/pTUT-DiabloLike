@@ -85,6 +85,12 @@ class Game {
             break;
           case 'l':
             Zombie.isActive = true;
+            break; 
+          case 'm':
+            if (this.mob[0].addHp(-1) <=0) {
+              this.mob.splice(0);
+            }
+              
             break;
           case 'a':
             this.hero.attack();
@@ -93,7 +99,7 @@ class Game {
           case 'h':
             console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
               "map : ", GameMap.maps, "\n",
-              "renderable : ", GameMap.renderable,"\n"
+              "renderable : ", GameMap.renderable, "\n"
             );
             break;
         }
