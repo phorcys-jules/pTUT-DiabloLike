@@ -3,6 +3,10 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import { connect } from './database.js';
 import { User } from './models/User.js';
+import { json } from 'node:stream/consumers';
+
+import * as fs from 'fs';
+import e from 'express';
 
 //Config the app
 const app = express();
@@ -28,6 +32,29 @@ app.use(function(req, res, next) {
  * Routes available
  */
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
+
+app.get('/json', async function (req, res) {
+  var data = { table: [{
+    id: 0,
+    square: 0
+  }
+  ] }
+
+  for (let i = 0; i < 26; i++) {
+    var obj = {
+      id: i,
+      square: i * i
+    }
+    data.table.push(obj);
+  }
+  fs.writeFile("input.json", JSON.stringify(data), function (err: any) {
+    if (err) throw err;
+    console.log('complete');
+  }
+  );
+  res.status(200).send("complete")
+
+});
 
 app.get('/ginette', async function (req, res) {
 
