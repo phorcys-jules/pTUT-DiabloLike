@@ -26,49 +26,48 @@ export class Wizard extends Character {
         //this.fireball();
         let sendX = this.x;
         let sendY = this.y;
-        let fireImg = this.fireballImage
+        let fireImg = this.fireballImage;
+        let direction = this.direction;
 
         GameMap.renderable.push(function feu() {
-            fireball(sendX, sendY, fireImg, 64);
+            fireball(sendX, sendY, fireImg, 64, direction);
         })
-        /*
-        GameMap.renderable.push(async function fireball(x: number = sendX, y:number = sendY, img:GameImage = fireImg, porte:number = 64){
-            console.log("fireeeeeeeeeeeeeeee !", porte)
-            //64 : porté du sort
-            try {
-                //Game.context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x + i.X) * 64, (y + i.Y) * 64, i.width, i.height);
-                Game.context.drawImage(await fireImg.getImg(), x+64-porte, y);
-                porte--;
-            } catch (error) {
-                console.log(error)
-            }
-            //console.log(porte)
-            if (porte === 63) {
-                //console.log(GameMap.renderable);
-                
-                GameMap.renderable.pop();
-            }else{}
-        });*/
         return this.strenth;
     }
 
 
 }
 
-async function fireball(x: number , y:number , img:GameImage, porte:number = 64){
-    console.log("fireeeeeeeeeeeeeeee !", porte)
+async function fireball(x: number , y:number , img:GameImage, porte:number = 64, direction:number){
+    //console.log("fireeeeeeeeeeeeeeee !", porte)
     //64 : porté du sort
     try {
-        //Game.context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x + i.X) * 64, (y + i.Y) * 64, i.width, i.height);
-        Game.context.drawImage(await img.getImg(), x+64-porte, y);
-        porte--;
+        porte-=2;
+        Game.context.drawImage(await img.getImg(), x, y);
     } catch (error) {
         console.log(error)
     }
     GameMap.renderable.pop();
     if (porte > 0 ) {
+        //console.log(direction, " dir ", x, y);
+        switch (direction) {
+            case 1:
+                y -= 3;
+                break;
+            case 3 :
+            case -1:
+                y += 3;
+                break;
+            case 2:
+                x += 3;
+                break;
+            case 4 :
+            case -2:
+                x -= 3;
+                break;
+        }
         GameMap.renderable.push(function feu() {
-            fireball(x+2, y, img, porte);
+            fireball(x, y, img, porte, direction);
         })
     }else{}
 }

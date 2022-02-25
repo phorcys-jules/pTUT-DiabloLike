@@ -15,6 +15,14 @@ export abstract class Entity extends Object {
     mp: number;
     maxMp: number;
 
+    /** 
+     * 1 : N,
+     * -1 || 3 : S,
+     * 2 : E,
+     * -2 || 4: O
+     */
+    direction:number;
+
     x: number;
     y: number;
     sprites: HTMLImageElement;
@@ -50,6 +58,7 @@ export abstract class Entity extends Object {
         this.x = x;
         this.y = y;
         this.multiSprite = 1;
+        this.direction = 3;
         console.log(this.name);
         this.loadSprites();
     }
@@ -88,9 +97,7 @@ export abstract class Entity extends Object {
      * @param delta : temps depuis la dernière boucle : anti-lag
      */
     walk(direction: number, delta: number, mob: Entity[] = []) {
-        let coord = this.getBlockPos();
-        //console.log(coord);
-        //console.log(GameMap.maps[0][3].solid);
+        this.direction = direction;
         switch (direction) {
             case 1:
                 // x, newY + décalage par rapport a 0 de l'image qui se situe au pied

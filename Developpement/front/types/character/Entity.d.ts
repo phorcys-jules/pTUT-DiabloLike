@@ -9,6 +9,13 @@ export declare abstract class Entity extends Object {
     maxHp: number;
     mp: number;
     maxMp: number;
+    /**
+     * 1 : N,
+     * -1 || 3 : S,
+     * 2 : E,
+     * -2 || 4: O
+     */
+    direction: number;
     x: number;
     y: number;
     sprites: HTMLImageElement;

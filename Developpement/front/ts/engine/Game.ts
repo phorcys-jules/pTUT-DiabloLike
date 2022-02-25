@@ -92,7 +92,8 @@ class Game {
           //debug
           case 'h':
             console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
-              "map : ", GameMap.maps, "\n"
+              "map : ", GameMap.maps, "\n",
+              "renderable : ", GameMap.renderable,"\n"
             );
             break;
         }
