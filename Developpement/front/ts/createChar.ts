@@ -5,6 +5,7 @@ import { Archer } from "./character/Archer.js";
 
 import { bootstrap } from "./engine/bootstrap.js";
 import { Zombie } from "./character/Zombie.js";
+import Game from "./engine/Game.js";
 
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;

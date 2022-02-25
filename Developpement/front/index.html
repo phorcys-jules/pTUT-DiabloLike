@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diablo Like</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./assets/logo.png">
 </head>
 
 <body>
-    <button type="button"><a href="./html/createChar.html">createChar</a></button>
-    <button type="button"><a href="./html/createUser.html">createUser</a></button>
-    <button type="button" id='run'>run</button>
+    <div id="settings" class="d-flex">
+        <div class="btn-group">
+            <a href="./html/createChar.html" class="btn btn-primary">createChar</a>
+            <a href="./html/createUser.html" class="btn btn-primary">createUser</a>
+            <button type="button" class="btn btn-primary" id='run'>run</button>
+        </div>
+    </div>
+    <div id="stats" class="d-flex">
+        <p> HP : <label id="heroHp"></label> </p>
+        <p> MP : <label id="heroMp"></label> </p>
+        <p> Gold : <label id="userGold"></label> </p>
+    </div>
     <div id='gameContent'>
 
         <canvas id="game-canvas" width="1280" height="896px"></canvas>
