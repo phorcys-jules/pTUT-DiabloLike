@@ -7,6 +7,7 @@ import { Archer } from "../character/Archer.js";
 import { Entity } from "../character/Entity.js";
 import { Zombie } from "../character/Zombie.js";
 import { User } from "../User.js";
+import { Warrior } from "../character/Warrior.js";
 
 class Game {
 
@@ -193,7 +194,7 @@ class Game {
     //console.log( this.hero instanceof Wizard);
     let newHero: Character;
     if (this.hero instanceof Wizard) {
-      newHero = new Archer('Legolas');
+      newHero = new Warrior('Conan');
     } else {
       newHero = new Wizard('Gandalfs');
     }
