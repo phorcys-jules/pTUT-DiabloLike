@@ -66,7 +66,7 @@ export abstract class Entity extends Object {
     protected async loadSprites() {
         this.sprites = await ImageUtils.loadImageFromUrl("./assets/img/perso/sprites.png");
         this.currentSprite = [0, 0];
-        console.log("you're supposed to rededfine this function with the correct sprite")
+        console.log("you're supposed to rededfine this function with the correct sprite", this.constructor.name)
     }
 
     paint(context: CanvasRenderingContext2D) {

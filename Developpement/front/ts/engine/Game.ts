@@ -85,12 +85,16 @@ class Game {
             break;
           case 'l':
             Zombie.isActive = true;
-            break; 
+            break;
           case 'm':
-            if (this.mob[0].addHp(-1) <=0) {
+            //try
+            if (this.mob[0].addHp(-1) <= 0) {
               this.mob.splice(0);
+              Game.player.updateGold(+5);
             }
-              
+            break;
+          case 'o':
+            this.mob.push(new Zombie());
             break;
           case 'a':
             this.hero.attack();

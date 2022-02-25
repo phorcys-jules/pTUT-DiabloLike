@@ -28,8 +28,8 @@ export class Zombie extends Entity {
         
     }
     protected async loadSprites() {
-        super.loadSprites();
         this.sprites = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
+        this.currentSprite = [0, 0];
         
     }
 
