@@ -7,9 +7,12 @@ Ceci affin de faire évoluer notre personnage et progresser dan le jeu.
 ## Comment jouer
     - zqsd, flèches : Se déplacer
     - p : Changer de perso
-    - b, n : Changer d'étages
+    - b, n : Changer d'étages (débug)
     - K, l : bloquer, débloquer les zombies
     - m  : enlever 1 pv à un monstre (débug)
+    - o : spawn un zombie (débug)
+    - a : attack
+
 
 ## Auteurs
 - FRANCOIS Jules
