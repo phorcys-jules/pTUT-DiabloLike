@@ -14,6 +14,8 @@ export class Wizard extends Character {
         super(name, lvl, speed, strenth, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/fireball_attack.mp3');
         this.fireballImage = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/fireball.png")
+        this.updateAffichageStats();
+        
     }
 
     protected async loadSprites() {

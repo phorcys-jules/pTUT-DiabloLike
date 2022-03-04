@@ -6,6 +6,7 @@ import { Archer } from "./character/Archer.js";
 import { bootstrap } from "./engine/bootstrap.js";
 import { Zombie } from "./character/Zombie.js";
 import Game from "./engine/Game.js";
+import { User } from "./User.js";
 
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
@@ -58,6 +59,8 @@ async function validate(name:String, classID:number){
 
 
 form.onsubmit = () => {
+  console.log('form submit');
+  
     const formData = new FormData(form);
 
     const characterName = formData.get('name') as string;
@@ -88,9 +91,12 @@ form.onsubmit = () => {
     //const idClass=getClassId(characterClass);
     //validate(characterName,idClass)
     //console.log(idClass)
-    bootstrap(c1, [new Zombie(), new Zombie()]);
+    Game.player.ajouterChar(c1);
+    console.log(Game.player)
+    window.location.href = '../index.html';
 
-    //window.location.href = '../index.html';
+    //bootstrap(Game.player, [new Zombie(), new Zombie()]);
+
     return false; // prevent reload
 };
 

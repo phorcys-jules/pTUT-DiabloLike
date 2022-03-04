@@ -215,7 +215,7 @@ class Game {
   }
   switchPerso() {
     //TODO : stocker la liste des perso du joueur et prendre dedans
-    //console.log( this.hero instanceof Wizard);
+    console.log(Game.player.chars);
     let newHero: Character;
     if (this.hero instanceof Wizard) {
       newHero = new Warrior('Conan');
