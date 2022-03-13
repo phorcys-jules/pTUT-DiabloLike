@@ -3,3 +3,5 @@ Developpement/node_modules/*
 *.js
 Developpement/package-lock.json
 Developpement/back/ts/database.ts
+Developpement/back/ts/database.ts
+**database.ts
