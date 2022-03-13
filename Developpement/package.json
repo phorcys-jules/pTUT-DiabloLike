@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "start npx tsc -p ./back/tsconfig.json --watch && start npx tsc -p ./front/tsconfig.json --watch",
     "build": "npx tsc -p ./back/tsconfig.json && npx tsc -p ./front/tsconfig.json",
-    "start": "node ./back/js/index.js"
+    "start": "nodemon ./back/js/index.js --watch"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,10 @@
   "homepage": "https://github.com/phorcys-jules/pTUT-DiabloLike#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
     "@types/mysql2": "github:types/mysql2",
     "@types/node": "^17.0.8",
     "typescript": "^4.5.4",
@@ -38,6 +40,7 @@
     "crypto": "^1.0.1",
     "database": "^0.0.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "fs": "0.0.1-security",
     "install": "^0.13.0",
     "mysql2": "^2.3.3",
@@ -45,6 +48,7 @@
     "path": "^0.12.7",
     "promises": "^0.2.5",
     "systemjs": "^6.12.1",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "webpack": "^5.70.0"
   }
 }

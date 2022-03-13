@@ -11,4 +11,5 @@ export declare class User {
     ajouterChar(char: Character): void;
     updateGold(montant?: number): void;
     toString(): string;
+    static whoIsConnected(): Promise<void>;
 }

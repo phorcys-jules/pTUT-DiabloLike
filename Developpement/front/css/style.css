@@ -2,6 +2,8 @@ body {
     max-height: 90%;
     margin-left: 5px;
     margin-top: 5px;
+    background-color: black;
+    color: WHITE;
 }
 
 #game-canvas {
@@ -18,4 +20,13 @@ body {
 
 #stats > p {
     padding-left: 5px;
+    font-weight: bold;
+}
+
+.heroHp {
+    color: red;
+}.heroMp {
+    color: lightseagreen;
+}.userGold {
+    color: yellow;
 }

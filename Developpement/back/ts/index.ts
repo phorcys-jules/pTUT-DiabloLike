@@ -3,7 +3,10 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import { connect } from './database.js';
 import { User } from './models/User.js';
-import { json } from 'node:stream/consumers';
+import  session  from './routes/session.js';
+import cookieParser from 'cookie-parser';
+import sessions from 'express-session';
+import { Router } from 'express';
 
 import * as fs from 'fs';
 import e from 'express';
@@ -12,13 +15,27 @@ import e from 'express';
 const app = express();
 const PORT = 8752;
 
-app.use(express.json());
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
 
+//session middleware
+app.use(sessions({
+  secret: "thisismysecrctekey",
+  saveUninitialized:true,
+  cookie: { maxAge: oneDay, httpOnly: false  },
+  resave: true
+}));
+
+app.use(cookieParser());
+
+app.use(express.json());
+/*
 app.use(cors({
   origin: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
+*/
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,6 +43,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+/**
+ * Router
+*/
+const routes = Router();
+
+routes.use('/session', session);
+app.use(routes);
 
 
 /**
@@ -169,7 +193,12 @@ app.post('/createUser/:pseudo/:firstname/:lastname/:pass/:mail', async function 
   });
 });
 
-
+app.get('*', function (req, res) {
+  res.status(400).json({
+    "type": "error",
+    "error": 400,
+    "message": `route inconnu`});
+})
 
 
 

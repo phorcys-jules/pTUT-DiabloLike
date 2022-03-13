@@ -11,5 +11,7 @@
     },
     "include": [
         "./ts/*.ts",
-        "./ts/models/*.ts"],
+        "./ts/models/*.ts",
+        "./ts/routes/*.ts"
+    ],
 }

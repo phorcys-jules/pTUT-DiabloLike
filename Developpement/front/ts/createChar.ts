@@ -10,6 +10,8 @@ import { User } from "./User.js";
 
 
 const form: HTMLFormElement = document.getElementById('formChar') as HTMLFormElement;
+console.log(Game.player);
+
 
 
 

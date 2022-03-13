@@ -1,4 +1,7 @@
+import Game from './engine/Game.js';
 import { User } from './User.js';
+
+User.whoIsConnected();
 
 function validateEmail(mail:string):boolean{
     let regex:RegExp = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
@@ -36,11 +39,13 @@ async function validate ( u: User ){
     //Then with the data from the response in JSON...
     .then((data) => {
       console.log('Success:', data);
+      Game.player = u;
       window.location.href = './createChar.html';
     })
     //Then with the error genereted...
     .catch((error) => {
       console.error('Error:', error);
+      displayError("Erreur, nous n'avons pas pus contacter le serveur");
     });
 };
 
@@ -76,9 +81,18 @@ form.onsubmit = (e) => {
          displayError('Erreur, veuillez vérifier que les mots de passes soient indentiques');
     }
 
+    
     let u:User = new User(userPseudo,userFirstName, userLastName, userPassword, userEmail);
 
-    validate(u);
+    //TODO : display error impossible de joindre l'api
+    try {
+      validate(u);
+      
+    } catch (error) {
+      console.log("coucou");
+      
+    }
+
     const errorMessage = document.getElementById('errorMessage') as HTMLElement;
     
     errorMessage.classList.add('d-none');
