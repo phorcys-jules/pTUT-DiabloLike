@@ -14,6 +14,7 @@ declare class Game {
      */
     private timeSinceLastFPS;
     private frame;
+    private cooldown;
     /**
      * Touches sur lesquelles on peut rester appuyé
      * key : name key down,

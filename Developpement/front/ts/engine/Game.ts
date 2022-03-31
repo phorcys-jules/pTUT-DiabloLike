@@ -28,6 +28,7 @@ class Game {
    */
   private timeSinceLastFPS: number = 0;
   private frame: number = 0;
+  private cooldown: number;
 
 
   /**
@@ -46,6 +47,7 @@ class Game {
 
     Game.player = player;
     this.hero = player.chars[0];
+    this.cooldown = this.hero.attackSpeed;
     Game.mob = mob;
 
     this.setup()
@@ -98,7 +100,10 @@ class Game {
             Game.mob.push(new Zombie());
             break;
           case 'a':
-            this.hero.attack();
+            if (this.cooldown == this.hero.attackSpeed) {
+              this.hero.attack();
+              this.cooldown = 0;
+            }
             break;
           //debug
           case 'h':
@@ -121,13 +126,13 @@ class Game {
                   }
                 });
                 */
-                let urlSend = `http://localhost:8752/json`
-                  let xhr = new XMLHttpRequest();
-                  xhr.open('GET',urlSend);
-                  xhr.responseType = 'json';
-                  console.log('url :  ',urlSend);
-                  xhr.send();
-             
+              let urlSend = `http://localhost:8752/json`
+              let xhr = new XMLHttpRequest();
+              xhr.open('GET', urlSend);
+              xhr.responseType = 'json';
+              console.log('url :  ', urlSend);
+              xhr.send();
+
             }
             save()
             break;
@@ -208,6 +213,12 @@ class Game {
       Game.mob.forEach((entity) => {
         entity.nextSprites();
       });
+      //incrementation du cooldown
+      if (this.cooldown < this.hero.attackSpeed){
+        this.cooldown += 0.5;
+        console.log(this.cooldown);
+      }
+
     } else {
       //console.log("false");
     }
@@ -219,7 +230,7 @@ class Game {
     let newHero: Character;
     if (this.hero instanceof Wizard) {
       newHero = new Warrior('Conan');
-    } 
+    }
     else if (this.hero instanceof Warrior) {
       newHero = new Archer();
     }
@@ -231,6 +242,7 @@ class Game {
     newHero.x = this.hero.x;
     newHero.y = this.hero.y;
     this.hero = newHero;
+    this.cooldown = this.hero.attackSpeed;
   }
 
 }

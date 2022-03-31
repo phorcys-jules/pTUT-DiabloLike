@@ -7,8 +7,8 @@ import { Character } from "./Character.js";
 export class Warrior extends Character {
     swordImage: any;
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 40, maxMp: number = 20, x: number = 64, y: number = 64) {
-        super(name, lvl, speed, strenth, maxHp, maxMp, x, y);
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 1, maxHp: number = 40, maxMp: number = 20, x: number = 64, y: number = 64) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/sword_attack.mp3');
         this.swordImage = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/sword.png")
         this.updateAffichageStats();

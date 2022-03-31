@@ -10,6 +10,7 @@ export abstract class Entity extends Object {
     xp: number;
     speed: number;
     strenth: number;
+    attackSpeed: number;
     hp: number;
     maxHp: number;
     mp: number;
@@ -43,7 +44,7 @@ export abstract class Entity extends Object {
     public attackSound: HTMLAudioElement;
 
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 2, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
         //Level has  default value of 1
         super();
         this.name = name;
@@ -51,6 +52,7 @@ export abstract class Entity extends Object {
         this.xp = 0;
         this.speed = speed;
         this.strenth = strenth;
+        this.attackSpeed = attackSpeed;
         this.hp = maxHp;
         this.maxHp = maxHp;
         this.mp = maxMp;

@@ -9,8 +9,8 @@ export class Archer extends Character {
     arrowImgHori: any;
     arrowImgVert: any;
 
-    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 20, maxMp: number = 10, x: number = 64, y: number = 64) {
-        super(name, lvl, speed, strenth, maxHp, maxMp, x, y);
+    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 3,maxHp: number = 20, maxMp: number = 10, x: number = 64, y: number = 64) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/bow_sound.mp3');
         this.arrowImgHori = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/arrow_hori.png")
         this.arrowImgVert = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/arrow_vert.png")

@@ -82,7 +82,7 @@ class GameMap {
             context.drawImage(await i.getImg(), i.dx, i.dy, i.dw, i.dh, (x + i.X) * tileSize, (y + i.Y) * tileSize, i.width, i.height);
             GameMap.renderable.forEach(element => {
               element();
-              console.log("renderable");
+              //console.log("renderable");
 
             });
             //console.log(GameMap.renderable);

@@ -5,6 +5,7 @@ export declare abstract class Entity extends Object {
     xp: number;
     speed: number;
     strenth: number;
+    attackSpeed: number;
     hp: number;
     maxHp: number;
     mp: number;
@@ -27,7 +28,7 @@ export declare abstract class Entity extends Object {
     dir: number;
     movable: boolean[];
     attackSound: HTMLAudioElement;
-    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
+    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, attackSpeed?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
     protected loadSprites(): Promise<void>;
     paint(context: CanvasRenderingContext2D): void;
     nextSprites(): void;

@@ -10,8 +10,8 @@ export class Wizard extends Character {
     public fireballImage: GameImage;
 
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
-        super(name, lvl, speed, strenth, maxHp, maxMp, x, y);
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 4, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/fireball_attack.mp3');
         this.fireballImage = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/fireball.png")
         this.updateAffichageStats();
