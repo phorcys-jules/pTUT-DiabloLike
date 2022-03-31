@@ -54,18 +54,18 @@ async function fireball(x: number , y:number , img:GameImage, porte:number = 64,
         //console.log(direction, " dir ", x, y);
         switch (direction) {
             case 1:
-                y -= 3;
+                y -= 9;
                 break;
             case 3 :
             case -1:
-                y += 3;
+                y += 9;
                 break;
             case 2:
-                x += 3;
+                x += 9;
                 break;
             case 4 :
             case -2:
-                x -= 3;
+                x -= 9;
                 break;
         }
         GameMap.renderable.push(function feu() {

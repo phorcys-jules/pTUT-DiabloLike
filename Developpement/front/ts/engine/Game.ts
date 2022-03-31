@@ -219,13 +219,18 @@ class Game {
     let newHero: Character;
     if (this.hero instanceof Wizard) {
       newHero = new Warrior('Conan');
-    } else {
+    } 
+    else if (this.hero instanceof Warrior) {
+      newHero = new Archer();
+    }
+    else {
       newHero = new Wizard('Gandalfs');
     }
 
+    console.log(newHero);
     newHero.x = this.hero.x;
     newHero.y = this.hero.y;
-    this.hero = newHero
+    this.hero = newHero;
   }
 
 }
