@@ -1,3 +1,4 @@
+import e from "cors";
 import { Archer } from "./character/Archer.js";
 import { Warrior } from "./character/Warrior.js";
 import { Wizard } from "./character/Wizard.js";
@@ -14,3 +15,16 @@ document.getElementById('run')?.addEventListener("click", function(){
 
 });
 
+document.getElementById('btn_fullscreen')?.addEventListener("click", function(){
+    let elem = document.documentElement;
+
+  if (!document.fullscreenElement) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+});
