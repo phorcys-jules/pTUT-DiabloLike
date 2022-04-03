@@ -36,5 +36,12 @@ declare class Game {
      */
     private loop;
     switchPerso(): void;
+    majDivSpell(): void;
+    /**
+     * met a jour l'image de la div de sort (en bas à droite de l'interface)
+     * @param p_spellImg image du sort
+     * @param p_rgbaBackColor couleur de fond utilisant la méhode rgba()
+     */
+    majSpellImg(p_spellImg: string[], p_rgbaBackColor?: string): void;
 }
 export default Game;

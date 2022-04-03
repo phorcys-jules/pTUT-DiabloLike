@@ -8,6 +8,8 @@ import { Entity } from "../character/Entity.js";
 import { Zombie } from "../character/Zombie.js";
 import { User } from "../User.js";
 import { Warrior } from "../character/Warrior.js";
+import { constants } from "fs";
+import { url } from "inspector";
 
 class Game {
 
@@ -76,6 +78,7 @@ class Game {
         switch (e.key) {
           case 'p':
             this.switchPerso();
+            this.majDivSpell();
             break;
           case 'b':
             GameMap.previousFloor();
@@ -156,6 +159,14 @@ class Game {
   public async run() {
     console.log('GG u run the Game');
 
+    document.getElementById("div_spell")?.addEventListener('click', () => {
+      console.log('pépé')
+      document.dispatchEvent(new KeyboardEvent('keypress', {
+        'key': 'a'
+      }));
+    });
+
+    this.majDivSpell();
     GameMap.jsonProceduralMap(0);
     GameMap.jsonProceduralMap(1);
     GameMap.jsonProceduralMap(2);
@@ -217,9 +228,9 @@ class Game {
         entity.nextSprites();
       });
       //incrementation du cooldown
-      if (this.cooldown < this.hero.attackSpeed){
+      if (this.cooldown < this.hero.attackSpeed) {
         this.cooldown += 0.5;
-        //console.log(this.cooldown);
+        this.majDivSpell();
       }
 
     } else {
@@ -247,6 +258,33 @@ class Game {
     this.hero = newHero;
     this.cooldown = this.hero.attackSpeed;
   }
+  //met à jour la div du sort (en bas à droite de l'interface)
+  majDivSpell() {
+    let h2Cooldown = document.getElementById("h2_cooldown");
+
+    if (h2Cooldown != null) {
+      h2Cooldown.textContent = this.cooldown.toFixed(1).toString();
+    }
+    this.majSpellImg(this.hero.spellImg);
+  }
+
+  /**
+   * met a jour l'image de la div de sort (en bas à droite de l'interface)
+   * @param p_spellImg image du sort
+   * @param p_rgbaBackColor couleur de fond utilisant la méhode rgba()
+   */
+  majSpellImg(p_spellImg: string[], p_rgbaBackColor: string = "rgba(125,125,125,") {
+    let divSpell = document.getElementById("div_spell");
+
+    if (divSpell != null) {
+      if (this.cooldown < this.hero.attackSpeed)
+        divSpell.style.backgroundColor = p_rgbaBackColor + "0.5)";
+      else
+        divSpell.style.backgroundColor = p_rgbaBackColor + "1)";
+      divSpell.style.backgroundImage = "url('" + p_spellImg[0] + "'), url('')";
+    }
+  }
+
 
 }
 

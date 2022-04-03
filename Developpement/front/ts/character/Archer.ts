@@ -9,13 +9,25 @@ export class Archer extends Character {
     arrowImgHori: any;
     arrowImgVert: any;
 
-    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 3,maxHp: number = 20, maxMp: number = 10, x: number = 64, y: number = 64) {
+    constructor(name: string = 'great green stick',
+        lvl: number = 1,
+        speed: number = 100,
+        strenth: number = 1,
+        attackSpeed: number = 3,
+        maxHp: number = 20,
+        maxMp: number = 10,
+        x: number = 64,
+        y: number = 64,
+        spellImg: string[] = ["./assets/img/capacity/Interface/archer_spell1.png", "./assets/img/capacity/Interface/gray_backgroud.png"]) {
+
+
         super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/bow_sound.mp3');
-        this.arrowImgHori = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/arrow_hori.png")
-        this.arrowImgVert = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/arrow_vert.png")
+        this.arrowImgHori = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/Game/arrow_hori.png")
+        this.arrowImgVert = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/Game/arrow_vert.png")
+        this.spellImg = spellImg;
         this.updateAffichageStats();
-        
+
     }
 
     protected async loadSprites() {
@@ -33,19 +45,19 @@ export class Archer extends Character {
             case 1:
                 arwImg = this.arrowImgVert;
                 break;
-            case 3 :
+            case 3:
             case -1:
-                sendY+=32;
+                sendY += 32;
                 arwImg = this.arrowImgVert;
                 break;
             case 2:
-                sendX+=32;
-                sendY+=10;
+                sendX += 32;
+                sendY += 10;
                 arwImg = this.arrowImgHori;
                 break;
-            case 4 :
+            case 4:
             case -2:
-                sendY+=10;
+                sendY += 10;
                 arwImg = this.arrowImgHori;
                 break;
         }
@@ -57,32 +69,32 @@ export class Archer extends Character {
         return this.strenth;
     }
 
-    
+
 }
-async function arrow(x: number , y:number , img:GameImage, porte:number = 64, direction:number){
+async function arrow(x: number, y: number, img: GameImage, porte: number = 64, direction: number) {
     //console.log("fireeeeeeeeeeeeeeee !", porte)
     //64 : porté du sort
-    porte -=16;
+    porte -= 16;
     try {
         Game.context.drawImage(await img.getImg(), x, y);
     } catch (error) {
         console.log(error)
     }
     GameMap.renderable.pop();
-    if (porte > 0 ) {
+    if (porte > 0) {
         //console.log(direction, " dir ", x, y);
         switch (direction) {
             case 1:
                 y -= 15;
                 break;
-            case 3 :
+            case 3:
             case -1:
                 y += 15;
                 break;
             case 2:
                 x += 15;
                 break;
-            case 4 :
+            case 4:
             case -2:
                 x -= 15;
                 break;
@@ -90,6 +102,6 @@ async function arrow(x: number , y:number , img:GameImage, porte:number = 64, di
         GameMap.renderable.push(function fer() {
             arrow(x, y, img, porte, direction);
         })
-    }else{}
+    } else { }
 }
 

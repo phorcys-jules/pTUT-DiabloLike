@@ -18,7 +18,7 @@
                 <a href="./html/createChar.html" class="btn btn-primary">createChar</a>
                 <a href="./html/createUser.html" class="btn btn-primary">createUser</a>
                 <button type="button" id='run' class="btn btn-primary">run</button>
-                <button type="button" id="btn_fullscreen" class="btn btn-secondary" > FuSc </button>
+                <button type="button" id="btn_fullscreen" class="btn btn-secondary"> FuSc </button>
             </div>
         </div>
         <div id="stats" class="d-flex">
@@ -27,10 +27,22 @@
             <p class="userGold"> Gold : <label id="userGold"></label> </p>
         </div>
     </div>
-    <div id='gameContent'>
+    <div id="div_game">
+        <div id="div_left_canvas">
 
-        <canvas id="game-canvas" width="1280" height="896px"></canvas>
+        </div>
 
+        <div id='div_canvas'>
+
+            <canvas id="game-canvas" width="1280" height="896px"></canvas>
+
+        </div>
+
+        <div id="div_right_canvas">
+            <div id="div_spell">
+                <h2 id="h2_cooldown"></h2>
+            </div>
+        </div>
     </div>
 </body>
 <script type="module" src="./js/main.js"></script>
