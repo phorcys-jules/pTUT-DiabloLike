@@ -1,4 +1,3 @@
-import { Entity } from "../character/Entity.js";
 import { GameImage } from "./GameImage.js";
 export declare class Block {
     blockX: number;
@@ -46,5 +45,5 @@ export declare class Block {
     getDLY(): number;
     getULX(): number;
     getULY(): number;
-    collisionJoueur(p_entity: Entity): void;
+    collisionJoueur(): void;
 }

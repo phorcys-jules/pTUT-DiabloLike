@@ -156,6 +156,9 @@ class Game {
   public async run() {
     console.log('GG u run the Game');
 
+    GameMap.jsonProceduralMap(0);
+    GameMap.jsonProceduralMap(1);
+    GameMap.jsonProceduralMap(2);
     GameMap.initMap();
 
     //Game.mobImage = await ImageUtils.loadImageFromUrl("./assets/img/mob/zombie_sprites.png");
@@ -216,7 +219,7 @@ class Game {
       //incrementation du cooldown
       if (this.cooldown < this.hero.attackSpeed){
         this.cooldown += 0.5;
-        console.log(this.cooldown);
+        //console.log(this.cooldown);
       }
 
     } else {
@@ -226,7 +229,7 @@ class Game {
   }
   switchPerso() {
     //TODO : stocker la liste des perso du joueur et prendre dedans
-    console.log(Game.player.chars);
+    //console.log(Game.player.chars);
     let newHero: Character;
     if (this.hero instanceof Wizard) {
       newHero = new Warrior('Conan');

@@ -1,6 +1,9 @@
 import GameMap from "../engine/GameMap.js";
 import ImageUtils from "../engine/ImageUtils.js";
 import { Block } from "../map/block.js";
+import { Archer } from "./Archer.js";
+import { Warrior } from "./Warrior.js";
+import { Wizard } from "./Wizard.js";
 //import Stuff from "./stuff/Stuff.js";
 
 export abstract class Entity extends Object {
@@ -22,7 +25,7 @@ export abstract class Entity extends Object {
      * 2 : E,
      * -2 || 4: O
      */
-    direction:number;
+    direction: number;
 
     x: number;
     y: number;
@@ -40,7 +43,7 @@ export abstract class Entity extends Object {
     //stuff:Stuff[];
 
     //sound 
-    
+
     public attackSound: HTMLAudioElement;
 
 
@@ -108,7 +111,7 @@ export abstract class Entity extends Object {
                     this.y -= this.speed * delta;
                 }
                 break;
-            case 3 :
+            case 3:
             case -1:
                 this.currentSprite[1] = 0;
                 if (!this.isBlockSolid(this.x, this.y + this.speed * delta)) {
@@ -123,7 +126,7 @@ export abstract class Entity extends Object {
                 }
 
                 break;
-            case 4 :
+            case 4:
             case -2:
                 this.currentSprite[1] = 128;
                 if (!this.isBlockSolid(this.x - this.speed * delta, this.y)) {
@@ -131,7 +134,7 @@ export abstract class Entity extends Object {
                 }
                 break;
         }
-        this.getBlockFromPos().collisionJoueur();
+        this.getBlockFromPos().collisionJoueur(this);
 
     }
 
@@ -139,21 +142,21 @@ export abstract class Entity extends Object {
      * Fait reculer l'entite en arrière suita à un coup
      * @param direction 
      */
-    knockback(direction: number, delta : number){
+    knockback(direction: number, delta: number) {
         switch (direction) {
             case 1:
-                this.y -= this.speed * delta*10;
+                this.y -= this.speed * delta * 10;
                 break;
-            case 3 :
+            case 3:
             case -1:
-                this.y += this.speed * delta*10;
+                this.y += this.speed * delta * 10;
                 break;
             case 2:
-                this.x += this.speed * delta*10;
+                this.x += this.speed * delta * 10;
                 break;
-            case 4 :
+            case 4:
             case -2:
-                this.x -= this.speed * delta*10;
+                this.x -= this.speed * delta * 10;
                 break;
         }
     }
@@ -188,7 +191,7 @@ export abstract class Entity extends Object {
         this.updateAffichageStats();
     }
 
-    addHp(amount: number) : number{
+    addHp(amount: number): number {
         //Si atteint lim basse ou haute
         if (this.hp + amount >= this.maxHp) {
             this.hp += amount = 64;
@@ -227,7 +230,8 @@ export abstract class Entity extends Object {
             //console.log(GameMap.maps[blCord[0]][blCord[1]].solid);
             return GameMap.maps[blCord[0]][blCord[1]].solid
         } catch (error) {
-            console.log(error);
+            //console.log(error);
+            console.log("entity collision error");
             return true
 
         }
@@ -245,6 +249,6 @@ export abstract class Entity extends Object {
             hpLabel.innerHTML = this.hp.toString();
             const mpLabel = document.getElementById('heroMp') as HTMLElement;
             mpLabel.innerHTML = this.mp.toString();
-          } catch (error) {}
+        } catch (error) { }
     }
 }

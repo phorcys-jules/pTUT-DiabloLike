@@ -23,7 +23,7 @@ declare class GameMap {
      * Init a map from a JSON File
      */
     static initMap(): void;
-    static jsonProceduralMap(numFloor: number): void;
+    static jsonProceduralMap(numFloor?: number): void;
     getCurrentTime(): void;
 }
 export default GameMap;

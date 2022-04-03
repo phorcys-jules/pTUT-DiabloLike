@@ -1,3 +1,4 @@
+import { Entity } from "../character/Entity.js";
 import { GameImage } from "./GameImage.js";
 
 export class Block {
@@ -21,13 +22,16 @@ export class Block {
                                         [80,256,16,16], [96,256,16,16], [80,256,16,16]];
 
     public static STAIR_UR : number[] = [32,285,16,19];
+    public static STAIR_DL : number[] = [0,288,16,15];
 
-    /**
-     * UP left --- UP --- Up Right --- Down Right --- Right Side --- Down left --- Left Side
-     */
-    public static WALL : number[][] = [[7,0,17,31], [48,16,64,32], [24,0,17,31],
-    //[24,48,17,31], [75,309,31,32], [7,48,17,31]];
-    [24,48,17,31], [71,104,9,7], [7,48,17,31], [112,104,9,7]];
+    public static WALL_U_D : number[] = [48,16,64,32];
+    public static WALL_L : number[] = [7,32,16,15];
+    public static WALL_R : number[] = [25,32,16,15];
+    public static WALL_UR : number[] = [24,0,17,31];
+    public static WALL_UL : number[] = [7,0,17,31];
+    public static WALL_DR : number[] = [24,48,17,31];
+    public static WALL_DL : number[] = [7,48,17,31];
+
 
     public static CHEST : number[] = [96,272,16,16];
     public static VOID : number[] = [0,0,0,0];
@@ -112,5 +116,5 @@ export class Block {
         return this.blockY;
     }
 
-    public collisionJoueur(){};
+    public collisionJoueur(p_entity: Entity){};
 }
