@@ -60,6 +60,7 @@ class GameMap {
     for (let i = 0; i < 3; i++) {
       jSONmap.floors[0].mobPos.splice(i, 1, jSONmap.floors[1].mobPos[i])
     }
+    jSONmap.floors[0].theme = jSONmap.floors[1].theme;
 
     //étage 1 deviens l'étage 2
     for (let i = 0; i < length; i++) {
@@ -68,6 +69,7 @@ class GameMap {
     for (let i = 0; i < 3; i++) {
       jSONmap.floors[1].mobPos.splice(i, 1, jSONmap.floors[2].mobPos[i])
     }
+    jSONmap.floors[1].theme = jSONmap.floors[2].theme;
 
     GameMap.jsonProceduralMap(2);
     GameMap.initMap();
@@ -81,6 +83,7 @@ class GameMap {
     for (let i = 0; i < 3; i++) {
       jSONmap.floors[2].mobPos.splice(i, 1, jSONmap.floors[1].mobPos[i])
     }
+    jSONmap.floors[2].theme = jSONmap.floors[1].theme;
 
     //étage 1 deviens l'étage 0
     for (let i = 0; i < length; i++) {
@@ -89,6 +92,7 @@ class GameMap {
     for (let i = 0; i < 3; i++) {
       jSONmap.floors[1].mobPos.splice(i, 1, jSONmap.floors[0].mobPos[i])
     }
+    jSONmap.floors[1].theme = jSONmap.floors[0].theme;
 
     GameMap.jsonProceduralMap(0);
     GameMap.initMap();
@@ -263,8 +267,22 @@ class GameMap {
   public static jsonProceduralMap(numFloor: number) {
     let nbCoffre = Math.round(Math.random() * 3);
     let nbZombie = Math.round(Math.random() * 3);
+    let numTheme = Math.round(Math.random() * 3);
     let tabPositionElementParticulier: number[][][] = [[], [], []];
     let different;
+
+    //choix theme map
+    switch (numTheme) {
+      case 1:
+        jSONmap.floors[numFloor].theme = "./assets/img/map/AssetsDG.png";
+        break;
+      case 2:
+        jSONmap.floors[numFloor].theme = "./assets/img/map/AssetsDG2.png";
+        break;
+      case 3:
+        jSONmap.floors[numFloor].theme = "./assets/img/map/AssetsDG3.png";
+        break;
+    }
 
     //boucle calcule positions coffres
     for (let c = 0; c < nbCoffre; c++) {
@@ -300,31 +318,31 @@ class GameMap {
       let x: number;
       let y: number;
 
-      if(z < nbZombie){
-      x = Math.round((Math.random() * 18) + 0.5);
-      y = Math.round((Math.random() * 12) + 0.5);
-      different = false;
-      while (!different) {
-        if (tabPositionElementParticulier[0].length === 0)
-          different = true;
-        tabPositionElementParticulier[0].forEach(pos => {
-          if (pos[0] !== x && pos[1] !== y)
+      if (z < nbZombie) {
+        x = Math.round((Math.random() * 18) + 0.5);
+        y = Math.round((Math.random() * 12) + 0.5);
+        different = false;
+        while (!different) {
+          if (tabPositionElementParticulier[0].length === 0)
             different = true;
-        });
-        tabPositionElementParticulier[1].forEach(pos => {
-          if (pos[0] !== x && pos[1] !== y)
-            different = true;
-        });
-        if (!different) {
-          x = Math.round((Math.random() * 18) + 0.5);
-          y = Math.round((Math.random() * 12) + 0.5);
+          tabPositionElementParticulier[0].forEach(pos => {
+            if (pos[0] !== x && pos[1] !== y)
+              different = true;
+          });
+          tabPositionElementParticulier[1].forEach(pos => {
+            if (pos[0] !== x && pos[1] !== y)
+              different = true;
+          });
+          if (!different) {
+            x = Math.round((Math.random() * 18) + 0.5);
+            y = Math.round((Math.random() * 12) + 0.5);
+          }
         }
       }
-    }
-    else{
-      x = 0;
-      y = 0;
-    }
+      else {
+        x = 0;
+        y = 0;
+      }
       tabPositionElementParticulier[1].push([x, y]);
     }
 
@@ -365,7 +383,32 @@ class GameMap {
       tabPositionElementParticulier[2].push([x, y]);
     }
 
-    let tabMap = [
+    let tabMap: number[][];
+    tabMap = [];
+    let tabTemp: number[];
+    //ajout du sol
+    for (let i = 1; i < 13; i++) {
+      tabTemp = [];
+      for (let j = 1; j < 19; j++) {
+        tabTemp.push(Math.round(Math.random() * 6 + 0.5) - 1)
+      }
+      tabMap.push(tabTemp);
+    }
+    //ajout des bordures droites et gauches
+    for (let i = 0; i < 12; i++) {
+      tabMap[i].splice(0, 0, 14);
+      tabMap[i].splice(19, 0, 13);
+    }
+    //ajout des bodures haut et bas et des angles
+    let haut = [8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9];
+    let bas = [11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 10];
+    tabMap.splice(0, 0, haut);
+    tabMap.splice(19, 0, bas);
+
+    console.log(tabMap)
+
+    /**
+    let tabMap2 = [
       [8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9],
       [14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 13],
       [14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 13],
@@ -381,6 +424,7 @@ class GameMap {
       [14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 13],
       [11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 10]
     ];
+    */
 
     //ajout coffres et escaliers a la map
     tabPositionElementParticulier[0].forEach(pos => {
@@ -409,7 +453,7 @@ class GameMap {
     }
   }
 
-  getCurrentTime() {  
+  getCurrentTime() {
     throw new Error("Method not implemented.");
   }
 
