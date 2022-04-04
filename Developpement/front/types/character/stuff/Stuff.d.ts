@@ -4,6 +4,6 @@ export declare class Stuff {
     static div: HTMLDivElement;
     visible: boolean;
     constructor(itemList: Array<Item>);
-    displayStuff(): void;
+    displayStuff(): Promise<void>;
     hide(): void;
 }

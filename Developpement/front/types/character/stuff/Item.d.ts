@@ -1,6 +1,6 @@
-export declare abstract class Item {
+export declare class Item {
     private name;
     constructor(name: String);
-    static loadImage(): Promise<void>;
+    displayItem(context: CanvasRenderingContext2D): Promise<void>;
     action(): void;
 }
