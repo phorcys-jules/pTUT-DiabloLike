@@ -12,22 +12,37 @@
 </head>
 
 <body>
-    <div id="settings" class="d-flex">
-        <div class="btn-group">
-            <a href="./html/createChar.html" class="btn btn-primary">createChar</a>
-            <a href="./html/createUser.html" class="btn btn-primary">createUser</a>
-            <button type="button" class="btn btn-primary" id='run'>run</button>
+    <div class="d-flex justify-content-around">
+        <div id="settings" class="d-flex">
+            <div class="btn-group">
+                <a href="./html/createChar.html" class="btn btn-primary">createChar</a>
+                <a href="./html/createUser.html" class="btn btn-primary">createUser</a>
+                <button type="button" id='run' class="btn btn-primary">run</button>
+                <button type="button" id="btn_fullscreen" class="btn btn-secondary"> FuSc </button>
+            </div>
+        </div>
+        <div id="stats" class="d-flex">
+            <p class="heroHp"> HP : <label id="heroHp"></label> </p>
+            <p class="heroMp"> MP : <label id="heroMp"></label> </p>
+            <p class="userGold"> Gold : <label id="userGold"></label> </p>
         </div>
     </div>
-    <div id="stats" class="d-flex">
-        <p class="heroHp"> HP : <label id="heroHp"></label> </p>
-        <p class="heroMp"> MP : <label id="heroMp"></label> </p>
-        <p class="userGold"> Gold : <label id="userGold"></label> </p>
-    </div>
-    <div id='gameContent'>
+    <div id="div_game">
+        <div id="div_left_canvas">
 
-        <canvas id="game-canvas" width="1280" height="896px"></canvas>
+        </div>
 
+        <div id='div_canvas'>
+
+            <canvas id="game-canvas" width="1280" height="896px"></canvas>
+
+        </div>
+
+        <div id="div_right_canvas">
+            <div id="div_spell">
+                <h2 id="h2_cooldown"></h2>
+            </div>
+        </div>
     </div>
 </body>
 <script type="module" src="./js/main.js"></script>

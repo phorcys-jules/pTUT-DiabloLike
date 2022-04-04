@@ -7,6 +7,12 @@ import { Entity } from "./Entity.js";
 export abstract class Character extends Entity {
 
 
+    spellImg: string[];
+
+    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 3,maxHp: number = 20, maxMp: number = 10, x: number = 64, y: number = 64, spellImg: string[] = ['./assets/img/capacity/Interface/null_spell.png', './assets/img/capacity/Interface/white_background.png']) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
+        this.spellImg = spellImg;
+    }
 
     /**
      * Déplace le perso dans la dir associé
@@ -28,7 +34,7 @@ export abstract class Character extends Entity {
                 console.log("collision hero, monstre");
                 this.addHp(-monstre.attack());
 
-                //Si on reçoit des dégats aloçrs on recule
+                //Si on reçoit des dégats alors on recule
                 super.knockback(-direction, delta);
                 monstre.knockback(direction, delta)
             }

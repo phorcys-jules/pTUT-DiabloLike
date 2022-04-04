@@ -1,7 +1,5 @@
 import { Entity } from "./Entity.js";
 export declare abstract class Character extends Entity {
-    spellImg: string[];
-    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, attackSpeed?: number, maxHp?: number, maxMp?: number, x?: number, y?: number, spellImg?: string[]);
     /**
      * Déplace le perso dans la dir associé
      * @param direction

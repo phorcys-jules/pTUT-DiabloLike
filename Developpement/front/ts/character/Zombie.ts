@@ -11,8 +11,8 @@ export class Zombie extends Entity {
     public static isActive: boolean = true;
     public attackSound: HTMLAudioElement;
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
-        super(name, lvl, speed, strenth, maxHp, maxMp, x, y);
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 1, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/zombie_attack2.mp3');
     }
 
