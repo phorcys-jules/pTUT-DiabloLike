@@ -23,7 +23,6 @@ export class Warrior extends Character {
 
     attack(): number {
         this.attackSound.play();
-        //this.sword();
         let sendX = this.x;
         let sendY = this.y;
         switch (this.direction) {
@@ -47,7 +46,7 @@ export class Warrior extends Character {
         let swrImg = this.swordImage;
         let direction = this.direction;
 
-        GameMap.renderable.push(function feu() {
+        GameMap.renderable.push(function fer() {
             sword(sendX, sendY, swrImg, 64, direction);
         })
         return this.strenth;
@@ -55,8 +54,27 @@ export class Warrior extends Character {
 
 
 }
+
+/**
+ * Lance l'attaque à l'épée
+ * @param x 
+ * @param y 
+ * @param img 
+ * @param porte 
+ * @param direction 
+ */
 async function sword(x: number, y: number, img: GameImage, porte: number = 64, direction: number) {
-    //console.log("fireeeeeeeeeeeeeeee !", porte)
+    //console.log("sword !", x, y)
+    let i =0;//index of the monster
+    Game.mob.forEach(mob => {
+        if (mob.x - 32 < x && mob.x + 32 > x &&
+            mob.y - 32 < y && mob.y + 32 > y) {
+            Game.mob.splice(i);
+            Game.player.updateGold(+5);
+        }
+
+    });
+
     //64 : porté du sort
     try {
         porte -= 16;
