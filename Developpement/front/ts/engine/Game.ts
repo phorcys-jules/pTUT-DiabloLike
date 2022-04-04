@@ -71,80 +71,86 @@ class Game {
       if (!this.keyStates.includes(e.key)) {
         this.keyStates.push(e.key);
       }
-    }),
-      //Touches que l'on presse simplement pour effectuer UNE action
-      document.addEventListener("keypress", e => {
-        //console.log(e.key);
+    });
 
-        switch (e.key) {
-          case 'p':
-            this.switchPerso();
-            this.majDivSpell();
-            break;
-          case 'b':
-            GameMap.previousFloor();
-            break;
-          case 'n':
-            GameMap.nextFloor();
-            break;
-          case 'k':
-            Zombie.isActive = false;
-            break;
-          case 'l':
-            Zombie.isActive = true;
-            break;
-          case 'm':
-            //try
-            if (Game.mob[0].addHp(-1) <= 0) {
-              Game.mob.splice(0);
-              Game.player.updateGold(+5);
-            }
-            break;
-          case 'o':
-            Game.mob.push(new Zombie());
-            break;
-          case 'a':
-            if (this.cooldown == this.hero.attackSpeed) {
-              this.hero.attack();
-              this.cooldown = 0;
-            }
-            break;
-          //debug
-          case 'h':
-            console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
-              "map : ", GameMap.maps, "\n",
-              "renderable : ", GameMap.renderable, "\n"
-            );
-            break;
-          case 'j':
-            console.log("saving json....");
-            async function save() {
-              /*
-              let url = `http://localhost:8752/json`;
-            
-                e.preventDefault();
-                let response = await fetch(url, {
-                  method: 'GET',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  }
-                });
-                */
-              let urlSend = `http://localhost:8752/json`
-              let xhr = new XMLHttpRequest();
-              xhr.open('GET', urlSend);
-              xhr.responseType = 'json';
-              console.log('url :  ', urlSend);
-              xhr.send();
+    document.addEventListener("click", e => {
+      console.log("click on : " + e.x, e.y);
 
-            }
-            save()
-            break;
-          case 'x':
-            Game.stop();
-            break;
-        }
-      })
+    });
+  
+    //Touches que l'on presse simplement pour effectuer UNE action
+    document.addEventListener("keypress", e => {
+      //console.log(e.key);
+
+      switch (e.key) {
+        case 'p':
+          this.switchPerso();
+          this.majDivSpell();
+          break;
+        case 'b':
+          GameMap.previousFloor();
+          break;
+        case 'n':
+          GameMap.nextFloor();
+          break;
+        case 'k':
+          Zombie.isActive = false;
+          break;
+        case 'l':
+          Zombie.isActive = true;
+          break;
+        case 'm':
+          //try
+          if (Game.mob[0].addHp(-1) <= 0) {
+            Game.mob.splice(0);
+            Game.player.updateGold(+5);
+          }
+          break;
+        case 'o':
+          Game.mob.push(new Zombie());
+          break;
+        case 'a':
+          if (this.cooldown == this.hero.attackSpeed) {
+            this.hero.attack();
+            this.cooldown = 0;
+          }
+          break;
+        //debug
+        case 'h':
+          console.log("pos hero : ", this.hero.x, ", ", this.hero.y, "\n",
+            "map : ", GameMap.maps, "\n",
+            "renderable : ", GameMap.renderable, "\n"
+          );
+          break;
+        case 'j':
+          console.log("saving json....");
+          async function save() {
+            /*
+            let url = `http://localhost:8752/json`;
+          
+              e.preventDefault();
+              let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              });
+              */
+            let urlSend = `http://localhost:8752/json`
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', urlSend);
+            xhr.responseType = 'json';
+            console.log('url :  ', urlSend);
+            xhr.send();
+
+          }
+          save()
+          break;
+        case 'x':
+          Game.stop();
+          break;
+      }
+    })
     document.addEventListener("keyup", e => {
       e.preventDefault();
       //this.keyStates[e.key] = false;
@@ -188,7 +194,7 @@ class Game {
     console.log('stop game');
 
     Game.gameLoop.stop()
-    
+
     const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/GameOver.png");
     this.context.drawImage(logoImage, 3 * 64, 3 * 64);
   }
