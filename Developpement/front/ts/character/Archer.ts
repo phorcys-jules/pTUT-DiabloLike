@@ -81,7 +81,7 @@ async function arrow(x: number, y: number, img: GameImage, porte: number = 64, d
             GameMap.renderable.pop();
             return -1; //on arrête la flèche après une collision
         }
-
+        i++;
     });
 
     //64 : porté du sort

@@ -72,6 +72,7 @@ async function sword(x: number, y: number, img: GameImage, porte: number = 64, d
             GameMap.removeMob(i);
             Game.player.updateGold(+5);
         }
+        i++;
 
     });
 
