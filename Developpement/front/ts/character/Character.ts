@@ -1,3 +1,4 @@
+import Game from "../engine/Game.js";
 import GameMap from "../engine/GameMap.js";
 import ImageUtils from "../engine/ImageUtils.js";
 import { Block } from "../map/block.js";
@@ -44,6 +45,9 @@ export abstract class Character extends Entity {
     addHp(amount: number): number {
         let res = super.addHp(amount);
         this.updateAffichageStats();
+        if (res <= 0) {
+            Game.stop();
+        }
         return res;
     }
 

@@ -6,6 +6,7 @@ class GameLoop {
 
   private loopFunction: GameLoopFunction
   private deltaTracker: DeltaTracker
+  continue: boolean;
 
   constructor(loopFunction: GameLoopFunction) {
     this.loopFunction = loopFunction
@@ -14,6 +15,10 @@ class GameLoop {
 
   public run() {
     window.requestAnimationFrame(this.loop.bind(this))
+  }
+
+  public stop() {
+    this.loopFunction = () => { };
   }
 
   private loop() {

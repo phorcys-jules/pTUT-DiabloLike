@@ -1,3 +1,4 @@
+import GameLoop from "./GameLoop.js";
 import { Entity } from "../character/Entity.js";
 import { User } from "../User.js";
 declare class Game {
@@ -21,6 +22,7 @@ declare class Game {
      * value : isDown ?
      */
     private keyStates;
+    static gameLoop: GameLoop;
     constructor(canvasEl: HTMLCanvasElement, player: User, mob?: Entity[]);
     init(this: any): EventListenerOrEventListenerObject;
     /**
@@ -30,6 +32,7 @@ declare class Game {
     isKeyDown(key: string): boolean;
     isAnyKeyDown(): boolean;
     run(): Promise<void>;
+    static stop(): Promise<void>;
     /**
      * Appeler a chaque update du jeu
      * @param delta tmps depuis dernier appel

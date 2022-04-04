@@ -39,6 +39,7 @@ class Game {
    * value : isDown ? 
    */
   private keyStates: string[] = [];
+  static gameLoop: GameLoop;
 
 
   constructor(canvasEl: HTMLCanvasElement, player: User, mob: Entity[] = []) {
@@ -139,6 +140,9 @@ class Game {
             }
             save()
             break;
+          case 'x':
+            Game.stop();
+            break;
         }
       })
     document.addEventListener("keyup", e => {
@@ -176,8 +180,17 @@ class Game {
     //this.context.drawImage(Game.mobImage, 3 * 64, 3 * 64);
 
 
-    const gameLoop = new GameLoop(this.loop.bind(this));
-    gameLoop.run();
+    Game.gameLoop = new GameLoop(this.loop.bind(this));
+    Game.gameLoop.run();
+  }
+
+  public static async stop() {
+    console.log('stop game');
+
+    Game.gameLoop.stop()
+    
+    const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/GameOver.png");
+    this.context.drawImage(logoImage, 3 * 64, 3 * 64);
   }
 
   /**
