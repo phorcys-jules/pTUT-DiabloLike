@@ -47,10 +47,11 @@ async function fireball(x: number , y:number , img:GameImage, porte:number = 64,
     Game.mob.forEach(mob => {
         if (mob.x - 32 < x && mob.x + 32 > x &&
             mob.y - 32 < y && mob.y + 32 > y) {
-            Game.mob.splice(i);
-            Game.player.updateGold(+5);
+            GameMap.removeMob(i);
+            console.log("die");
+            Game.player.updateGold(+5);            
         }
-
+        i++;
     });
     //64 : porté du sort
     try {

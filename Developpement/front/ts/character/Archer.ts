@@ -74,14 +74,14 @@ export class Archer extends Character {
 async function arrow(x: number, y: number, img: GameImage, porte: number = 64, direction: number) {
     let i =0;//index of the monster
     Game.mob.forEach(mob => {
-        if (mob.x - 32 < x && mob.x + 32 > x &&
-            mob.y - 32 < y && mob.y + 32 > y) {
-            Game.mob.splice(i);
+        if (mob.x - 5 < x && mob.x + 5 > x &&
+            mob.y - 5 < y && mob.y + 5 > y) {
+            GameMap.removeMob(i);
             Game.player.updateGold(+5);
             GameMap.renderable.pop();
             return -1; //on arrête la flèche après une collision
         }
-
+        i++;
     });
 
     //64 : porté du sort

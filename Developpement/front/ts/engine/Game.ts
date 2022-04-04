@@ -62,21 +62,27 @@ class Game {
   public init(this: any): EventListenerOrEventListenerObject {
     return this.setup(this.canvasEl);
   }
-  /**
+    /**
    * setup some action as key Mapping
    */
-  private setup() {
-    this.hero.updateAffichageStats();
-    let frame = 0;
-    document.addEventListener("keydown", e => {
-      if (!this.keyStates.includes(e.key)) {
-        this.keyStates.push(e.key);
-      }
-    }),
+     private setup() {
+      this.hero.updateAffichageStats();
+      let frame = 0;
+      document.addEventListener("keydown", e => {
+        if (!this.keyStates.includes(e.key)) {
+          this.keyStates.push(e.key);
+        }
+      });
+  
+      document.addEventListener("click", e => {
+        console.log("click on : " + e.x, e.y);
+  
+      });
+  
       //Touches que l'on presse simplement pour effectuer UNE action
       document.addEventListener("keypress", e => {
         //console.log(e.key);
-
+  
         switch (e.key) {
           case 'p':
             this.switchPerso();
@@ -94,11 +100,6 @@ class Game {
           case 'l':
             Zombie.isActive = true;
             break;
-          case 'i':
-            console.log('display inventory ?')
-            this.displayStuff()
-            console.log('display inventory effected')
-          break;
           case 'm':
             //try
             if (Game.mob[0].addHp(-1) <= 0) {
@@ -108,6 +109,11 @@ class Game {
             break;
           case 'o':
             Game.mob.push(new Zombie());
+            break;
+          case 'i':
+            console.log('display inventory ?')
+            this.displayStuff()
+            console.log('display inventory effected')
             break;
           case 'a':
             if (this.cooldown == this.hero.attackSpeed) {
@@ -142,7 +148,7 @@ class Game {
               xhr.responseType = 'json';
               console.log('url :  ', urlSend);
               xhr.send();
-
+  
             }
             save()
             break;
@@ -151,20 +157,21 @@ class Game {
             break;
         }
       })
-    document.addEventListener("keyup", e => {
-      e.preventDefault();
-      //this.keyStates[e.key] = false;
-      this.keyStates.splice(this.keyStates.indexOf(e.key));
-    })
-
-  }
-  public isKeyDown(key: string) {
-    return this.keyStates.includes(key);
-  }
-
-  public isAnyKeyDown() {
-    return this.keyStates.length != 0;
-  }
+      document.addEventListener("keyup", e => {
+        e.preventDefault();
+        //this.keyStates[e.key] = false;
+        this.keyStates.splice(this.keyStates.indexOf(e.key));
+      })
+  
+  
+    }
+    public isKeyDown(key: string) {
+      return this.keyStates.includes(key);
+    }
+  
+    public isAnyKeyDown() {
+      return this.keyStates.length != 0;
+    }
 
   public async run() {
     console.log('GG u run the Game');
@@ -194,7 +201,7 @@ class Game {
     console.log('stop game');
 
     Game.gameLoop.stop()
-    
+
     const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/GameOver.png");
     this.context.drawImage(logoImage, 3 * 64, 3 * 64);
   }

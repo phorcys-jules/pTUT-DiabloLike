@@ -28,8 +28,8 @@ declare class Game {
     constructor(canvasEl: HTMLCanvasElement, player: User, mob?: Entity[]);
     init(this: any): EventListenerOrEventListenerObject;
     /**
-     * setup some action as key Mapping
-     */
+   * setup some action as key Mapping
+   */
     private setup;
     isKeyDown(key: string): boolean;
     isAnyKeyDown(): boolean;
