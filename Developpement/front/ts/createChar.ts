@@ -27,7 +27,7 @@ console.log(Game.player);
     //Then with the data from the response in JSON...
     .then((data) => {
       console.log('Success:', data);
-      //window.location.href = './createChar.html';
+      window.location.href = '../../index.html';
     })
     //Then with the error genereted...
     .catch((error) => {
@@ -90,11 +90,14 @@ form.onsubmit = () => {
     }
     console.log(c1.toString());
     console.log('Character created !')
-    //const idClass=getClassId(characterClass);
-    //validate(characterName,idClass)
-    //console.log(idClass)
+    
+    //tmp TODO remove tha tmp create user
+    let u:User = new User('userPseudo','userFirstName', 'userLastName', 'userPassword', 'userEmail');
+    Game.player = u;
+
+
     Game.player.ajouterChar(c1);
-    console.log(Game.player)
+    console.log("game player char : ", Game.player.chars)
     window.location.href = '../index.html';
 
     //bootstrap(Game.player, [new Zombie(), new Zombie()]);
