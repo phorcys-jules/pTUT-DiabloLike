@@ -262,6 +262,10 @@ class GameMap {
     });
   }
 
+  public static removeMob(mobNumber : number){
+    Game.mob.splice(mobNumber,1);
+    jSONmap.floors[1].mobPos[mobNumber] = [0,0];
+  }
 
 
   public static jsonProceduralMap(numFloor: number) {

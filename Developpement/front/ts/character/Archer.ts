@@ -76,7 +76,7 @@ async function arrow(x: number, y: number, img: GameImage, porte: number = 64, d
     Game.mob.forEach(mob => {
         if (mob.x - 5 < x && mob.x + 5 > x &&
             mob.y - 5 < y && mob.y + 5 > y) {
-            Game.mob.splice(i);
+            GameMap.removeMob(i);
             Game.player.updateGold(+5);
             GameMap.renderable.pop();
             return -1; //on arrête la flèche après une collision

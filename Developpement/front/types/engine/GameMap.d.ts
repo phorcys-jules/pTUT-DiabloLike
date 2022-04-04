@@ -23,6 +23,7 @@ declare class GameMap {
      * Init a map from a JSON File
      */
     static initMap(): void;
+    static removeMob(mobNumber: number): void;
     static jsonProceduralMap(numFloor: number): void;
     getCurrentTime(): void;
 }

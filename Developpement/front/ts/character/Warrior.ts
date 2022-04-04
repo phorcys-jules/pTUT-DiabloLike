@@ -69,7 +69,7 @@ async function sword(x: number, y: number, img: GameImage, porte: number = 64, d
     Game.mob.forEach(mob => {
         if (mob.x - 32 < x && mob.x + 32 > x &&
             mob.y - 32 < y && mob.y + 32 > y) {
-            Game.mob.splice(i);
+            GameMap.removeMob(i);
             Game.player.updateGold(+5);
         }
 
