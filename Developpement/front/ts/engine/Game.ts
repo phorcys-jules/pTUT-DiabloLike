@@ -10,6 +10,7 @@ import { User } from "../User.js";
 import { Warrior } from "../character/Warrior.js";
 import { constants } from "fs";
 import { url } from "inspector";
+import { Stuff } from "../character/stuff/Stuff.js";
 
 class Game {
 
@@ -24,7 +25,7 @@ class Game {
   public static player: User;
   private hero: Character;
   public static mob: Entity[];
-
+  //private inventory : Inventory;
   /**
    * Deltas en ms depuis le dernier refresh
    */
@@ -40,7 +41,7 @@ class Game {
    */
   private keyStates: string[] = [];
   static gameLoop: GameLoop;
-
+  static stuff: Stuff;
 
   constructor(canvasEl: HTMLCanvasElement, player: User, mob: Entity[] = []) {
     this.canvasEl = canvasEl;
@@ -52,7 +53,7 @@ class Game {
     this.hero = player.chars[0];
     this.cooldown = this.hero.attackSpeed;
     Game.mob = mob;
-
+    Game.stuff= new Stuff(new Array())
     this.setup()
 
 
@@ -93,6 +94,11 @@ class Game {
           case 'l':
             Zombie.isActive = true;
             break;
+          case 'i':
+            console.log('display inventory ?')
+            this.displayStuff()
+            console.log('display inventory effected')
+          break;
           case 'm':
             //try
             if (Game.mob[0].addHp(-1) <= 0) {
@@ -193,11 +199,35 @@ class Game {
     this.context.drawImage(logoImage, 3 * 64, 3 * 64);
   }
 
+  public pauseGame(){
+    if(Game.stuff.visible==false){
+      console.log('pause du jeu');
+      Game.gameLoop.stop()
+      Game.stuff.visible=true;
+    }else{
+      console.log('reprise du jeu')
+      Game.gameLoop = new GameLoop(this.loop.bind(this));
+      Game.gameLoop.run()
+      Game.stuff.visible=false;
+
+    }
+  }
+
+
+
+  public async displayStuff() {
+      this.pauseGame();
+      const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/stuff.png");
+      Game.context.drawImage(logoImage, 3 * 64, 3 * 64);
+      //Game.stuff.displayStuff()
+     
+  }
+
   /**
    * Appeler a chaque update du jeu
    * @param delta tmps depuis dernier appel
    */
-  private async loop(delta: number) {
+  public async loop(delta: number) {
     this.timeSinceLastFPS += delta;
 
 

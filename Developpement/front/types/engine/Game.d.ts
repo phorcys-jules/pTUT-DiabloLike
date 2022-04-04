@@ -1,6 +1,7 @@
 import GameLoop from "./GameLoop.js";
 import { Entity } from "../character/Entity.js";
 import { User } from "../User.js";
+import { Stuff } from "../character/stuff/Stuff.js";
 declare class Game {
     private canvasEl;
     static context: CanvasRenderingContext2D;
@@ -23,6 +24,7 @@ declare class Game {
      */
     private keyStates;
     static gameLoop: GameLoop;
+    static stuff: Stuff;
     constructor(canvasEl: HTMLCanvasElement, player: User, mob?: Entity[]);
     init(this: any): EventListenerOrEventListenerObject;
     /**
@@ -33,11 +35,13 @@ declare class Game {
     isAnyKeyDown(): boolean;
     run(): Promise<void>;
     static stop(): Promise<void>;
+    pauseGame(): void;
+    displayStuff(): Promise<void>;
     /**
      * Appeler a chaque update du jeu
      * @param delta tmps depuis dernier appel
      */
-    private loop;
+    loop(delta: number): Promise<void>;
     switchPerso(): void;
     majDivSpell(): void;
     /**

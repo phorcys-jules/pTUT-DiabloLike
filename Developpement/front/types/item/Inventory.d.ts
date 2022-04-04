@@ -1,9 +1,9 @@
 import { Item } from "./Item";
-export declare class Stuff {
+export declare class Inventory {
     itemList: Item[];
     static div: HTMLDivElement;
-    visible: boolean;
+    static visible: boolean;
     constructor(itemList: Array<Item>);
-    displayStuff(): void;
-    hide(): void;
+    static display(): void;
+    static hide(): void;
 }
