@@ -74,8 +74,8 @@ export class Archer extends Character {
 async function arrow(x: number, y: number, img: GameImage, porte: number = 64, direction: number) {
     let i =0;//index of the monster
     Game.mob.forEach(mob => {
-        if (mob.x - 32 < x && mob.x + 32 > x &&
-            mob.y - 32 < y && mob.y + 32 > y) {
+        if (mob.x - 5 < x && mob.x + 5 > x &&
+            mob.y - 5 < y && mob.y + 5 > y) {
             Game.mob.splice(i);
             Game.player.updateGold(+5);
             GameMap.renderable.pop();

@@ -47,7 +47,10 @@ async function fireball(x: number , y:number , img:GameImage, porte:number = 64,
     Game.mob.forEach(mob => {
         if (mob.x - 32 < x && mob.x + 32 > x &&
             mob.y - 32 < y && mob.y + 32 > y) {
-            Game.mob.splice(i);
+            Game.mob.splice(i,1);
+            //Game.mob.
+            console.log("die");
+            
             Game.player.updateGold(+5);
         }
 
