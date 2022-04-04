@@ -1,6 +1,6 @@
 import ImageUtils from "../../engine/ImageUtils";
 
-export class Item  {
+export abstract class Item  {
 
 
   private name : String;
@@ -9,20 +9,21 @@ export class Item  {
     this.name=name;
   }
 
-  public async displayItem(context : CanvasRenderingContext2D) {
-    let itm : HTMLImageElement|null = null;
+  public static async loadImage() {
+    console.log('chargement');
 
     if(this.name=='popoVie'){
-       itm   = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_vie.png");
+      const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_vie.png");
     }
     if(this.name=='popoXp'){
-      itm = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_xp.png");
+      const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_xp.png");
     }
     if(this.name=='popoMana'){
-      itm = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_mana.png");
+      const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/potion/potion_mana.png");
     }
+    //Game.gameLoop.stop()
 
-    context.drawImage(itm!, 3 * 64, 3 * 64);
+    //this.context.drawImage(logoImage, 3 * 64, 3 * 64);
   }
   action(){
 

@@ -223,9 +223,9 @@ class Game {
 
 
   public async displayStuff() {
-    console.log('display stuff..........');
-    
       this.pauseGame();
+      const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/stuff.png");
+      Game.context.drawImage(logoImage, 3 * 64, 3 * 64);
       //Game.stuff.displayStuff()
      
   }
