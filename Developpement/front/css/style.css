@@ -48,6 +48,31 @@ body {
     border-radius: 5px;
 }
 
+#stuff {
+    /**display: grid;*/
+    display: none;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    text-align: center;
+    gap: 10px;
+    background-color: rgb(202, 167, 121);
+    width: 50vh;
+    height: 40vh;
+    position: absolute;
+    top: 40vh;
+    left:40vw;
+}
+
+#stuff div{
+    border :1px solid black;
+    background-color: rgb(232, 227, 222);
+    background-repeat: no-repeat;
+    border-radius:5px;
+    border-style: dashed;
+
+}
+
 #h2_cooldown {
     margin-top: calc(5vw - 19.2px);
 }

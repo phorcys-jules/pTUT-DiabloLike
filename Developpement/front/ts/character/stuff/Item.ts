@@ -1,15 +1,15 @@
 import ImageUtils from "../../engine/ImageUtils";
 
-export abstract class Item  {
+export class Item  {
 
 
-  private name : String;
+  public name : String;
 
   constructor(name:String){
     this.name=name;
   }
 
-  public static async loadImage() {
+  /**public static async loadImage() {
     console.log('chargement');
 
     if(this.name=='popoVie'){
@@ -28,5 +28,5 @@ export abstract class Item  {
   action(){
 
   }
-  
+  */
 }
