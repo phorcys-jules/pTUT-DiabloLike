@@ -42,7 +42,7 @@ declare class Game {
      * @param delta tmps depuis dernier appel
      */
     loop(delta: number): Promise<void>;
-    switchPerso(): void;
+    switchPerso(numPerso: number): void;
     majDivSpell(): void;
     /**
      * met a jour l'image de la div de sort (en bas à droite de l'interface)
@@ -50,5 +50,7 @@ declare class Game {
      * @param p_rgbaBackColor couleur de fond utilisant la méhode rgba()
      */
     majSpellImg(p_spellImg: string[], p_rgbaBackColor?: string): void;
+    saveAff(): void;
+    loadAff(): void;
 }
 export default Game;

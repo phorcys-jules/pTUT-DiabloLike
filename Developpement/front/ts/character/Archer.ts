@@ -14,14 +14,16 @@ export class Archer extends Character {
         speed: number = 100,
         strenth: number = 1,
         attackSpeed: number = 3,
-        maxHp: number = 20,
-        maxMp: number = 10,
+        maxHp: number = 3,
+        maxMp: number = 10, 
+        hp:number = 3, 
+        mp:number = 20,
         x: number = 64,
         y: number = 64,
         spellImg: string[] = ["./assets/img/capacity/Interface/archer_spell1.png", "./assets/img/capacity/Interface/gray_backgroud.png"]) {
 
 
-        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, hp, mp, x, y);
         this.attackSound = new Audio('./assets/sound/entity/bow_sound.mp3');
         this.arrowImgHori = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/Game/arrow_hori.png")
         this.arrowImgVert = new GameImage(this.x, this.y + 16, 32, 32, "./assets/img/capacity/Game/arrow_vert.png")
@@ -69,7 +71,6 @@ export class Archer extends Character {
         return this.strenth;
     }
 
-
 }
 async function arrow(x: number, y: number, img: GameImage, porte: number = 64, direction: number) {
     let i =0;//index of the monster
@@ -115,4 +116,8 @@ async function arrow(x: number, y: number, img: GameImage, porte: number = 64, d
         })
     } else { }
 }
+
+
+
+
 

@@ -47,8 +47,8 @@ export abstract class Entity extends Object {
     public attackSound: HTMLAudioElement;
 
 
-    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 2, maxHp: number = 20, maxMp: number = 20, x: number = 64, y: number = 64) {
-        //Level has  default value of 1
+    constructor(name: string = 'michou', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 2, maxHp: number = 20, maxMp: number = 20, hp: number = 20, mp: number = 20, x: number = 64, y: number = 64) {
+        //Level has default value of 1
         super();
         this.name = name;
         this.lvl = lvl;
@@ -56,9 +56,9 @@ export abstract class Entity extends Object {
         this.speed = speed;
         this.strenth = strenth;
         this.attackSpeed = attackSpeed;
-        this.hp = maxHp;
+        this.hp = hp;
         this.maxHp = maxHp;
-        this.mp = maxMp;
+        this.mp = mp;
         this.maxMp = maxMp;
         this.x = x;
         this.y = y;
@@ -86,8 +86,14 @@ export abstract class Entity extends Object {
 
     }
 
-    toString() {
-        return `${this.name} est un ${this.constructor.name} de niveau ${this.lvl}`
+    toString(phrase: boolean = true) {
+        let res: string;
+        if (phrase)
+            res = `${this.name} est un ${this.constructor.name} de niveau ${this.lvl}`;
+        else
+            res =
+                `${this.constructor.name}////${this.name}////${this.lvl}////${this.speed}////${this.strenth}////${this.attackSpeed}////${this.maxHp}////${this.maxMp}////${this.hp}////${this.mp}////${this.x}////${this.y}`
+        return res;
     }
 
     evolve(delat: number) { };

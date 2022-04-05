@@ -17,7 +17,8 @@
             <div class="btn-group">
                 <a href="./html/createChar.html" class="btn btn-primary">createChar</a>
                 <a href="./html/createUser.html" class="btn btn-primary">createUser</a>
-                <button type="button" id='run' class="btn btn-primary">run</button>
+                <button type="button" id='btn_save' class="btn btn-primary">save</button>
+                <button type="button" id='btn_load' class="btn btn-primary">load</button>
                 <button type="button" id="btn_fullscreen" class="btn btn-secondary"> FuSc </button>
             </div>
         </div>
@@ -35,6 +36,15 @@
         <div id='div_canvas'>
 
             <canvas id="game-canvas" width="1280" height="896px"></canvas>
+
+            <div id="div_save_load">
+                <h2 id="h2_save_load"></h2>
+                <textarea id="textarea_save_load"></textarea>
+                <div class="d-flex justify-content-around">
+                    <button type="button" id="btn_save_load_close" class="btn btn-danger"></button>
+                    <button type="button" id="btn_save_load_load" class="btn btn-success">Load</button>
+                </div>
+            </div>
 
         </div>
 

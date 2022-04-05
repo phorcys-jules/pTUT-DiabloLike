@@ -34,6 +34,14 @@ body {
     background-color: rgb(238, 238, 238);
 }
 
+#div_save_load {
+    display: none;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 2em;
+}
+
 #div_spell {
     width: 100%;
     height: 10vw;
@@ -50,6 +58,16 @@ body {
 
 #h2_cooldown {
     margin-top: calc(5vw - 19.2px);
+}
+
+#textarea_save_load {
+    width: 80%;
+    height: 60vh;
+    background-color: gray;
+    border: 4px brown solid;
+    margin: 2em 10% 2em 10%;
+    font-size: xx-small;
+    
 }
 
 #stats > p {

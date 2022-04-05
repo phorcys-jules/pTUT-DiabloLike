@@ -409,8 +409,6 @@ class GameMap {
     tabMap.splice(0, 0, haut);
     tabMap.splice(19, 0, bas);
 
-    console.log(tabMap)
-
     /**
     let tabMap2 = [
       [8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9],

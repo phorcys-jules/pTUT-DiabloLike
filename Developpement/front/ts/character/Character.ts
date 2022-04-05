@@ -10,8 +10,8 @@ export abstract class Character extends Entity {
 
     spellImg: string[];
 
-    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 3,maxHp: number = 20, maxMp: number = 10, x: number = 64, y: number = 64, spellImg: string[] = ['./assets/img/capacity/Interface/null_spell.png', './assets/img/capacity/Interface/white_background.png']) {
-        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, x, y);
+    constructor(name: string = 'great green stick', lvl: number = 1, speed: number = 100, strenth: number = 1, attackSpeed: number = 3,maxHp: number = 20, maxMp: number = 10, hp:number = 6, mp:number = 20, x: number = 64, y: number = 64, spellImg: string[] = ['./assets/img/capacity/Interface/null_spell.png', './assets/img/capacity/Interface/white_background.png']) {
+        super(name, lvl, speed, strenth, attackSpeed, maxHp, maxMp, hp, mp, x, y);
         this.spellImg = spellImg;
     }
 

@@ -28,11 +28,11 @@ export declare abstract class Entity extends Object {
     dir: number;
     movable: boolean[];
     attackSound: HTMLAudioElement;
-    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, attackSpeed?: number, maxHp?: number, maxMp?: number, x?: number, y?: number);
+    constructor(name?: string, lvl?: number, speed?: number, strenth?: number, attackSpeed?: number, maxHp?: number, maxMp?: number, hp?: number, mp?: number, x?: number, y?: number);
     protected loadSprites(): Promise<void>;
     paint(context: CanvasRenderingContext2D): void;
     nextSprites(): void;
-    toString(): string;
+    toString(phrase?: boolean): string;
     evolve(delat: number): void;
     /**
      * Déplace le perso dans la dir associé
