@@ -151,18 +151,22 @@ export abstract class Entity extends Object {
     knockback(direction: number, delta: number) {
         switch (direction) {
             case 1:
-                this.y -= this.speed * delta * 10;
+                if (!this.isBlockSolid(this.x, this.y - this.speed * delta * 10))
+                    this.y -= this.speed * delta * 10;
                 break;
             case 3:
             case -1:
-                this.y += this.speed * delta * 10;
+                if (!this.isBlockSolid(this.x, this.y + this.speed * delta * 10))
+                    this.y += this.speed * delta * 10;
                 break;
             case 2:
-                this.x += this.speed * delta * 10;
+                if (!this.isBlockSolid(this.x + this.speed * delta * 10, this.y))
+                    this.x += this.speed * delta * 10;
                 break;
             case 4:
             case -2:
-                this.x -= this.speed * delta * 10;
+                if (!this.isBlockSolid(this.x - this.speed * delta * 10, this.y))
+                    this.x -= this.speed * delta * 10;
                 break;
         }
     }
