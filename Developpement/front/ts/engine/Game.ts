@@ -245,9 +245,10 @@ class Game {
       this.pauseGame();
     
     //Recupere l'élément stuff dans le fichier HTML
+      let inventoryDiv = document.getElementById("div_inventory");
       let stuffdiv = document.getElementById("stuff")
 
-    //Actualise la liste
+    //Reset la liste
       for(let i = 0 ; i < 20 ; i++){
         if(stuffdiv?.firstChild!=null){
           stuffdiv?.removeChild(stuffdiv?.firstChild)
@@ -256,13 +257,11 @@ class Game {
       }
       
       //Ouverture de l'inventaire
-      if(stuffdiv != null){
-        if(stuffdiv.style.display=='none' || stuffdiv.style.display==""){
-          stuffdiv.style.display='grid';
+      if(inventoryDiv != null && stuffdiv!= null){
+        if(inventoryDiv.style.display=='none' || inventoryDiv.style.display==""){
+          inventoryDiv.style.display='block';
           for(let i = 0 ; i < 20 ; i++){
             let slot = document.createElement('div');
-            slot.style.margin='5px';
-            slot.style.padding='20px';
 
             if(i < Game.stuff.itemList.length){
               //Potion de vie (rouge) --> rajoute 2 pv au héros si les pv max ne sont pas déjà atteint
@@ -315,7 +314,7 @@ class Game {
           }
           //Fermeture de l'inventaire
         }else{
-          stuffdiv.style.display='none';
+          inventoryDiv.style.display='none';
 
         }
     }
@@ -427,6 +426,8 @@ class Game {
   saveAff() {
     if (document.getElementById("div_save_load")?.style.display == "" || document.getElementById("div_save_load")?.style.display == "none") {
 
+      (document.getElementById("div_inventory") as HTMLDivElement).style.display = "none";
+
       let gameCanvas = document.getElementById("game-canvas");
       let divSL = document.getElementById("div_save_load");
       let h2SL = document.getElementById("h2_save_load");
@@ -473,8 +474,8 @@ class Game {
 
   loadAff() {
     if (document.getElementById("div_save_load")?.style.display == "" || document.getElementById("div_save_load")?.style.display == "none") {
-      this.pauseGame;
-      console.log(this.pauseGame)
+      
+      (document.getElementById("div_inventory") as HTMLDivElement).style.display = "none";
 
       let gameCanvas = document.getElementById("game-canvas");
       let divSL = document.getElementById("div_save_load");

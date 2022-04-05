@@ -56,29 +56,42 @@ body {
     border-radius: 5px;
 }
 
-#stuff {
-    /**display: grid;*/
+#div_inventory {
     display: none;
+    background-color: rgb(84, 75, 48);
+    width: 30vw;
+    height: 30vw;
+    position: absolute;
+    top: 20vh;
+    left: calc(35vw);
+    text-align: center;
+    border: 5px solid rgb(68, 39, 10);
+    border-radius: 5px;
+}
+
+#stuff{
+    display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     text-align: center;
-    gap: 10px;
-    background-color: rgb(202, 167, 121);
-    width: 50vh;
-    height: 40vh;
-    position: absolute;
-    top: 40vh;
-    left:40vw;
+    gap: 1vw;
+    height: 100%;
+    margin: 1em 3% 1em 3%;
 }
 
 #stuff div{
-    border :1px solid black;
-    background-color: rgb(232, 227, 222);
+    width: calc(94% -4px);
+    height: calc(94% -4px);
+    border :2px solid rgb(70, 63, 57);
+    background-color: rgb(114, 103, 93);
     background-repeat: no-repeat;
+    background-size: 100%;
     border-radius:5px;
-    border-style: dashed;
+}
 
+#div_inventory h2{
+    color: rgb(80, 45, 14);
 }
 
 #h2_cooldown {
