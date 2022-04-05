@@ -12,6 +12,7 @@ import { Warrior } from "../character/Warrior.js";
 import { constants } from "fs";
 import { url } from "inspector";
 import { Stuff } from "../character/stuff/Stuff.js";
+import { Item } from "../character/stuff/Item.js";
 
 class Game {
 
@@ -54,7 +55,7 @@ class Game {
     this.hero = player.chars[0];
     this.cooldown = this.hero.attackSpeed;
     Game.mob = mob;
-    Game.stuff = new Stuff(new Array())
+    Game.stuff= new Stuff([new Item('popoXp'),new Item('popoVie') , new Item('popoMana')])
     this.setup()
 
 
@@ -240,11 +241,85 @@ class Game {
 
 
   public async displayStuff() {
-    this.pauseGame();
-    const logoImage = await ImageUtils.loadImageFromUrl("./assets/img/stuff/stuff.png");
-    Game.context.drawImage(logoImage, 3 * 64, 3 * 64);
-    //Game.stuff.displayStuff()
+    //Met le jeu en pause
+      this.pauseGame();
+    
+    //Recupere l'élément stuff dans le fichier HTML
+      let stuffdiv = document.getElementById("stuff")
 
+    //Actualise la liste
+      for(let i = 0 ; i < 20 ; i++){
+        if(stuffdiv?.firstChild!=null){
+          stuffdiv?.removeChild(stuffdiv?.firstChild)
+          
+        }
+      }
+      
+      //Ouverture de l'inventaire
+      if(stuffdiv != null){
+        if(stuffdiv.style.display=='none' || stuffdiv.style.display==""){
+          stuffdiv.style.display='grid';
+          for(let i = 0 ; i < 20 ; i++){
+            let slot = document.createElement('div');
+            slot.style.margin='5px';
+            slot.style.padding='20px';
+
+            if(i < Game.stuff.itemList.length){
+              //Potion de vie (rouge) --> rajoute 2 pv au héros si les pv max ne sont pas déjà atteint
+              if(Game.stuff.itemList[i].name=='popoVie'){
+                slot.style.backgroundImage = "url('./assets/img/stuff/potion/potion_vie.png')";
+                slot.addEventListener("click", (e)=>{
+                  this.hero.addHp(2);
+                  slot.remove();
+                  const index = Game.stuff.itemList.indexOf(Game.stuff.itemList[i]);
+                  if (index > -1) {
+                    Game.stuff.itemList.splice(index, 1); // 2nd parameter means remove one item only
+                  }
+                  let newslot = document.createElement('div');
+                  stuffdiv?.appendChild(newslot);
+                })
+              }
+              //Potion d' xp (verte) --> rajoute de l'xp au héros si l'xp max n'est pas déjà atteint
+
+              if(Game.stuff.itemList[i].name=='popoXp'){
+                slot.style.backgroundImage =  "url('./assets/img/stuff/potion/potion_xp.png')";
+                slot.addEventListener("click", (e)=>{
+                  //this.hero.addHp(2);
+                  slot.remove();
+                  const index = Game.stuff.itemList.indexOf(Game.stuff.itemList[i]);
+                  if (index > -1) {
+                    Game.stuff.itemList.splice(index, 1); // 2nd parameter means remove one item only
+                  }
+                  let newslot = document.createElement('div');
+                  stuffdiv?.appendChild(newslot);
+                })
+                
+              }
+              //Potion de mana (bleue) --> rajoute du mana au héros si le mana max n'est pas déjà atteint
+              if(Game.stuff.itemList[i].name=='popoMana'){
+                slot.style.backgroundImage =  "url('./assets/img/stuff/potion/potion_mana.png')";
+                slot.addEventListener("click", (e)=>{
+                  //this.hero.addMana(4);
+                  slot.remove();
+                  const index = Game.stuff.itemList.indexOf(Game.stuff.itemList[i]);
+                  if (index > -1) {
+                    Game.stuff.itemList.splice(index, 1); // 2nd parameter means remove one item only
+                  }
+                  let newslot = document.createElement('div');
+                  stuffdiv?.appendChild(newslot);
+                  })
+                
+              }
+            }
+            stuffdiv.appendChild(slot)
+          }
+          //Fermeture de l'inventaire
+        }else{
+          stuffdiv.style.display='none';
+
+        }
+    }
+     
   }
 
   /**

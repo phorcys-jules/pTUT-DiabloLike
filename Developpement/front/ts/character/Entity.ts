@@ -185,7 +185,7 @@ export abstract class Entity extends Object {
     addMana(amount: number) {
         //Si atteint lim basse ou haute
         if (this.mp + amount >= this.maxMp) {
-            this.mp += amount = 64;
+            this.mp = this.maxMp;
         } else {
             if (this.mp + amount <= 0) {
                 this.mp = 0;
@@ -200,7 +200,7 @@ export abstract class Entity extends Object {
     addHp(amount: number): number {
         //Si atteint lim basse ou haute
         if (this.hp + amount >= this.maxHp) {
-            this.hp += amount = 64;
+            this.hp = this.maxHp;
         } else {
             if (this.hp + amount <= 0) {
                 this.hp = 0;

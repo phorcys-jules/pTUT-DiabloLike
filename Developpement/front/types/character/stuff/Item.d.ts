@@ -1,6 +1,4 @@
-export declare abstract class Item {
-    private name;
+export declare class Item {
+    name: String;
     constructor(name: String);
-    static loadImage(): Promise<void>;
-    action(): void;
 }
